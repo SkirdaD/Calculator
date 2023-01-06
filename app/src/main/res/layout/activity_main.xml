@@ -20,7 +20,7 @@
         android:gravity="right|center_vertical"
         android:text="0"
         android:textColor="@color/white"
-        android:textSize="100dp"/>
+        android:textSize="100dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:backgroundTint="#A59F9F"
                 android:text="AC"
                 android:textColor="@color/black"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/buttonDelete"
@@ -149,12 +149,12 @@
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:backgroundTint="#514D4D"
                 android:text="5"
                 android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_margin="3dp"/>
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/button6"
@@ -237,8 +237,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button0"
@@ -255,8 +255,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/buttonPoint"
