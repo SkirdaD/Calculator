@@ -22,7 +22,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textColor="#8BC34A"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
@@ -53,8 +53,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#A59F9F"
-                    android:text="AC"
+                    android:backgroundTint="@color/light_gray_button"
+                    android:text="@string/ac"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -64,8 +64,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#A59F9F"
-                    android:text="Del"
+                    android:backgroundTint="@color/light_gray_button"
+                    android:text="@string/delete"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -75,8 +75,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#A59F9F"
-                    android:text="+/-"
+                    android:backgroundTint="@color/light_gray_button"
+                    android:text="@string/plus_minus"
                     android:textColor="@color/black"
                     android:textSize="17sp" />
 
@@ -86,8 +86,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#DAA812"
-                    android:text="/"
+                    android:backgroundTint="@color/orange_button"
+                    android:text="@string/division_sign"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     tools:ignore="TextContrastCheck" />
@@ -104,8 +104,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="7"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_7"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -115,8 +115,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="8"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_8"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -126,8 +126,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="9"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_9"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -137,8 +137,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#DAA812"
-                    android:text="*"
+                    android:backgroundTint="@color/orange_button"
+                    android:text="@string/multiplication_sign"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     tools:ignore="TextContrastCheck" />
@@ -155,8 +155,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="4"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_4"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -166,8 +166,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="5"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_5"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -177,8 +177,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="6"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_6"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -188,8 +188,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#DAA812"
-                    android:text="-"
+                    android:backgroundTint="@color/orange_button"
+                    android:text="@string/minus_sign"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
             </LinearLayout>
@@ -205,8 +205,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="1"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_1"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -216,8 +216,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="2"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_2"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -227,8 +227,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#514D4D"
-                    android:text="3"
+                    android:backgroundTint="@color/gray_button"
+                    android:text="@string/number_3"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -238,8 +238,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#DAA812"
-                    android:text="+"
+                    android:backgroundTint="@color/orange_button"
+                    android:text="@string/plus_sign"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
             </LinearLayout>
@@ -261,8 +261,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="3dp"
                         android:layout_weight="0.5"
-                        android:backgroundTint="#514D4D"
-                        android:text="0"
+                        android:backgroundTint="@color/gray_button"
+                        android:text="@string/number_0"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
                 </LinearLayout>
@@ -279,8 +279,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="3dp"
                         android:layout_weight="0.25"
-                        android:backgroundTint="#514D4D"
-                        android:text=","
+                        android:backgroundTint="@color/gray_button"
+                        android:text="@string/decimal_sign"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -290,8 +290,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="3dp"
                         android:layout_weight="0.25"
-                        android:backgroundTint="#DAA812"
-                        android:text="="
+                        android:backgroundTint="@color/orange_button"
+                        android:text="@string/equals_sign"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
                 </LinearLayout>
