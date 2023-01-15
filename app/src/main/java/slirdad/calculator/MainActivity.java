@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_constraint);
 
         SP = this.getSharedPreferences(SAVE_TEXT, MODE_PRIVATE);
         SP = this.getSharedPreferences(IS_FIRST_RUN, MODE_PRIVATE);
