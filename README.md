@@ -1,7 +1,7 @@
 # Calculator
 Данный калькулятор является тестовым заданием для отработки ключевых навыков программирования.
 
-![Калькулятор](https://user-images.githubusercontent.com/121316397/211090209-6832fdb8-1039-476c-8086-ba4d63399dac.jpg)
+![Калькулятор](https://user-images.githubusercontent.com/121316397/212566537-aec9b486-c1ab-4270-9280-1da6bdf771ee.jpg)
 
 Что реализовано:
 
