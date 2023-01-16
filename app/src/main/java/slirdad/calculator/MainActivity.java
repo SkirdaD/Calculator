@@ -139,17 +139,20 @@ public class MainActivity extends AppCompatActivity {
                 var1 = 0;
             }
 
-            if (textMainField.equals("") && lastOperation == ADDITION) {           //двойное подряд нажатие на действие = ничего не происходит
+            //двойное подряд нажатие на действие = ничего не происходит
+            if (textMainField.equals("") && lastOperation == ADDITION) {
                 return;
             }
 
             textSecondaryField = textSecondaryField + textMainField + " " + "+" + " ";
             secondaryField.setText(textSecondaryField);
 
-            if (lastOperation != NULL) {//если это не первое действие, то запускаем действие по предыдущему флагу
+            /*если это не первое действие, то запускаем действие по предыдущему флагу,
+            а если первое , то просто считываем с экрана число*/
+            if (lastOperation != NULL) {
                 operate();
             } else if (!isLastPressButtonEqualMark) {
-                result = Double.parseDouble(textMainField);//если первое действие, то просто считываем с экрана число
+                result = Double.parseDouble(textMainField);
             }
 
             lastOperation = ADDITION;
@@ -158,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonMultiplicationSign = view -> {
-            if (isLastPressButtonEqualMark) {        //продолжение дествий после нажатия на равно
+            if (isLastPressButtonEqualMark) {
                 lastOperation = NULL;
                 result = Double.parseDouble(mainField.getText().toString());
                 var1 = 1;
@@ -173,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             if (lastOperation != NULL) {
                 operate();
             } else if (!isLastPressButtonEqualMark) {
-                result = Double.parseDouble(textMainField);       //если первое действие, то просто считываем с экрана число
+                result = Double.parseDouble(textMainField);
             }
 
             lastOperation = MULTIPLICATION;
@@ -182,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonMinus = view -> {
-            if (isLastPressButtonEqualMark) {        //продолжение дествий после нажатия на равно
+            if (isLastPressButtonEqualMark) {
                 lastOperation = NULL;
                 result = Double.parseDouble(mainField.getText().toString());
                 var1 = 0;
@@ -197,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             if (lastOperation != NULL) {
                 operate();
             } else if (!isLastPressButtonEqualMark) {
-                result = Double.parseDouble(textMainField);       //если первое действие, то просто считываем с экрана число
+                result = Double.parseDouble(textMainField);
             }
 
             lastOperation = SUBTRACTION;
@@ -206,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonDivisionSign = view -> {
-            if (isLastPressButtonEqualMark) {        //продолжение дествий после нажатия на равно
+            if (isLastPressButtonEqualMark) {
                 lastOperation = NULL;
                 result = Double.parseDouble(mainField.getText().toString());
                 var1 = 1;
@@ -221,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
             if (lastOperation != NULL) {
                 operate();
             } else if (!isLastPressButtonEqualMark) {
-                result = Double.parseDouble(textMainField);       //если первое действие, то просто считываем с экрана число
+                result = Double.parseDouble(textMainField);
             }
 
             lastOperation = DIVISION;
@@ -230,11 +233,44 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = view -> {
-            var1 = var2;  //если подряд нажимать = , то var1 не затирается в следующем Action, а так же при повороте экрана
+            if (lastOperation == NULL) {
+                return;
+            }
+
+            String var = "";
+            if (isLastPressButtonEqualMark) {
+                switch (lastOperation) {
+                    case ADDITION:
+                        textSecondaryField = textSecondaryField + " + " + var;
+                        break;
+                    case SUBTRACTION:
+                        textSecondaryField = textSecondaryField + " - " + var;
+                        break;
+                    case DIVISION:
+                        textSecondaryField = textSecondaryField + " / " + var;
+                        break;
+                    case MULTIPLICATION:
+                        textSecondaryField = textSecondaryField + " * " + var;
+                        break;
+                }
+            }
+
+            /*если подряд нажимать = , то var1 не затирается в следующем operate,
+             а так же при повороте экрана*/
+            var1 = var2;
             operate();
             isLastPressButtonEqualMark = true;
 
-            secondaryField.setText("");
+            /*если в строке после запятой только один символ и он равен 0,
+            то удаляем и точку и ноль*/
+            if ((String.valueOf(var1).indexOf(".") + 2) == String.valueOf(var1).length() &&
+                    Character.toString(String.valueOf(var1).charAt(String.valueOf(var1).
+                            indexOf(".") + 1)).compareTo("0") == 0) {
+                var = String.valueOf(var1).substring(0, String.valueOf(var1).indexOf("."));
+            } else var = String.valueOf(var1);
+
+            textSecondaryField = textSecondaryField + var + " " + "=";
+            secondaryField.setText(textSecondaryField);
             textSecondaryField = mainField.getText().toString();
         };
 
@@ -260,7 +296,8 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonPositiveToNegative = view -> {
-            textMainField = mainField.getText().toString();  //что бы можно было менять знак в процессе вычислений, а не только в начале
+            //что бы можно было менять знак в процессе вычислений, а не только в начале
+            textMainField = mainField.getText().toString();
 
             if ((textMainField.equals("0")) || (textMainField.equals(""))) {
                 return;
@@ -345,9 +382,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void operate() {
-        if (!textMainField.equals("")) {                                  //если после одного дейсвия нажали сразу другое,
-            var1 = Double.parseDouble(textMainField);                     //то ничего не произойдет (только если это не кнопка равно).
-        } else if (!isLastPressButtonEqualMark) {                         //Просто сменится флаг.
+        /*если после одного дейсвия нажали сразу другое,
+        то ничего не произойдет (только если это не кнопка равно).
+        Просто сменится флаг.*/
+        if (!textMainField.equals("")) {
+            var1 = Double.parseDouble(textMainField);
+        } else if (!isLastPressButtonEqualMark) {
             textSecondaryField = new StringBuffer(textSecondaryField).
                     delete(textSecondaryField.length() - 6,
                             textSecondaryField.length() - 3).toString();
@@ -385,10 +425,11 @@ public class MainActivity extends AppCompatActivity {
         var2 = var1;
         textMainField = String.valueOf(result);
 
-        if ((textMainField.indexOf(".") + 2) == textMainField.length() &&                  //если в строке после запятой только один символ и он равен 0
+        /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+        if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
                 Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
                         compareTo("0") == 0) {
-            textMainField = textMainField.substring(0, textMainField.indexOf("."));       //то удаляем и точку и ноль
+            textMainField = textMainField.substring(0, textMainField.indexOf("."));
         }
 
         changeSizeText();
