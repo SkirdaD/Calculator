@@ -15,23 +15,49 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    /*
+    этот блок переменных определяет значение переменной lastOperation ,
+    то есть какое действие было выбрано. И она тут же и инициализируется.
+    Они используются:
+        - в лисенерах кнопок арифметических операций;
+        - в лисенере кнопки равно для отображения нужного символа в secondaryField;
+        - в методе ::operate;
+        - в лисенере АС
+
+    */
+    int lastOperation = NULL;
     static final int ADDITION = 1;
     static final int SUBTRACTION = 2;
     static final int DIVISION = 3;
     static final int MULTIPLICATION = 4;
     static final int NULL = 0;
 
+
+    /*
+    этот блок переменных необходим только для подгонки размера шрифта для "красивого" отображения.
+    Используется в ::changeSizeText.
+    */
     final int NUMBER_OF_LARGE_CHARACTERS = 8;
     final int NUMBER_OF_MEDIUM_CHARACTERS = 11;
     final int SIZE_LARGE_TEXT = 100;
     final int SIZE_MEDIUM_TEXT = 70;
     final int SIZE_SMALL_TEXT = 40;
 
+    /*
+    инициализация SP, которая используется в ::onStart и в ::onStop, для сохранения и извлечения
+    при закрытии приложения.
+    и тут же переменная для ключа
+    */
     SharedPreferences SP;
-
     final String SAVE_TEXT = "save text";
-    final String IS_FIRST_RUN = "isFirstRun";
+    //final String IS_FIRST_RUN = "isFirstRun";
 
+
+    /*
+    Переменные (ключи) для методов onRestoreInstanceState и onSaveInstanceState.
+    Используются только в них.
+    Для поворота экрана.
+     */
     final String LAST_OPERATION = "lastOperation";
     final String RESULT = "result";
     final String VAR1 = "var1";
@@ -42,9 +68,17 @@ public class MainActivity extends AppCompatActivity {
     final String SECONDARY_FIELD = "secondaryField";
     final String TEXT_SECONDARY_FIELD = "textSecondaryField";
 
+    /*
+    Инициализация переменной, которая показывает было ли нажато последним "=".
+    Используется:
+      - во всех лисенерах кнопок операций;
+      - в методах onRestoreInstanceState и onSaveInstanceState;
+      - в методе ::operate;
+      - в лисенере АС
+
+     */
     boolean isLastPressButtonEqualMark;
 
-    int lastOperation = NULL;
 
     Button buttonNum1, buttonNum2, buttonNum3, buttonNum4, buttonNum5, buttonNum6, buttonNum7,
             buttonNum8, buttonNum9, buttonNum0, buttonAllClean, buttonDeleteLastCharacter,
@@ -53,10 +87,26 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mainField, secondaryField;
 
+    /*
+    Переменные инициализируюся дефолтными значениями.
+    Используются:
+      - во всех лисенерах кнопок операций;
+      - в методах onRestoreInstanceState и onSaveInstanceState;
+      - в методе ::operate;
+      - в лисенере АС
+     */
     double result = 0;
     double var1 = 0;
     double var2 = 0;
 
+
+    /*
+    Переменные инициализируюся дефолтными значениями.
+    Используются:
+      - во всех лисенерах кнопок;
+      - в методах onRestoreInstanceState и onSaveInstanceState;
+      - в методе ::operate;
+     */
     String textMainField, textSecondaryField = "";
 
     @Override
@@ -65,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_constraint);
 
         SP = this.getSharedPreferences(SAVE_TEXT, MODE_PRIVATE);
-        SP = this.getSharedPreferences(IS_FIRST_RUN, MODE_PRIVATE);
+        //SP = this.getSharedPreferences(IS_FIRST_RUN, MODE_PRIVATE);
 
         buttonNum1 = (Button) findViewById(R.id.button1);
         buttonNum2 = (Button) findViewById(R.id.button2);
@@ -263,6 +313,12 @@ public class MainActivity extends AppCompatActivity {
 
             /*если в строке после запятой только один символ и он равен 0,
             то удаляем и точку и ноль*/
+            /*
+            Я бы, наверное, эту операцию поместил бы в отдельный метод.
+            Хотя эта операция используется всего (пока) в двух местах и с разными входными данными
+            (в одном месте со стрингами, а в другом в дабл.
+            Так что его придётся, наверное, перегружать. Надо ли?
+             */
             if ((String.valueOf(var1).indexOf(".") + 2) == String.valueOf(var1).length() &&
                     Character.toString(String.valueOf(var1).charAt(String.valueOf(var1).
                             indexOf(".") + 1)).compareTo("0") == 0) {
