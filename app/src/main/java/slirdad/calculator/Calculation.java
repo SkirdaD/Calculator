@@ -1,15 +1,46 @@
 package slirdad.calculator;
 
+
 import android.widget.Toast;
 
-public class Calculation extends MainActivity {
-    static double result = 0;
-    static double var1 = 0;
-    static double var2 = 0;
+// Класс сделал дефолтным для видимости только в пакете.
+class Calculation {
+    /*
+    Используются:
+      - во всех лисенерах кнопок операций;
+      - в методах onRestoreInstanceState и onSaveInstanceState;
+      - в методе ::operate;
+      - в лисенере АС
 
-    static boolean isLastPressButtonEqualMark;
+      Сделал их протектед, что бы мэйн смог ими пользоваться.
+     */
+    protected double result;
+    protected double var1;
+    protected double var2;
 
-    static LastOperation lastOperation = LastOperation.NULL;
+    /*
+    Инициализация переменной, которая показывает было ли нажато последним "=".
+    Используется:
+      - во всех лисенерах кнопок операций;
+      - в методах onRestoreInstanceState и onSaveInstanceState;
+      - в методе ::operate;
+      - в лисенере АС
+
+      Сделал протектед, что бы мэйн смог им пользоваться.
+     */
+    protected boolean isLastPressButtonEqualMark;
+
+    /*
+    lastOperation используется:
+        - в лисенерах кнопок арифметических операций;
+        - в лисенере кнопки равно для отображения нужного символа в secondaryField;
+        - в методе ::operate;
+        - в лисенере АС
+        - в onSaveInstanceState и onRestoreInstanceState
+
+       Сделал протектед, что бы мэйн смог им пользоваться.
+    */
+    protected LastOperation lastOperation = LastOperation.NULL;
 
     enum LastOperation {
         ADDITION,
@@ -19,21 +50,10 @@ public class Calculation extends MainActivity {
         NULL
     }
 
-    protected static void operate() {
-        /*если после одного дейсвия нажали сразу другое,
-        то ничего не произойдет (только если это не кнопка равно).
-        Просто сменится флаг.*/
-
-        if (!textMainField.equals("")) {
-            var1 = Double.parseDouble(textMainField);
-        } else if (!isLastPressButtonEqualMark) {
-            textSecondaryField = new StringBuffer(textSecondaryField).
-                    delete(textSecondaryField.length() - 6,
-                            textSecondaryField.length() - 3).toString();
-            MainActivity.secondaryField.setText(textSecondaryField);
-            return;
-        }
-
+    /*
+    ::operate используется в лисенерах кнопок "/" "*" "-" "+" "="
+     */
+    protected void operate() {
         switch (lastOperation) {
             case ADDITION:
                 result = result + var1;
@@ -50,11 +70,11 @@ public class Calculation extends MainActivity {
                 } else {
                     /*Toast.makeText(getApplicationContext(),
                             R.string.division_error,
-                            Toast.LENGTH_LONG).show();*/
+                            Toast.LENGTH_LONG).show();
                     mainField.setText(R.string.error);
-                    textMainField = "";
+                    textMainField = "";*/
                     result = 0;
-                    var1 = 0;
+                    //var1 = 0;
                     isLastPressButtonEqualMark = false;
                     //buttonAllClean.callOnClick();
                     return;
@@ -62,17 +82,5 @@ public class Calculation extends MainActivity {
                 break;
         }
         var2 = var1;
-        textMainField = String.valueOf(result);
-
-        /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
-        if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
-                Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
-                        compareTo("0") == 0) {
-            textMainField = textMainField.substring(0, textMainField.indexOf("."));
-        }
-
-        changeSizeText();
-        mainField.setText(textMainField);
-        textMainField = "";
     }
 }

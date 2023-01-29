@@ -8,109 +8,69 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    /*  Создаю объект класса Calculation для доступа к переменным экземпляра класса.
+            Не уверен, что это должно быть тут. Пока тут.
+        Сначала создал в онКрейте. Всё работало, кроме onRestoreInstanceState и onSaveInstanceState.
+        Я понимаю, что это связано с ЖЦ. Пока точно объяснить не могу.
+        Но когда создаю объект в онКрейт, то при дестрое он уничтожается.
+        Думаю, связано с этим.
+        Сделал приватным, т.к. кроме активити его никто не должен использовать.
+        И студия пишет, что может быть файнл. Не стал делать, т.к не понимаю пока этого.
+         */
+    private Calculation calculation = new Calculation();
+
     /*
-    этот блок переменных определяет значение переменной lastOperation ,
-    то есть какое действие было выбрано. И она тут же и инициализируется.
-    Они используются:
-        - в лисенерах кнопок арифметических операций;
-        - в лисенере кнопки равно для отображения нужного символа в secondaryField;
-        - в методе ::operate;
-        - в лисенере АС
-
-    int lastOperation = NULL;
-    static final int ADDITION = 1;
-    static final int SUBTRACTION = 2;
-    static final int DIVISION = 3;
-    static final int MULTIPLICATION = 4;
-    static final int NULL = 0;
-
-
-
-    этот блок переменных необходим только для подгонки размера шрифта для "красивого" отображения.
-    Используется в ::changeSizeText.
-
-    final int NUMBER_OF_LARGE_CHARACTERS = 8;
-    final int NUMBER_OF_MEDIUM_CHARACTERS = 11;
-    final int SIZE_LARGE_TEXT = 100;
-    final int SIZE_MEDIUM_TEXT = 70;
-    final int SIZE_SMALL_TEXT = 40;
-
-
-    инициализация SP, которая используется в ::onStart и в ::onStop, для сохранения и извлечения
+   инициализация SP, которая используется в ::onStart и в ::onStop, для сохранения и извлечения
     при закрытии приложения.
-    и тут же переменная для ключа
+    Используется в итоге только в мэйне, поэтому приват.
     */
-    SharedPreferences SP;
-    final String SAVE_TEXT = "saveText";
-
+    private SharedPreferences SP;
 
     /*
-    Переменные (ключи) для методов onRestoreInstanceState и onSaveInstanceState.
-    Используются только в них.
-    Для поворота экрана.
-     */
-    final private String LAST_OPERATION = "lastOperation";
-    final private String RESULT = "result";
-    final private String VAR1 = "var1";
-    final private String VAR2 = "var2";
-    final private String IS_LAST_PRESS_EQUAL_MARK = "isLastPressButtonEqualMark";
-    final private String TEXT_MAIN_FIELD = "textMainField";
-    final private String MAIN_FIELD = "mainField";
-    final private String SECONDARY_FIELD = "secondaryField";
-    final private String TEXT_SECONDARY_FIELD = "textSecondaryField";
-
-    /*
-    Инициализация переменной, которая показывает было ли нажато последним "=".
-    Используется:
-      - во всех лисенерах кнопок операций;
-      - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в методе ::operate;
-      - в лисенере АС
-
-     */
-
-
-    Button buttonNum1, buttonNum2, buttonNum3, buttonNum4, buttonNum5, buttonNum6, buttonNum7,
-            buttonNum8, buttonNum9, buttonNum0, buttonAllClean, buttonDeleteLastCharacter,
-            buttonPositiveToNegative, buttonDivisionSign, buttonMultiplicationSign,
-            buttonMinus, buttonPlus, buttonEqualMark, buttonPoint;
-
-    protected static TextView mainField, secondaryField;
-
-    /*
-    Переменные инициализируюся дефолтными значениями.
-    Используются:
-      - во всех лисенерах кнопок операций;
-      - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в методе ::operate;
-      - в лисенере АС
-
-    double result = 0;
-    double var1 = 0;
-    double var2 = 0;
-
+     Тексвью используются:
+      - в поиске вьюшек
+      - во всех лисенерах
+      - в онСтарт и онСтоп для шаредпреференс
+      - в методах onRestoreInstanceState и onSaveInstanceState
+      - в ::changeSizeText
+      Но только в мэйне, поэтому можно сделать приватными, и тогда никто не сможет в них вмешаться.
+      */
+    private TextView mainField, secondaryField;
 
     /*
     Переменные инициализируюся дефолтными значениями.
     Используются:
       - во всех лисенерах кнопок;
       - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в методе ::operate;
+      - в преференс
+      Но только в мэйне, поэтому можно сделать приватными, и тогда никто не сможет в них вмешаться.
      */
-    protected static String textMainField, textSecondaryField = "";
+    private String textMainField, textSecondaryField = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        SP = this.getSharedPreferences(SAVE_TEXT, MODE_PRIVATE);
+        SP = this.getSharedPreferences(StringKeys.SAVE_TEXT, MODE_PRIVATE);
+
+         /*
+    Баттоны используютя:
+     - в поиске вьюшек
+     - в назначении лисенера для соответствующей кнопки
+     Поэтому можно сделать их локальными.
+     */
+        Button buttonNum1, buttonNum2, buttonNum3, buttonNum4, buttonNum5, buttonNum6, buttonNum7,
+                buttonNum8, buttonNum9, buttonNum0, buttonAllClean, buttonDeleteLastCharacter,
+                buttonPositiveToNegative, buttonDivisionSign, buttonMultiplicationSign,
+                buttonMinus, buttonPlus, buttonEqualMark, buttonPoint;
 
         buttonNum1 = (Button) findViewById(R.id.button1);
         buttonNum2 = (Button) findViewById(R.id.button2);
@@ -177,16 +137,29 @@ public class MainActivity extends AppCompatActivity {
             mainField.setText(textMainField);
         };
 
+
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            if (Calculation.isLastPressButtonEqualMark) {//продолжение дествий после равно
-                Calculation.lastOperation = Calculation.LastOperation.NULL;
-                Calculation.result = Double.parseDouble(mainField.getText().toString());
-                Calculation.var1 = 0;
+            if (calculation.var1 == 0 &&
+                    calculation.lastOperation == Calculation.LastOperation.DIVISION) {
+                Toast.makeText(getApplicationContext(),
+                        R.string.division_error,
+                        Toast.LENGTH_LONG).show();
+                mainField.setText(R.string.error);
+                textMainField = "";
+                textSecondaryField = "";
+                secondaryField.setText(textSecondaryField);
+                return;
+            }
+
+            if (calculation.isLastPressButtonEqualMark) {//продолжение дествий после равно
+                calculation.lastOperation = Calculation.LastOperation.NULL;
+                calculation.result = Double.parseDouble(mainField.getText().toString());
+                calculation.var1 = 0;
             }
 
             //двойное подряд нажатие на действие = ничего не происходит
             if (textMainField.equals("") &&
-                    Calculation.lastOperation == Calculation.LastOperation.ADDITION) {
+                    calculation.lastOperation == Calculation.LastOperation.ADDITION) {
                 return;
             }
 
@@ -195,100 +168,221 @@ public class MainActivity extends AppCompatActivity {
 
             /*если это не первое действие, то запускаем действие по предыдущему флагу,
             а если первое , то просто считываем с экрана число*/
-            if (Calculation.lastOperation != Calculation.LastOperation.NULL) {
-                Calculation.operate();
-            } else if (!Calculation.isLastPressButtonEqualMark) {
-                Calculation.result = Double.parseDouble(textMainField);
+            if (calculation.lastOperation != Calculation.LastOperation.NULL) {
+//начало старого оперэйт
+                /*если после одного дейсвия нажали сразу другое,
+                  то ничего не произойдет (только если это не кнопка равно).
+                  Просто сменится флаг.
+                */
+                if (!textMainField.equals("")) {
+                    calculation.var1 = Double.parseDouble(textMainField);
+                } else if (!calculation.isLastPressButtonEqualMark) {
+                    textSecondaryField = new StringBuffer(textSecondaryField).
+                            delete(textSecondaryField.length() - 6,
+                                    textSecondaryField.length() - 3).toString();
+                    secondaryField.setText(textSecondaryField);
+                    //return;
+                }
+
+                calculation.operate();
+
+                textMainField = String.valueOf(calculation.result);
+
+                /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+                if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
+                        Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
+                                compareTo("0") == 0) {
+                    textMainField = textMainField.substring(0, textMainField.indexOf("."));
+                }
+
+                changeSizeText();
+                mainField.setText(textMainField);
+                textMainField = "";
+//конец старого оперэйт
+
+
+            } else if (!calculation.isLastPressButtonEqualMark) {
+                calculation.result = Double.parseDouble(textMainField);
             }
 
-            Calculation.lastOperation = Calculation.LastOperation.ADDITION;
-            Calculation.isLastPressButtonEqualMark = false;
+            calculation.lastOperation = Calculation.LastOperation.ADDITION;
+            calculation.isLastPressButtonEqualMark = false;
             textMainField = "";
         };
 
+
         View.OnClickListener onClickListenerButtonMultiplicationSign = view -> {
-            if (Calculation.isLastPressButtonEqualMark) {
-                Calculation.lastOperation = Calculation.LastOperation.NULL;
-                Calculation.result = Double.parseDouble(mainField.getText().toString());
-                Calculation.var1 = 1;
+            if (calculation.isLastPressButtonEqualMark) {
+                calculation.lastOperation = Calculation.LastOperation.NULL;
+                calculation.result = Double.parseDouble(mainField.getText().toString());
+                calculation.var1 = 1;
             }
             if (textMainField.equals("") &&
-                    Calculation.lastOperation == Calculation.LastOperation.MULTIPLICATION) {
+                    calculation.lastOperation == Calculation.LastOperation.MULTIPLICATION) {
                 return;
             }
 
             textSecondaryField = textSecondaryField + textMainField + " " + "*" + " ";
             secondaryField.setText(textSecondaryField);
 
-            if (Calculation.lastOperation != Calculation.LastOperation.NULL) {
-                Calculation.operate();
-            } else if (!Calculation.isLastPressButtonEqualMark) {
-                Calculation.result = Double.parseDouble(textMainField);
+            if (calculation.lastOperation != Calculation.LastOperation.NULL) {
+                                /*если после одного дейсвия нажали сразу другое,
+                  то ничего не произойдет (только если это не кнопка равно).
+                  Просто сменится флаг.
+                */
+                if (!textMainField.equals("")) {
+                    calculation.var1 = Double.parseDouble(textMainField);
+                } else if (!calculation.isLastPressButtonEqualMark) {
+                    textSecondaryField = new StringBuffer(textSecondaryField).
+                            delete(textSecondaryField.length() - 6,
+                                    textSecondaryField.length() - 3).toString();
+                    secondaryField.setText(textSecondaryField);
+                    //return;
+                }
+
+                calculation.operate();
+
+                textMainField = String.valueOf(calculation.result);
+
+                /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+                if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
+                        Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
+                                compareTo("0") == 0) {
+                    textMainField = textMainField.substring(0, textMainField.indexOf("."));
+                }
+
+                changeSizeText();
+                mainField.setText(textMainField);
+                textMainField = "";
+            } else if (!calculation.isLastPressButtonEqualMark) {
+                calculation.result = Double.parseDouble(textMainField);
             }
 
-            Calculation.lastOperation = Calculation.LastOperation.MULTIPLICATION;
-            Calculation.isLastPressButtonEqualMark = false;
+            calculation.lastOperation = Calculation.LastOperation.MULTIPLICATION;
+            calculation.isLastPressButtonEqualMark = false;
             textMainField = "";
         };
 
         View.OnClickListener onClickListenerButtonMinus = view -> {
-            if (Calculation.isLastPressButtonEqualMark) {
-                Calculation.lastOperation = Calculation.LastOperation.NULL;
-                Calculation.result = Double.parseDouble(mainField.getText().toString());
-                Calculation.var1 = 0;
+            if (calculation.isLastPressButtonEqualMark) {
+                calculation.lastOperation = Calculation.LastOperation.NULL;
+                calculation.result = Double.parseDouble(mainField.getText().toString());
+                calculation.var1 = 0;
             }
             if (textMainField.equals("") &&
-                    Calculation.lastOperation == Calculation.LastOperation.SUBTRACTION) {
+                    calculation.lastOperation == Calculation.LastOperation.SUBTRACTION) {
                 return;
             }
 
             textSecondaryField = textSecondaryField + textMainField + " " + "-" + " ";
             secondaryField.setText(textSecondaryField);
 
-            if (Calculation.lastOperation != Calculation.LastOperation.NULL) {
-                Calculation.operate();
-            } else if (!Calculation.isLastPressButtonEqualMark) {
-                Calculation.result = Double.parseDouble(textMainField);
+            if (calculation.lastOperation != Calculation.LastOperation.NULL) {
+                                /*если после одного дейсвия нажали сразу другое,
+                  то ничего не произойдет (только если это не кнопка равно).
+                  Просто сменится флаг.
+                */
+                if (!textMainField.equals("")) {
+                    calculation.var1 = Double.parseDouble(textMainField);
+                } else if (!calculation.isLastPressButtonEqualMark) {
+                    textSecondaryField = new StringBuffer(textSecondaryField).
+                            delete(textSecondaryField.length() - 6,
+                                    textSecondaryField.length() - 3).toString();
+                    secondaryField.setText(textSecondaryField);
+                    //return;
+                }
+
+                calculation.operate();
+
+                textMainField = String.valueOf(calculation.result);
+
+                /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+                if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
+                        Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
+                                compareTo("0") == 0) {
+                    textMainField = textMainField.substring(0, textMainField.indexOf("."));
+                }
+
+                changeSizeText();
+                mainField.setText(textMainField);
+                textMainField = "";
+            } else if (!calculation.isLastPressButtonEqualMark) {
+                calculation.result = Double.parseDouble(textMainField);
             }
 
-            Calculation.lastOperation = Calculation.LastOperation.SUBTRACTION;
-            Calculation.isLastPressButtonEqualMark = false;
+            calculation.lastOperation = Calculation.LastOperation.SUBTRACTION;
+            calculation.isLastPressButtonEqualMark = false;
             textMainField = "";
         };
 
         View.OnClickListener onClickListenerButtonDivisionSign = view -> {
-            if (Calculation.isLastPressButtonEqualMark) {
-                Calculation.lastOperation = Calculation.LastOperation.NULL;
-                Calculation.result = Double.parseDouble(mainField.getText().toString());
-                Calculation.var1 = 1;
+            if (calculation.isLastPressButtonEqualMark) {
+                calculation.lastOperation = Calculation.LastOperation.NULL;
+                calculation.result = Double.parseDouble(mainField.getText().toString());
+                calculation.var1 = 1;
             }
             if (textMainField.equals("") &&
-                    Calculation.lastOperation == Calculation.LastOperation.DIVISION) {
+                    calculation.lastOperation == Calculation.LastOperation.DIVISION) {
                 return;
             }
 
             textSecondaryField = textSecondaryField + textMainField + " " + "/" + " ";
             secondaryField.setText(textSecondaryField);
 
-            if (Calculation.lastOperation != Calculation.LastOperation.NULL) {
-                Calculation.operate();
-            } else if (!Calculation.isLastPressButtonEqualMark) {
-                Calculation.result = Double.parseDouble(textMainField);
+            if (calculation.lastOperation != Calculation.LastOperation.NULL) {
+                /*если после одного дейсвия нажали сразу другое,
+                  то ничего не произойдет (только если это не кнопка равно).
+                  Просто сменится флаг.
+                */
+                if (!textMainField.equals("")) {
+                    calculation.var1 = Double.parseDouble(textMainField);
+                } else if (!calculation.isLastPressButtonEqualMark) {
+                    textSecondaryField = new StringBuffer(textSecondaryField).
+                            delete(textSecondaryField.length() - 6,
+                                    textSecondaryField.length() - 3).toString();
+                    secondaryField.setText(textSecondaryField);
+                    //return;
+                }
+
+                calculation.operate();
+                /*if (calculation.var1 == 0){
+                    Toast.makeText(getApplicationContext(),
+                            R.string.division_error,
+                            Toast.LENGTH_LONG).show();
+                    mainField.setText(R.string.error);
+                    textMainField = "";
+                    return;
+                }*/
+
+                textMainField = String.valueOf(calculation.result);
+
+                /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+                if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
+                        Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
+                                compareTo("0") == 0) {
+                    textMainField = textMainField.substring(0, textMainField.indexOf("."));
+                }
+
+                changeSizeText();
+                mainField.setText(textMainField);
+                textMainField = "";
+            } else if (!calculation.isLastPressButtonEqualMark) {
+                calculation.result = Double.parseDouble(textMainField);
             }
 
-            Calculation.lastOperation = Calculation.LastOperation.DIVISION;
-            Calculation.isLastPressButtonEqualMark = false;
+            calculation.lastOperation = Calculation.LastOperation.DIVISION;
+            calculation.isLastPressButtonEqualMark = false;
             textMainField = "";
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = view -> {
-            if (Calculation.lastOperation == Calculation.LastOperation.NULL) {
+            if (calculation.lastOperation == Calculation.LastOperation.NULL) {
                 return;
             }
 
             String var = "";
-            if (Calculation.isLastPressButtonEqualMark) {
-                switch (Calculation.lastOperation) {
+            if (calculation.isLastPressButtonEqualMark) {
+                switch (calculation.lastOperation) {
                     case ADDITION:
                         textSecondaryField = textSecondaryField + " + " + var;
                         break;
@@ -306,9 +400,36 @@ public class MainActivity extends AppCompatActivity {
 
             /*если подряд нажимать = , то var1 не затирается в следующем operate,
              а так же при повороте экрана*/
-            Calculation.var1 = Calculation.var2;
-            Calculation.operate();
-            Calculation.isLastPressButtonEqualMark = true;
+            calculation.var1 = calculation.var2;
+                            /*если после одного дейсвия нажали сразу другое,
+                  то ничего не произойдет (только если это не кнопка равно).
+                  Просто сменится флаг.
+                */
+            if (!textMainField.equals("")) {
+                calculation.var1 = Double.parseDouble(textMainField);
+            } else if (!calculation.isLastPressButtonEqualMark) {
+                textSecondaryField = new StringBuffer(textSecondaryField).
+                        delete(textSecondaryField.length() - 6,
+                                textSecondaryField.length() - 3).toString();
+                secondaryField.setText(textSecondaryField);
+                //return;
+            }
+
+            calculation.operate();
+
+            textMainField = String.valueOf(calculation.result);
+
+            /*если в строке после запятой только один символ и он равен 0, то удаляем и точку и ноль*/
+            if ((textMainField.indexOf(".") + 2) == textMainField.length() &&
+                    Character.toString(textMainField.charAt(textMainField.indexOf(".") + 1)).
+                            compareTo("0") == 0) {
+                textMainField = textMainField.substring(0, textMainField.indexOf("."));
+            }
+
+            changeSizeText();
+            mainField.setText(textMainField);
+            textMainField = "";
+            calculation.isLastPressButtonEqualMark = true;
 
             /*если в строке после запятой только один символ и он равен 0,
             то удаляем и точку и ноль*/
@@ -318,11 +439,11 @@ public class MainActivity extends AppCompatActivity {
             (в одном месте со стрингами, а в другом в дабл.
             Так что его придётся, наверное, перегружать. Надо ли?
              */
-            if ((String.valueOf(Calculation.var1).indexOf(".") + 2) == String.valueOf(Calculation.var1).length() &&
-                    Character.toString(String.valueOf(Calculation.var1).charAt(String.valueOf(Calculation.var1).
+            if ((String.valueOf(calculation.var1).indexOf(".") + 2) == String.valueOf(calculation.var1).length() &&
+                    Character.toString(String.valueOf(calculation.var1).charAt(String.valueOf(calculation.var1).
                             indexOf(".") + 1)).compareTo("0") == 0) {
-                var = String.valueOf(Calculation.var1).substring(0, String.valueOf(Calculation.var1).indexOf("."));
-            } else var = String.valueOf(Calculation.var1);
+                var = String.valueOf(calculation.var1).substring(0, String.valueOf(calculation.var1).indexOf("."));
+            } else var = String.valueOf(calculation.var1);
 
             textSecondaryField = textSecondaryField + var + " " + "=";
             secondaryField.setText(textSecondaryField);
@@ -331,10 +452,10 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener onClickListenerButtonAllClean = view -> {
             textMainField = "0";
-            Calculation.var1 = 0;
-            Calculation.result = 0;
-            Calculation.lastOperation = Calculation.LastOperation.NULL;
-            Calculation.isLastPressButtonEqualMark = false;
+            calculation.var1 = 0;
+            calculation.result = 0;
+            calculation.lastOperation = Calculation.LastOperation.NULL;
+            calculation.isLastPressButtonEqualMark = false;
             changeSizeText();
             mainField.setText(textMainField);
             textSecondaryField = "";
@@ -387,7 +508,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        textMainField = SP.getString(SAVE_TEXT, "0");
+        textMainField = SP.getString(StringKeys.SAVE_TEXT, "0");
         changeSizeText();
         mainField.setText(textMainField);
     }
@@ -395,52 +516,58 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        SP.edit().putString(SAVE_TEXT, mainField.getText().toString()).apply();
+        SP.edit().putString(StringKeys.SAVE_TEXT, mainField.getText().toString()).apply();
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(LAST_OPERATION, Calculation.lastOperation.ordinal());
-        outState.putDouble(RESULT, Calculation.result);
-        outState.putDouble(VAR1, Calculation.var1);
-        outState.putDouble(VAR2, Calculation.var2);
-        outState.putBoolean(IS_LAST_PRESS_EQUAL_MARK, Calculation.isLastPressButtonEqualMark);
-        outState.putString(TEXT_MAIN_FIELD, textMainField);
-        outState.putString(MAIN_FIELD, mainField.getText().toString());
-        outState.putString(SECONDARY_FIELD, secondaryField.getText().toString());
-        outState.putString(TEXT_SECONDARY_FIELD, textSecondaryField);
+        outState.putInt(StringKeys.LAST_OPERATION, calculation.lastOperation.ordinal());
+        outState.putDouble(StringKeys.RESULT, calculation.result);
+        outState.putDouble(StringKeys.VAR1, calculation.var1);
+        outState.putDouble(StringKeys.VAR2, calculation.var2);
+        outState.putBoolean(StringKeys.IS_LAST_PRESS_EQUAL_MARK,
+                calculation.isLastPressButtonEqualMark);
+        outState.putString(StringKeys.TEXT_MAIN_FIELD, textMainField);
+        outState.putString(StringKeys.MAIN_FIELD, mainField.getText().toString());
+        outState.putString(StringKeys.SECONDARY_FIELD, secondaryField.getText().toString());
+        outState.putString(StringKeys.TEXT_SECONDARY_FIELD, textSecondaryField);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Calculation.lastOperation =
-                Calculation.LastOperation.values()[savedInstanceState.getInt(LAST_OPERATION)];
-        Calculation.result = savedInstanceState.getDouble(RESULT);
-        Calculation.var1 = savedInstanceState.getDouble(VAR1);
-        Calculation.var2 = savedInstanceState.getDouble(VAR2);
-        Calculation.isLastPressButtonEqualMark =
-                savedInstanceState.getBoolean(IS_LAST_PRESS_EQUAL_MARK);
-        textMainField = savedInstanceState.getString(TEXT_MAIN_FIELD);
-        mainField.setText(savedInstanceState.getString(MAIN_FIELD));
-        secondaryField.setText(savedInstanceState.getString(SECONDARY_FIELD));
-        textSecondaryField = savedInstanceState.getString(TEXT_SECONDARY_FIELD);
+        calculation.lastOperation = Calculation.LastOperation.
+                values()[savedInstanceState.getInt(StringKeys.LAST_OPERATION)];
+        calculation.result = savedInstanceState.getDouble(StringKeys.RESULT);
+        calculation.var1 = savedInstanceState.getDouble(StringKeys.VAR1);
+        calculation.var2 = savedInstanceState.getDouble(StringKeys.VAR2);
+        calculation.isLastPressButtonEqualMark =
+                savedInstanceState.getBoolean(StringKeys.IS_LAST_PRESS_EQUAL_MARK);
+        textMainField = savedInstanceState.getString(StringKeys.TEXT_MAIN_FIELD);
+        mainField.setText(savedInstanceState.getString(StringKeys.MAIN_FIELD));
+        secondaryField.setText(savedInstanceState.getString(StringKeys.SECONDARY_FIELD));
+        textSecondaryField = savedInstanceState.getString(StringKeys.TEXT_SECONDARY_FIELD);
     }
 
-    protected static void changeSizeText() {
-        int NUMBER_OF_LARGE_CHARACTERS = 8;
-        int NUMBER_OF_MEDIUM_CHARACTERS = 11;
-        int SIZE_LARGE_TEXT = 100;
-        int SIZE_MEDIUM_TEXT = 70;
-        int SIZE_SMALL_TEXT = 40;
 
-        if (textMainField.length() < NUMBER_OF_LARGE_CHARACTERS) {
-            mainField.setTextSize(SIZE_LARGE_TEXT);
-        } else if (textMainField.length() < NUMBER_OF_MEDIUM_CHARACTERS) {
-            mainField.setTextSize(SIZE_MEDIUM_TEXT);
+    /*
+    Используется только в мэйне, поэтому приват.
+     */
+    private void changeSizeText() {
+        //локальные переменные нет смысла делать константами
+        int number_of_large_characters = 8;
+        int number_of_medium_characters = 11;
+        int size_large_text = 100;
+        int size_medium_text = 70;
+        int size_small_text = 40;
+
+        if (textMainField.length() < number_of_large_characters) {
+            mainField.setTextSize(size_large_text);
+        } else if (textMainField.length() < number_of_medium_characters) {
+            mainField.setTextSize(size_medium_text);
         } else {
-            mainField.setTextSize(SIZE_SMALL_TEXT);
+            mainField.setTextSize(size_small_text);
         }
     }
 }
