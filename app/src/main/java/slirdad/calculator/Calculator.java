@@ -1,22 +1,17 @@
 package slirdad.calculator;
 
-
-import android.widget.Toast;
-
 // Класс сделал дефолтным для видимости только в пакете.
-class Calculation {
+class Calculator {
     /*
     Используются:
       - во всех лисенерах кнопок операций;
       - в методах onRestoreInstanceState и onSaveInstanceState;
       - в методе ::operate;
       - в лисенере АС
-
-      Сделал их протектед, что бы мэйн смог ими пользоваться.
      */
-    protected double result;
-    protected double var1;
-    protected double var2;
+    double result;
+    double var1;
+    double var2;
 
     /*
     Инициализация переменной, которая показывает было ли нажато последним "=".
@@ -25,10 +20,8 @@ class Calculation {
       - в методах onRestoreInstanceState и onSaveInstanceState;
       - в методе ::operate;
       - в лисенере АС
-
-      Сделал протектед, что бы мэйн смог им пользоваться.
      */
-    protected boolean isLastPressButtonEqualMark;
+    boolean isLastPressButtonEqualMark;
 
     /*
     lastOperation используется:
@@ -37,10 +30,8 @@ class Calculation {
         - в методе ::operate;
         - в лисенере АС
         - в onSaveInstanceState и onRestoreInstanceState
-
-       Сделал протектед, что бы мэйн смог им пользоваться.
     */
-    protected LastOperation lastOperation = LastOperation.NULL;
+    LastOperation lastOperation = LastOperation.NULL;
 
     enum LastOperation {
         ADDITION,
@@ -53,7 +44,7 @@ class Calculation {
     /*
     ::operate используется в лисенерах кнопок "/" "*" "-" "+" "="
      */
-    protected void operate() {
+    void operate() {
         switch (lastOperation) {
             case ADDITION:
                 result = result + var1;
@@ -68,15 +59,8 @@ class Calculation {
                 if (var1 != 0) {
                     result = result / var1;
                 } else {
-                    /*Toast.makeText(getApplicationContext(),
-                            R.string.division_error,
-                            Toast.LENGTH_LONG).show();
-                    mainField.setText(R.string.error);
-                    textMainField = "";*/
                     result = 0;
-                    //var1 = 0;
                     isLastPressButtonEqualMark = false;
-                    //buttonAllClean.callOnClick();
                     return;
                 }
                 break;
