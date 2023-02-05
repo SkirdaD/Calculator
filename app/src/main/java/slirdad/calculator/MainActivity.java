@@ -15,6 +15,11 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    private LastOperation lastOperation;
+    private double result, var1, var2;
+    private boolean isLastPressButtonEqualMark;
+
+
     /*  Создаю объект класса Calculation для доступа к переменным экземпляра класса.
             Не уверен, что это должно быть тут. Пока тут.
         Сначала создал в онКрейте. Всё работало, кроме onRestoreInstanceState и onSaveInstanceState.
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
+
+        lastOperation = LastOperation.NULL;
 
         SP = this.getSharedPreferences(StringKeys.SAVE_TEXT, MODE_PRIVATE);
 
@@ -134,20 +141,22 @@ public class MainActivity extends AppCompatActivity {
             mainField.setText(textMainField);
         };
 
+
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            if (checkForDivideByZeroError()){
+            if (checkForDivideByZeroError()) {
                 return;
             }
 
-            if (calculator.isLastPressButtonEqualMark) {//продолжение дествий после равно
-                calculator.lastOperation = Calculator.LastOperation.NULL;
-                calculator.result = Double.parseDouble(mainField.getText().toString());
-                calculator.var1 = 0;
+            /*Продолжение действий после "РАВНО"*/
+            if (isLastPressButtonEqualMark) {
+                lastOperation = LastOperation.NULL;
+                result = Double.parseDouble(mainField.getText().toString());
+                var1 = 0;
             }
 
-            //двойное подряд нажатие на действие = ничего не происходит
+            /*повторное нажатие на то же действие = ничего не происходит*/
             if (textMainField.equals("") &&
-                    calculator.lastOperation == Calculator.LastOperation.ADDITION) {
+                    lastOperation == LastOperation.ADDITION) {
                 return;
             }
 
@@ -156,38 +165,41 @@ public class MainActivity extends AppCompatActivity {
 
             /*если это не первое действие, то запускаем действие по предыдущему флагу,
             а если первое , то просто считываем с экрана число*/
-            if (calculator.lastOperation != Calculator.LastOperation.NULL) {
-                /*если после одного дейсвия нажали сразу другое,
+            if (lastOperation != LastOperation.NULL) {
+                /*если после одного действия нажали сразу другое,
                   то ничего не произойдет (только если это не кнопка равно).
-                  Просто сменится флаг.
-                */
+                  Просто сменится флаг */
                 if (!textMainField.equals("")) {
-                    calculator.var1 = Double.parseDouble(textMainField);
-                } else if (!calculator.isLastPressButtonEqualMark) {
+                    var1 = Double.parseDouble(textMainField);
+                } else if (!isLastPressButtonEqualMark) {
                     textSecondaryField = new StringBuffer(textSecondaryField).
                             delete(textSecondaryField.length() - 6,
                                     textSecondaryField.length() - 3).toString();
                     secondaryField.setText(textSecondaryField);
                 }
 
-                calculator.operate();
+                result = calculator.operate(lastOperation, result, var1);
+                var2 = var1;
 
-                textMainField = formattingWholeDoubleAsInt(String.valueOf(calculator.result));
+                textMainField = formattingWholeDoubleAsInt(String.valueOf(result));
+                //textMainField = formattingWholeDoubleAsInt(new DecimalFormat(",###").format(calculator.result));
+
 
                 changeSizeText();
                 mainField.setText(textMainField);
                 textMainField = "";
 
-            } else if (!calculator.isLastPressButtonEqualMark) {
-                calculator.result = Double.parseDouble(textMainField);
+            } else if (!isLastPressButtonEqualMark) {
+                result = Double.parseDouble(textMainField);
             }
-            calculator.lastOperation = Calculator.LastOperation.ADDITION;
-            calculator.isLastPressButtonEqualMark = false;
+            lastOperation = LastOperation.ADDITION;
+            isLastPressButtonEqualMark = false;
             textMainField = "";
         };
 
+
         View.OnClickListener onClickListenerButtonMultiplicationSign = view -> {
-            if (checkForDivideByZeroError()){
+            if (checkForDivideByZeroError()) {
                 return;
             }
 
@@ -235,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonMinus = view -> {
-            if (checkForDivideByZeroError()){
+            if (checkForDivideByZeroError()) {
                 return;
             }
 
@@ -284,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonDivisionSign = view -> {
-            if (checkForDivideByZeroError()){
+            if (checkForDivideByZeroError()) {
                 return;
             }
 
@@ -333,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = view -> {
-            if (checkForDivideByZeroError()){
+            if (checkForDivideByZeroError()) {
                 return;
             }
 
@@ -464,12 +476,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(StringKeys.LAST_OPERATION, calculator.lastOperation.ordinal());
-        outState.putDouble(StringKeys.RESULT, calculator.result);
-        outState.putDouble(StringKeys.VAR1, calculator.var1);
-        outState.putDouble(StringKeys.VAR2, calculator.var2);
-        outState.putBoolean(StringKeys.IS_LAST_PRESS_EQUAL_MARK,
-                calculator.isLastPressButtonEqualMark);
+        outState.putInt(StringKeys.LAST_OPERATION, lastOperation.ordinal());
+        outState.putDouble(StringKeys.RESULT, result);
+        outState.putDouble(StringKeys.VAR1, var1);
+        outState.putDouble(StringKeys.VAR2, var2);
+        outState.putBoolean(StringKeys.IS_LAST_PRESS_EQUAL_MARK, isLastPressButtonEqualMark);
         outState.putString(StringKeys.TEXT_MAIN_FIELD, textMainField);
         outState.putString(StringKeys.MAIN_FIELD, mainField.getText().toString());
         outState.putString(StringKeys.SECONDARY_FIELD, secondaryField.getText().toString());
@@ -479,12 +490,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        calculator.lastOperation = Calculator.LastOperation.
+        lastOperation = LastOperation.
                 values()[savedInstanceState.getInt(StringKeys.LAST_OPERATION)];
-        calculator.result = savedInstanceState.getDouble(StringKeys.RESULT);
-        calculator.var1 = savedInstanceState.getDouble(StringKeys.VAR1);
-        calculator.var2 = savedInstanceState.getDouble(StringKeys.VAR2);
-        calculator.isLastPressButtonEqualMark =
+        result = savedInstanceState.getDouble(StringKeys.RESULT);
+        var1 = savedInstanceState.getDouble(StringKeys.VAR1);
+        var2 = savedInstanceState.getDouble(StringKeys.VAR2);
+        isLastPressButtonEqualMark =
                 savedInstanceState.getBoolean(StringKeys.IS_LAST_PRESS_EQUAL_MARK);
         textMainField = savedInstanceState.getString(StringKeys.TEXT_MAIN_FIELD);
         mainField.setText(savedInstanceState.getString(StringKeys.MAIN_FIELD));
@@ -508,9 +519,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkForDivideByZeroError(){
-        if (calculator.var1 == 0 &&
-                calculator.lastOperation == Calculator.LastOperation.DIVISION) {
+    private boolean checkForDivideByZeroError() {
+        if (var1 == 0 && lastOperation == LastOperation.DIVISION) {
             Toast.makeText(getApplicationContext(),
                     R.string.division_error,
                     Toast.LENGTH_LONG).show();
@@ -523,11 +533,10 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private String formattingWholeDoubleAsInt(String text){
+    private String formattingWholeDoubleAsInt(String text) {
         if ((text.indexOf(".") + 2) == text.length() &&
                 Character.toString(text.charAt(text.indexOf(".") + 1)).compareTo("0") == 0) {
             return text.substring(0, text.indexOf("."));
-        }
-        else return text;
+        } else return text;
     }
 }

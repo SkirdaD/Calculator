@@ -1,5 +1,6 @@
 package slirdad.calculator;
 
+
 // Класс сделал дефолтным для видимости только в пакете.
 class Calculator {
     /*
@@ -9,9 +10,16 @@ class Calculator {
       - в методе ::operate;
       - в лисенере АС
      */
-    double result;
-    double var1;
-    double var2;
+    //private double result;
+    /*public void setResult (double result){
+        this.result = result;
+    }
+    public double getResult() {
+        return result;
+    }*/
+
+    //double var1;
+    //double var2;
 
     /*
     Инициализация переменной, которая показывает было ли нажато последним "=".
@@ -21,7 +29,7 @@ class Calculator {
       - в методе ::operate;
       - в лисенере АС
      */
-    boolean isLastPressButtonEqualMark;
+    //boolean isLastPressButtonEqualMark;
 
     /*
     lastOperation используется:
@@ -31,7 +39,8 @@ class Calculator {
         - в лисенере АС
         - в onSaveInstanceState и onRestoreInstanceState
     */
-    LastOperation lastOperation = LastOperation.NULL;
+
+    /*LastOperation lastOperation = LastOperation.NULL;
 
     enum LastOperation {
         ADDITION,
@@ -39,32 +48,34 @@ class Calculator {
         DIVISION,
         MULTIPLICATION,
         NULL
-    }
+    }*/
 
     /*
     ::operate используется в лисенерах кнопок "/" "*" "-" "+" "="
      */
-    void operate() {
+    double operate(LastOperation lastOperation,double result, double var) {
         switch (lastOperation) {
             case ADDITION:
-                result = result + var1;
+                result = result + var;
                 break;
             case MULTIPLICATION:
-                result = result * var1;
+                result = result * var;
                 break;
             case SUBTRACTION:
-                result = result - var1;
+                result = result - var;
                 break;
             case DIVISION:
-                if (var1 != 0) {
-                    result = result / var1;
+                if (var != 0) {
+                    result = result / var;
                 } else {
-                    result = 0;
-                    isLastPressButtonEqualMark = false;
-                    return;
+                    //result = 0;
+                    //isLastPressButtonEqualMark = false;
+                    break;
+                    //return;
                 }
                 break;
         }
-        var2 = var1;
+        //var2 = var1;
+        return result;
     }
 }
