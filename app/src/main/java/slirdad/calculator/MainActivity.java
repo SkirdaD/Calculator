@@ -15,48 +15,21 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LastOperation lastOperation;
+    private Operation lastOperation;
     private double result, var1, var2;
     private boolean isLastPressButtonEqualMark;
+    private boolean isDivisionByZero;
 
-
-    /*  Создаю объект класса Calculation для доступа к переменным экземпляра класса.
-            Не уверен, что это должно быть тут. Пока тут.
-        Сначала создал в онКрейте. Всё работало, кроме onRestoreInstanceState и onSaveInstanceState.
-        Я понимаю, что это связано с ЖЦ. Пока точно объяснить не могу.
-        Но когда создаю объект в онКрейт, то при дестрое он уничтожается.
-        Думаю, связано с этим.
-        Сделал приватным, т.к. кроме активити его никто не должен использовать.
-        И студия пишет, что может быть файнл. Не стал делать, т.к не понимаю пока этого.
-         */
     private final Calculator calculator = new Calculator();
 
     /*
-   инициализация SP, которая используется в ::onStart и в ::onStop, для сохранения и извлечения
-    при закрытии приложения.
-    Используется в итоге только в мэйне, поэтому приват.
+    инициализация SP, которая используется в ::onStart и в ::onStop, для сохранения и извлечения
+    при закрытии приложения. Используется в итоге только в мэйне, поэтому приват.
     */
     private SharedPreferences SP;
 
-    /*
-     Тексвью используются:
-      - в поиске вьюшек
-      - во всех лисенерах
-      - в онСтарт и онСтоп для шаредпреференс
-      - в методах onRestoreInstanceState и onSaveInstanceState
-      - в ::changeSizeText
-      Но только в мэйне, поэтому можно сделать приватными, и тогда никто не сможет в них вмешаться.
-      */
     private TextView mainField, secondaryField;
 
-    /*
-    Переменные инициализируюся дефолтными значениями.
-    Используются:
-      - во всех лисенерах кнопок;
-      - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в преференс
-      Но только в мэйне, поэтому можно сделать приватными, и тогда никто не сможет в них вмешаться.
-     */
     private String textMainField, textSecondaryField = "";
 
     @Override
@@ -64,17 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        lastOperation = LastOperation.NULL;
+        lastOperation = Operation.NULL;
 
         SP = this.getSharedPreferences(StringKeys.SAVE_TEXT, MODE_PRIVATE);
-
-         /*
-    Баттоны используютя:
-     - в поиске вьюшек
-     - в назначении лисенера для соответствующей кнопки
-     Поэтому можно сделать их локальными
-     и файнл, потому что они один раз сетятся и больше не изменяются.
-     */
 
         final Button buttonNum1 = (Button) findViewById(R.id.button1);
         final Button buttonNum2 = (Button) findViewById(R.id.button2);
@@ -143,208 +108,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            if (checkForDivideByZeroError()) {
-                return;
-            }
-
-            /*Продолжение действий после "РАВНО"*/
-            if (isLastPressButtonEqualMark) {
-                lastOperation = LastOperation.NULL;
-                result = Double.parseDouble(mainField.getText().toString());
-                var1 = 0;
-            }
-
-            /*повторное нажатие на то же действие = ничего не происходит*/
-            if (textMainField.equals("") &&
-                    lastOperation == LastOperation.ADDITION) {
-                return;
-            }
-
-            textSecondaryField = textSecondaryField + textMainField + " " + "+" + " ";
-            secondaryField.setText(textSecondaryField);
-
-            /*если это не первое действие, то запускаем действие по предыдущему флагу,
-            а если первое , то просто считываем с экрана число*/
-            if (lastOperation != LastOperation.NULL) {
-                /*если после одного действия нажали сразу другое,
-                  то ничего не произойдет (только если это не кнопка равно).
-                  Просто сменится флаг */
-                if (!textMainField.equals("")) {
-                    var1 = Double.parseDouble(textMainField);
-                } else if (!isLastPressButtonEqualMark) {
-                    textSecondaryField = new StringBuffer(textSecondaryField).
-                            delete(textSecondaryField.length() - 6,
-                                    textSecondaryField.length() - 3).toString();
-                    secondaryField.setText(textSecondaryField);
-                }
-
-                result = calculator.operate(lastOperation, result, var1);
-                var2 = var1;
-
-                textMainField = formattingWholeDoubleAsInt(String.valueOf(result));
-                //textMainField = formattingWholeDoubleAsInt(new DecimalFormat(",###").format(calculator.result));
-
-
-                changeSizeText();
-                mainField.setText(textMainField);
-                textMainField = "";
-
-            } else if (!isLastPressButtonEqualMark) {
-                result = Double.parseDouble(textMainField);
-            }
-            lastOperation = LastOperation.ADDITION;
-            isLastPressButtonEqualMark = false;
-            textMainField = "";
+            myGreatMethod(Operation.ADDITION, lastOperation);
         };
 
 
         View.OnClickListener onClickListenerButtonMultiplicationSign = view -> {
-            if (checkForDivideByZeroError()) {
-                return;
-            }
-
-            if (calculator.isLastPressButtonEqualMark) {
-                calculator.lastOperation = Calculator.LastOperation.NULL;
-                calculator.result = Double.parseDouble(mainField.getText().toString());
-                calculator.var1 = 1;
-            }
-            if (textMainField.equals("") &&
-                    calculator.lastOperation == Calculator.LastOperation.MULTIPLICATION) {
-                return;
-            }
-
-            textSecondaryField = textSecondaryField + textMainField + " " + "*" + " ";
-            secondaryField.setText(textSecondaryField);
-
-            if (calculator.lastOperation != Calculator.LastOperation.NULL) {
-                /*если после одного дейсвия нажали сразу другое,
-                  то ничего не произойдет (только если это не кнопка равно).
-                  Просто сменится флаг.
-                */
-                if (!textMainField.equals("")) {
-                    calculator.var1 = Double.parseDouble(textMainField);
-                } else if (!calculator.isLastPressButtonEqualMark) {
-                    textSecondaryField = new StringBuffer(textSecondaryField).
-                            delete(textSecondaryField.length() - 6,
-                                    textSecondaryField.length() - 3).toString();
-                    secondaryField.setText(textSecondaryField);
-                    //return;
-                }
-
-                calculator.operate();
-
-                textMainField = formattingWholeDoubleAsInt(String.valueOf(calculator.result));
-
-                changeSizeText();
-                mainField.setText(textMainField);
-                textMainField = "";
-            } else if (!calculator.isLastPressButtonEqualMark) {
-                calculator.result = Double.parseDouble(textMainField);
-            }
-            calculator.lastOperation = Calculator.LastOperation.MULTIPLICATION;
-            calculator.isLastPressButtonEqualMark = false;
-            textMainField = "";
+            myGreatMethod(Operation.MULTIPLICATION, lastOperation);
         };
 
         View.OnClickListener onClickListenerButtonMinus = view -> {
-            if (checkForDivideByZeroError()) {
-                return;
-            }
-
-            if (calculator.isLastPressButtonEqualMark) {
-                calculator.lastOperation = Calculator.LastOperation.NULL;
-                calculator.result = Double.parseDouble(mainField.getText().toString());
-                calculator.var1 = 0;
-            }
-            if (textMainField.equals("") &&
-                    calculator.lastOperation == Calculator.LastOperation.SUBTRACTION) {
-                return;
-            }
-
-            textSecondaryField = textSecondaryField + textMainField + " " + "-" + " ";
-            secondaryField.setText(textSecondaryField);
-
-            if (calculator.lastOperation != Calculator.LastOperation.NULL) {
-                                /*если после одного дейсвия нажали сразу другое,
-                  то ничего не произойдет (только если это не кнопка равно).
-                  Просто сменится флаг.
-                */
-                if (!textMainField.equals("")) {
-                    calculator.var1 = Double.parseDouble(textMainField);
-                } else if (!calculator.isLastPressButtonEqualMark) {
-                    textSecondaryField = new StringBuffer(textSecondaryField).
-                            delete(textSecondaryField.length() - 6,
-                                    textSecondaryField.length() - 3).toString();
-                    secondaryField.setText(textSecondaryField);
-                    //return;
-                }
-
-                calculator.operate();
-
-                textMainField = formattingWholeDoubleAsInt(String.valueOf(calculator.result));
-
-                changeSizeText();
-                mainField.setText(textMainField);
-                textMainField = "";
-            } else if (!calculator.isLastPressButtonEqualMark) {
-                calculator.result = Double.parseDouble(textMainField);
-            }
-
-            calculator.lastOperation = Calculator.LastOperation.SUBTRACTION;
-            calculator.isLastPressButtonEqualMark = false;
-            textMainField = "";
+           myGreatMethod(Operation.SUBTRACTION, lastOperation);
         };
 
         View.OnClickListener onClickListenerButtonDivisionSign = view -> {
-            if (checkForDivideByZeroError()) {
-                return;
-            }
-
-            if (calculator.isLastPressButtonEqualMark) {
-                calculator.lastOperation = Calculator.LastOperation.NULL;
-                calculator.result = Double.parseDouble(mainField.getText().toString());
-                calculator.var1 = 1;
-            }
-            if (textMainField.equals("") &&
-                    calculator.lastOperation == Calculator.LastOperation.DIVISION) {
-                return;
-            }
-
-            textSecondaryField = textSecondaryField + textMainField + " " + "/" + " ";
-            secondaryField.setText(textSecondaryField);
-
-            if (calculator.lastOperation != Calculator.LastOperation.NULL) {
-                /*если после одного дейсвия нажали сразу другое,
-                  то ничего не произойдет (только если это не кнопка равно).
-                  Просто сменится флаг.
-                */
-                if (!textMainField.equals("")) {
-                    calculator.var1 = Double.parseDouble(textMainField);
-                } else if (!calculator.isLastPressButtonEqualMark) {
-                    textSecondaryField = new StringBuffer(textSecondaryField).
-                            delete(textSecondaryField.length() - 6,
-                                    textSecondaryField.length() - 3).toString();
-                    secondaryField.setText(textSecondaryField);
-                    //return;
-                }
-
-                calculator.operate();
-
-                textMainField = formattingWholeDoubleAsInt(String.valueOf(calculator.result));
-
-                changeSizeText();
-                mainField.setText(textMainField);
-                textMainField = "";
-            } else if (!calculator.isLastPressButtonEqualMark) {
-                calculator.result = Double.parseDouble(textMainField);
-            }
-
-            calculator.lastOperation = Calculator.LastOperation.DIVISION;
-            calculator.isLastPressButtonEqualMark = false;
-            textMainField = "";
+            myGreatMethod(Operation.DIVISION, lastOperation);
         };
 
-        View.OnClickListener onClickListenerButtonEqualMark = view -> {
+        /*View.OnClickListener onClickListenerButtonEqualMark = view -> {
             if (checkForDivideByZeroError()) {
                 return;
             }
@@ -354,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             String var = "";
-            if (calculator.isLastPressButtonEqualMark) {
-                switch (calculator.lastOperation) {
+            if (isLastPressButtonEqualMark) {
+                switch (lastOperation) {
                     case ADDITION:
                         textSecondaryField = textSecondaryField + " + " + var;
                         break;
@@ -373,12 +153,13 @@ public class MainActivity extends AppCompatActivity {
 
             /*если подряд нажимать = , то var1 не затирается в следующем operate,
              а так же при повороте экрана*/
-            calculator.var1 = calculator.var2;
-                            /*если после одного дейсвия нажали сразу другое,
+            //calculator.var1 = calculator.var2;
+
+            /*если после одного дейсвия нажали сразу другое,
                   то ничего не произойдет (только если это не кнопка равно).
                   Просто сменится флаг.
                 */
-            if (!textMainField.equals("")) {
+            /*if (!textMainField.equals("")) {
                 calculator.var1 = Double.parseDouble(textMainField);
             } else if (!calculator.isLastPressButtonEqualMark) {
                 textSecondaryField = new StringBuffer(textSecondaryField).
@@ -402,14 +183,14 @@ public class MainActivity extends AppCompatActivity {
             textSecondaryField = textSecondaryField + var + " " + "=";
             secondaryField.setText(textSecondaryField);
             textSecondaryField = mainField.getText().toString();
-        };
+        };*/
 
         View.OnClickListener onClickListenerButtonAllClean = view -> {
             textMainField = "0";
-            calculator.var1 = 0;
-            calculator.result = 0;
-            calculator.lastOperation = Calculator.LastOperation.NULL;
-            calculator.isLastPressButtonEqualMark = false;
+            //calculator.var1 = 0;
+            //calculator.result = 0;
+            lastOperation = Operation.NULL;
+            isLastPressButtonEqualMark = false;
             changeSizeText();
             mainField.setText(textMainField);
             textSecondaryField = "";
@@ -453,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMultiplicationSign.setOnClickListener(onClickListenerButtonMultiplicationSign);
         buttonMinus.setOnClickListener(onClickListenerButtonMinus);
         buttonDivisionSign.setOnClickListener(onClickListenerButtonDivisionSign);
-        buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
+        //buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
         buttonAllClean.setOnClickListener(onClickListenerButtonAllClean);
         buttonDeleteLastCharacter.setOnClickListener(onClickListenerButtonDeleteLastCharacter);
         buttonPositiveToNegative.setOnClickListener(onClickListenerButtonPositiveToNegative);
@@ -490,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        lastOperation = LastOperation.
+        lastOperation = Operation.
                 values()[savedInstanceState.getInt(StringKeys.LAST_OPERATION)];
         result = savedInstanceState.getDouble(StringKeys.RESULT);
         var1 = savedInstanceState.getDouble(StringKeys.VAR1);
@@ -519,11 +300,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkForDivideByZeroError() {
+    /*private boolean checkForDivideByZeroError() {
         if (var1 == 0 && lastOperation == LastOperation.DIVISION) {
             Toast.makeText(getApplicationContext(),
-                    R.string.division_error,
-                    Toast.LENGTH_LONG).show();
+                    R.string.division_error, Toast.LENGTH_LONG).show();
             mainField.setText(R.string.error);
             textMainField = "";
             textSecondaryField = "";
@@ -531,6 +311,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }*/
+
+    private void changeMarkForSecondaryField() {
+        textSecondaryField = new StringBuffer(textSecondaryField).
+                delete(textSecondaryField.length() - 6,
+                        textSecondaryField.length() - 3).toString();
+        secondaryField.setText(textSecondaryField);
     }
 
     private String formattingWholeDoubleAsInt(String text) {
@@ -539,4 +326,94 @@ public class MainActivity extends AppCompatActivity {
             return text.substring(0, text.indexOf("."));
         } else return text;
     }
+
+    public void setDivisionByZero(boolean divisionByZero) {
+        isDivisionByZero = divisionByZero;
+    }
+
+    private void showErrorForDivideByZero(boolean isDivisionByZero) {
+        if (isDivisionByZero) {
+            Toast.makeText(getApplicationContext(),
+                    R.string.division_error, Toast.LENGTH_LONG).show();
+            mainField.setText(R.string.error);
+            textMainField = "";
+            textSecondaryField = "";
+            secondaryField.setText(textSecondaryField);
+            this.isDivisionByZero = false;
+        }
+    }
+
+
+    private void myGreatMethod(Operation nowOperation, Operation lastOperation) {
+        /*повторное нажатие на то же действие = ничего не происходит*/
+        if (textMainField.equals("") && lastOperation == nowOperation) {
+            return;
+        }
+        showErrorForDivideByZero(isDivisionByZero);
+
+        switch (nowOperation) {
+            case ADDITION:
+                textSecondaryField = textSecondaryField + textMainField + " + ";
+                break;
+            case MULTIPLICATION:
+                textSecondaryField = textSecondaryField + textMainField + " * ";
+                break;
+            case SUBTRACTION:
+                textSecondaryField = textSecondaryField + textMainField + " - ";
+                break;
+            case DIVISION:
+                textSecondaryField = textSecondaryField + textMainField + " / ";
+                break;
+        }
+        secondaryField.setText(textSecondaryField);
+
+        /*Продолжение действий после "РАВНО"*/
+        if (isLastPressButtonEqualMark) {
+            //lastOperation = Operation.NULL;
+            calculator.setResult(Double.parseDouble(mainField.getText().toString()));
+            double var = 0;
+            switch (lastOperation) {
+                case ADDITION:
+                    var = 0;
+                    break;
+                case MULTIPLICATION:
+                    var = 1;
+                    break;
+                case SUBTRACTION:
+                    var = 0;
+                    break;
+                case DIVISION:
+                    var = 1;
+                    break;
+            }
+
+            textMainField = formattingWholeDoubleAsInt(String.valueOf(
+                    calculator.operate(lastOperation, var)));
+            changeSizeText();
+            mainField.setText(textMainField);
+        }
+
+        if (lastOperation != Operation.NULL) {
+            if (!textMainField.equals("")) {
+                textMainField = formattingWholeDoubleAsInt(String.valueOf(
+                        calculator.operate(lastOperation, Double.parseDouble(textMainField))));
+            } else {
+                changeMarkForSecondaryField();
+            }
+        } else if (!isLastPressButtonEqualMark) {
+            calculator.setResult(Double.parseDouble(textMainField));
+        }
+
+        switch (nowOperation) {
+            case ADDITION:
+                this.lastOperation = Operation.ADDITION;
+                break;
+            case MULTIPLICATION:
+                this.lastOperation = Operation.MULTIPLICATION;
+                break;
+        }
+        isLastPressButtonEqualMark = false;
+        textMainField = "";
+    }
+
 }

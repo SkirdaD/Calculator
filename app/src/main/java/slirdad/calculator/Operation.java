@@ -1,6 +1,6 @@
 package slirdad.calculator;
 
-public enum LastOperation {
+public enum Operation {
     ADDITION,
     SUBTRACTION,
     DIVISION,
