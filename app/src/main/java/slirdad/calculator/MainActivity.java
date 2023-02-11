@@ -15,12 +15,6 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CalculatorData calculatorData = new CalculatorData();
-    //private Operation lastOperation;
-    //private double result, var1, var2;
-    //private boolean isLastPressButtonEqualMark;
-    //private boolean isDivisionByZero;
-
     private final Calculator calculator = new Calculator();
 
     private SharedPreferences SP;
@@ -105,18 +99,16 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
-
-
-
-
-
-
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            calculatorData = readingField(mainField, Operation.ADDITION);
+            settingField
+                    (calculator.operate(
+                            readingField(mainField), Operation.ADDITION));
+        };
 
-            calculatorData = calculator.operate(calculatorData);
-
-            settingField(calculatorData);
+        View.OnClickListener onClickListenerButtonMinus = v -> {
+            settingField
+                    (calculator.operate(
+                            readingField(mainField), Operation.SUBTRACTION));
         };
 
 
@@ -126,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         buttonPlus.setOnClickListener(onClickListenerButtonPlus);
+        buttonMinus.setOnClickListener(onClickListenerButtonMinus);
         //buttonMultiplicationSign.setOnClickListener(onClickListenerButtonMultiplicationSign);
-        //buttonMinus.setOnClickListener(onClickListenerButtonMinus);
         //buttonDivisionSign.setOnClickListener(onClickListenerButtonDivisionSign);
         //buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
         //buttonAllClean.setOnClickListener(onClickListenerButtonAllClean);
@@ -135,12 +127,11 @@ public class MainActivity extends AppCompatActivity {
         //buttonPositiveToNegative.setOnClickListener(onClickListenerButtonPositiveToNegative);
     }
 
-    private CalculatorData readingField(TextView mainField, Operation currentOperation) {
-        double var = Double.parseDouble(mainField.getText().toString());
-        return new CalculatorData(currentOperation, var);
+    private double readingField(TextView mainField) {
+        return Double.parseDouble(mainField.getText().toString());
     }
 
-    private void settingField (CalculatorData calculatorData){
+    private void settingField(CalculatorData calculatorData) {
         textMainField = Double.toString(calculatorData.result);
         mainField.setText(textMainField);
         textMainField = "";

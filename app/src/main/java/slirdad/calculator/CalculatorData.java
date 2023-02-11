@@ -22,7 +22,6 @@ class CalculatorData {
         this.var = var;
     }
 
-    CalculatorData(){
-
+    CalculatorData() {
     }
 }
