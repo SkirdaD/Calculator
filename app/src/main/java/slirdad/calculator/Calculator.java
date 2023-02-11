@@ -3,15 +3,15 @@ package slirdad.calculator;
 
 class Calculator {
 
-    private double result;
-    public void setResult (double result){
-        this.result = result;
-    }
-    public double getResult() {
-        return result;
-    }
+    CalculatorData operate(CalculatorData calculatorData) {
 
-    double operate(Operation lastOperation, double var) {
+        Operation lastOperation = calculatorData.lastOperation;
+        Operation currentOperation = calculatorData.currentOperation;
+        double result = calculatorData.result;
+        double var = calculatorData.var;
+        boolean isDivisionByZero = calculatorData.isDivisionByZero;
+
+
         switch (lastOperation) {
             case ADDITION:
                 result = result + var;
@@ -26,17 +26,16 @@ class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    //MainActivity mainActivity = new MainActivity();
-                    //mainActivity.setDivisionByZero(true);
-                    new MainActivity().setDivisionByZero(true);
-                    //result = 0;
-                    //isLastPressButtonEqualMark = false;
-                    //break;
-                    return 0;
+                    isDivisionByZero = true;
                 }
                 break;
+            case NULL:
+                result = var;
+                break;
         }
-        //var2 = var1;
-        return result;
+        lastOperation = currentOperation;
+
+        return new CalculatorData(lastOperation, currentOperation,
+                result, var, isDivisionByZero);
     }
 }
