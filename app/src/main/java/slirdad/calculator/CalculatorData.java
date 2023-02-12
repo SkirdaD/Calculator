@@ -1,17 +1,14 @@
 package slirdad.calculator;
 
 class CalculatorData {
-    double result;
-    double var;
-    Operation currentOperation;
-    boolean isDivisionByZero;
+    final double result;
+    final double var;
+    final Operation operation;
 
 
-    CalculatorData(Operation currentOperation, double result, double var,
-                   boolean isDivisionByZero) {
-        this.currentOperation = currentOperation;
+    CalculatorData(Operation operation, double result, double var) {
+        this.operation = operation;
         this.result = result;
         this.var = var;
-        this.isDivisionByZero = isDivisionByZero;
     }
 }

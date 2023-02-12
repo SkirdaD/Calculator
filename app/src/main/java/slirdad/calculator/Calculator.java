@@ -2,13 +2,11 @@ package slirdad.calculator;
 
 
 class Calculator {
-    CalculatorData calculatorData;
+    private double result;
 
-    CalculatorData operate(double var, Operation currentOperation) {
-        double result = calculatorData.result;
-        boolean isDivisionByZero = calculatorData.isDivisionByZero;
+    CalculatorData operate(double var, Operation operation) {
 
-        switch (currentOperation) {
+        switch (operation) {
             case ADDITION:
                 result = result + var;
                 break;
@@ -22,15 +20,14 @@ class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    isDivisionByZero = true;
+                    //что-то с CallBack
                 }
                 break;
             case NULL:
                 result = var;
                 break;
         }
-        calculatorData = new CalculatorData(currentOperation, result, var, isDivisionByZero);
 
-        return calculatorData;
+        return new CalculatorData(operation, result, var);
     }
 }

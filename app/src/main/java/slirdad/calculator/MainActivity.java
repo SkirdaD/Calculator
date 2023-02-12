@@ -93,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            setFields(calculator.operate(readFields(mainField), Operation.ADDITION));
+            double var = readFields(mainField);
+            CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION);
+            setFields(calculatorData);
         };
 
         View.OnClickListener onClickListenerButtonMinus = v -> {
-            setFields(calculator.operate(readFields(mainField), Operation.SUBTRACTION));
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = v -> {
@@ -115,19 +116,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private double readFields(TextView mainField) {
-        return Double.parseDouble(mainField.getText().toString());
+        double var = Double.parseDouble(mainField.getText().toString());
+        return var;
     }
 
     private void setFields(CalculatorData calculatorData) {
-        if (calculatorData.isDivisionByZero) {
-            showErrorForDivideByZero();
-        } else {
-            textMainField = Double.toString(calculatorData.result);
-            changeSizeText(textMainField, mainField);
-            mainField.setText(textMainField);
-            textMainField = "";
-            showAllInSecondary(calculatorData);
-        }
+        textMainField = Double.toString(calculatorData.result);
+        changeSizeText(textMainField, mainField);
+        mainField.setText(textMainField);
+        textMainField = "";
+        showAllInSecondary(calculatorData);
     }
 
     private void changeSizeText(String text, TextView textView) {
@@ -153,9 +151,10 @@ public class MainActivity extends AppCompatActivity {
         textMainField = "";
     }
 
-    private void showAllInSecondary(CalculatorData c) {
+    private void showAllInSecondary(CalculatorData calculatorData) {
         secondaryField.setText(
-                "cur=" + c.currentOperation + "  var=" + c.var + "   result=" + c.result
+                "cur=" + calculatorData.operation + "  var=" + calculatorData.var +
+                        "   result=" + calculatorData.result
         );
     }
 }
