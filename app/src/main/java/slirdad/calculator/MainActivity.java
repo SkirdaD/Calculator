@@ -98,20 +98,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            if (calculator.calculatorData.lastOperation == Operation.ADDITION &&
-                    textMainField.equals("")) {
-                return;
-            }
+//            if (calculator.calculatorData.lastOperation == Operation.ADDITION &&
+//                    textMainField.equals("")) {
+//                return;
+//            }
             settingFields
                     (calculator.operate(
                             readingFields(mainField), Operation.ADDITION));
         };
 
         View.OnClickListener onClickListenerButtonMinus = v -> {
-            if (calculator.calculatorData.lastOperation == Operation.SUBTRACTION &&
-                    textMainField.equals("")) {
-                return;
-            }
+//            if (calculator.calculatorData.lastOperation == Operation.SUBTRACTION &&
+//                    textMainField.equals("")) {
+//                return;
+//            }
             settingFields
                     (calculator.operate(
                             readingFields(mainField), Operation.SUBTRACTION));
@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener onClickListenerButtonEqualMark = v -> {
             double var = calculator.calculatorData.var;
-            Operation curOper = calculator.calculatorData.lastOperation;
-            settingFields(calculator.operate(var, curOper));
+            //Operation curOper = calculator.calculatorData.lastOperation;
+            //settingFields(calculator.operate(var, curOper));
             //это повторное нажатаие на =, надо еще сделать первое нажатие
             //calculator.calculatorData = new CalculatorData(result)
         };
@@ -182,10 +182,9 @@ public class MainActivity extends AppCompatActivity {
         //secondaryField.setText(textSecondaryField);
     }
 
-    private void showAllInSecondary (CalculatorData c){
+    private void showAllInSecondary(CalculatorData c) {
         secondaryField.setText(
-                "last="+c.lastOperation + "  cur=" + c.currentOperation + "  var=" + c.var+
-                        "   result="+c.result
+                "cur=" + c.currentOperation + "  var=" + c.var + "   result=" + c.result
         );
     }
 }
