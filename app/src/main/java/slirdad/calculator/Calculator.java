@@ -7,7 +7,6 @@ class Calculator {
     CalculatorData operate(double var, Operation currentOperation) {
         double result = calculatorData.result;
         boolean isDivisionByZero = calculatorData.isDivisionByZero;
-        //Operation lastOperation = calculatorData.lastOperation;
 
         switch (currentOperation) {
             case ADDITION:
@@ -30,9 +29,8 @@ class Calculator {
                 result = var;
                 break;
         }
-        //lastOperation = currentOperation;
+        calculatorData = new CalculatorData(currentOperation, result, var, isDivisionByZero);
 
-        return calculatorData = new CalculatorData(currentOperation,
-                result, var, isDivisionByZero);
+        return calculatorData;
     }
 }

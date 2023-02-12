@@ -2,7 +2,6 @@ package slirdad.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,18 +15,14 @@ public class MainActivity extends AppCompatActivity {
 
     private final Calculator calculator = new Calculator();
 
-    private SharedPreferences SP;
-
     private TextView mainField, secondaryField;
 
-    private String textMainField;//, textSecondaryField = "";
+    private String textMainField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
-
-        //SP = this.getSharedPreferences(StringKeys.SAVE_TEXT, MODE_PRIVATE);
 
         final Button buttonNum1 = (Button) findViewById(R.id.button1);
         final Button buttonNum2 = (Button) findViewById(R.id.button2);
@@ -61,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mainField.setText(textMainField);
 
         View.OnClickListener onClickListenerForNumbers = view -> {
-            if (textMainField.equals("0")) {  // что бы при вводе затирался начальный ноль
+            if (textMainField.equals("0")) { // что бы при вводе затирался начальный ноль
                 textMainField = "";
             }
 
@@ -98,31 +93,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         View.OnClickListener onClickListenerButtonPlus = view -> {
-//            if (calculator.calculatorData.lastOperation == Operation.ADDITION &&
-//                    textMainField.equals("")) {
-//                return;
-//            }
-            settingFields
-                    (calculator.operate(
-                            readingFields(mainField), Operation.ADDITION));
+            setFields(calculator.operate(readFields(mainField), Operation.ADDITION));
         };
 
         View.OnClickListener onClickListenerButtonMinus = v -> {
-//            if (calculator.calculatorData.lastOperation == Operation.SUBTRACTION &&
-//                    textMainField.equals("")) {
-//                return;
-//            }
-            settingFields
-                    (calculator.operate(
-                            readingFields(mainField), Operation.SUBTRACTION));
+            setFields(calculator.operate(readFields(mainField), Operation.SUBTRACTION));
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = v -> {
-            double var = calculator.calculatorData.var;
-            //Operation curOper = calculator.calculatorData.lastOperation;
-            //settingFields(calculator.operate(var, curOper));
-            //это повторное нажатаие на =, надо еще сделать первое нажатие
-            //calculator.calculatorData = new CalculatorData(result)
         };
 
 
@@ -134,18 +112,13 @@ public class MainActivity extends AppCompatActivity {
         buttonPlus.setOnClickListener(onClickListenerButtonPlus);
         buttonMinus.setOnClickListener(onClickListenerButtonMinus);
         buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
-        //buttonMultiplicationSign.setOnClickListener(onClickListenerButtonMultiplicationSign);
-        //buttonDivisionSign.setOnClickListener(onClickListenerButtonDivisionSign);
-        //buttonAllClean.setOnClickListener(onClickListenerButtonAllClean);
-        //buttonDeleteLastCharacter.setOnClickListener(onClickListenerButtonDeleteLastCharacter);
-        //buttonPositiveToNegative.setOnClickListener(onClickListenerButtonPositiveToNegative);
     }
 
-    private double readingFields(TextView mainField) {
+    private double readFields(TextView mainField) {
         return Double.parseDouble(mainField.getText().toString());
     }
 
-    private void settingFields(CalculatorData calculatorData) {
+    private void setFields(CalculatorData calculatorData) {
         if (calculatorData.isDivisionByZero) {
             showErrorForDivideByZero();
         } else {
@@ -157,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void changeSizeText(String text, TextView field) {
+    private void changeSizeText(String text, TextView textView) {
         final int NUMBER_OF_LARGE_CHARACTERS = 8;
         final int NUMBER_OF_MEDIUM_CHARACTERS = 11;
         final int SIZE_LARGE_TEXT = 100;
@@ -165,11 +138,11 @@ public class MainActivity extends AppCompatActivity {
         final int SIZE_SMALL_TEXT = 40;
 
         if (text.length() < NUMBER_OF_LARGE_CHARACTERS) {
-            field.setTextSize(SIZE_LARGE_TEXT);
+            textView.setTextSize(SIZE_LARGE_TEXT);
         } else if (text.length() < NUMBER_OF_MEDIUM_CHARACTERS) {
-            field.setTextSize(SIZE_MEDIUM_TEXT);
+            textView.setTextSize(SIZE_MEDIUM_TEXT);
         } else {
-            field.setTextSize(SIZE_SMALL_TEXT);
+            textView.setTextSize(SIZE_SMALL_TEXT);
         }
     }
 
@@ -178,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
                 R.string.division_error, Toast.LENGTH_LONG).show();
         mainField.setText(R.string.error);
         textMainField = "";
-        //textSecondaryField = "";
-        //secondaryField.setText(textSecondaryField);
     }
 
     private void showAllInSecondary(CalculatorData c) {
