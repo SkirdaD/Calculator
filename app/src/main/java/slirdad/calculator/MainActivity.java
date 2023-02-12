@@ -1,6 +1,5 @@
 package slirdad.calculator;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences SP;
 
-    private TextView mainField;//, secondaryField;
+    private TextView mainField, secondaryField;
 
     private String textMainField;//, textSecondaryField = "";
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainField = (TextView) findViewById(R.id.textView1);
-        //secondaryField = (TextView) findViewById(R.id.textView2);
+        secondaryField = (TextView) findViewById(R.id.textView2);
 
         textMainField = "0";// так сделано, пока нет шареда
         mainField.setText(textMainField);
@@ -93,22 +92,37 @@ public class MainActivity extends AppCompatActivity {
                     textMainField = (textMainField.equals("")) ? ("0.") : (textMainField + ".");
                 } else return;
             }
-
-            //changeSizeText();
+            changeSizeText(textMainField, mainField);
             mainField.setText(textMainField);
         };
 
 
         View.OnClickListener onClickListenerButtonPlus = view -> {
-            settingField
+            if (calculator.calculatorData.lastOperation == Operation.ADDITION &&
+                    textMainField.equals("")) {
+                return;
+            }
+            settingFields
                     (calculator.operate(
-                            readingField(mainField), Operation.ADDITION));
+                            readingFields(mainField), Operation.ADDITION));
         };
 
         View.OnClickListener onClickListenerButtonMinus = v -> {
-            settingField
+            if (calculator.calculatorData.lastOperation == Operation.SUBTRACTION &&
+                    textMainField.equals("")) {
+                return;
+            }
+            settingFields
                     (calculator.operate(
-                            readingField(mainField), Operation.SUBTRACTION));
+                            readingFields(mainField), Operation.SUBTRACTION));
+        };
+
+        View.OnClickListener onClickListenerButtonEqualMark = v -> {
+            double var = calculator.calculatorData.var;
+            Operation curOper = calculator.calculatorData.lastOperation;
+            settingFields(calculator.operate(var, curOper));
+            //это повторное нажатаие на =, надо еще сделать первое нажатие
+            //calculator.calculatorData = new CalculatorData(result)
         };
 
 
@@ -119,22 +133,59 @@ public class MainActivity extends AppCompatActivity {
 
         buttonPlus.setOnClickListener(onClickListenerButtonPlus);
         buttonMinus.setOnClickListener(onClickListenerButtonMinus);
+        buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
         //buttonMultiplicationSign.setOnClickListener(onClickListenerButtonMultiplicationSign);
         //buttonDivisionSign.setOnClickListener(onClickListenerButtonDivisionSign);
-        //buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
         //buttonAllClean.setOnClickListener(onClickListenerButtonAllClean);
         //buttonDeleteLastCharacter.setOnClickListener(onClickListenerButtonDeleteLastCharacter);
         //buttonPositiveToNegative.setOnClickListener(onClickListenerButtonPositiveToNegative);
     }
 
-    private double readingField(TextView mainField) {
+    private double readingFields(TextView mainField) {
         return Double.parseDouble(mainField.getText().toString());
     }
 
-    private void settingField(CalculatorData calculatorData) {
-        textMainField = Double.toString(calculatorData.result);
-        mainField.setText(textMainField);
-        textMainField = "";
+    private void settingFields(CalculatorData calculatorData) {
+        if (calculatorData.isDivisionByZero) {
+            showErrorForDivideByZero();
+        } else {
+            textMainField = Double.toString(calculatorData.result);
+            changeSizeText(textMainField, mainField);
+            mainField.setText(textMainField);
+            textMainField = "";
+            showAllInSecondary(calculatorData);
+        }
+    }
 
+    private void changeSizeText(String text, TextView field) {
+        final int NUMBER_OF_LARGE_CHARACTERS = 8;
+        final int NUMBER_OF_MEDIUM_CHARACTERS = 11;
+        final int SIZE_LARGE_TEXT = 100;
+        final int SIZE_MEDIUM_TEXT = 70;
+        final int SIZE_SMALL_TEXT = 40;
+
+        if (text.length() < NUMBER_OF_LARGE_CHARACTERS) {
+            field.setTextSize(SIZE_LARGE_TEXT);
+        } else if (text.length() < NUMBER_OF_MEDIUM_CHARACTERS) {
+            field.setTextSize(SIZE_MEDIUM_TEXT);
+        } else {
+            field.setTextSize(SIZE_SMALL_TEXT);
+        }
+    }
+
+    private void showErrorForDivideByZero() {
+        Toast.makeText(getApplicationContext(),
+                R.string.division_error, Toast.LENGTH_LONG).show();
+        mainField.setText(R.string.error);
+        textMainField = "";
+        //textSecondaryField = "";
+        //secondaryField.setText(textSecondaryField);
+    }
+
+    private void showAllInSecondary (CalculatorData c){
+        secondaryField.setText(
+                "last="+c.lastOperation + "  cur=" + c.currentOperation + "  var=" + c.var+
+                        "   result="+c.result
+        );
     }
 }

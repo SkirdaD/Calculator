@@ -2,7 +2,7 @@ package slirdad.calculator;
 
 
 class Calculator {
-    private CalculatorData calculatorData = new CalculatorData();
+    CalculatorData calculatorData = new CalculatorData();
 
     CalculatorData operate (double var, Operation currentOperation) {
         double result = calculatorData.result;
