@@ -4,9 +4,8 @@ package slirdad.calculator;
 class Calculator {
     private double result;
 
-    CalculatorData operate(double var, Operation operation) {
-
-        switch (operation) {
+    CalculatorData operate(double var, Operation currentOperation, Operation nextOperation) {
+        switch (currentOperation) {
             case ADDITION:
                 result = result + var;
                 break;
@@ -23,11 +22,11 @@ class Calculator {
                     //что-то с CallBack
                 }
                 break;
-            case NULL:
+            case NONE:
                 result = var;
                 break;
         }
 
-        return new CalculatorData(operation, result, var);
+        return new CalculatorData(nextOperation, result, var);
     }
 }
