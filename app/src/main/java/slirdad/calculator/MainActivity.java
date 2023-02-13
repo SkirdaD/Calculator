@@ -15,11 +15,12 @@ public class MainActivity extends AppCompatActivity {
 
     private final Calculator calculator = new Calculator();
 
-    private TextView mainTextView, secondaryTextView;
-
-    private String textMainTextView;
+    private TextView mainTextView;
 
     private Operation currentOperation = Operation.NONE;
+
+    private boolean isFinishOperation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,45 +53,47 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainTextView = (TextView) findViewById(R.id.textView1);
-        secondaryTextView = (TextView) findViewById(R.id.textView2);
 
-        textMainTextView = "0";// так сделано, пока нет шареда
-        mainTextView.setText(textMainTextView);
+        mainTextView.setText("0"); // так сделано, пока нет шареда
 
         View.OnClickListener onClickListenerForNumbers = view -> {
-            if (textMainTextView.equals("0")) { // что бы при вводе затирался начальный ноль
-                textMainTextView = "";
+            String text = mainTextView.getText().toString();
+            /*При вводе затирался начальный ноль или
+            после нажатия на кнопку операции затирается то, что сейчас в mainTextView*/
+            if (text.equals("0") || isFinishOperation) {
+                text = "";
             }
 
             int id = view.getId();
 
             if (id == R.id.button1) {
-                textMainTextView = textMainTextView + "1";
+                text = text + "1";
             } else if (id == R.id.button2) {
-                textMainTextView = textMainTextView + "2";
+                text = text + "2";
             } else if (id == R.id.button3) {
-                textMainTextView = textMainTextView + "3";
+                text = text + "3";
             } else if (id == R.id.button4) {
-                textMainTextView = textMainTextView + "4";
+                text = text + "4";
             } else if (id == R.id.button5) {
-                textMainTextView = textMainTextView + "5";
+                text = text + "5";
             } else if (id == R.id.button6) {
-                textMainTextView = textMainTextView + "6";
+                text = text + "6";
             } else if (id == R.id.button7) {
-                textMainTextView = textMainTextView + "7";
+                text = text + "7";
             } else if (id == R.id.button8) {
-                textMainTextView = textMainTextView + "8";
+                text = text + "8";
             } else if (id == R.id.button9) {
-                textMainTextView = textMainTextView + "9";
+                text = text + "9";
             } else if (id == R.id.button0) {
-                textMainTextView = textMainTextView + "0";
+                text = text + "0";
             } else if (id == R.id.buttonPoint) {
-                if (!textMainTextView.contains(".")) {    //если в строке нет точки
-                    textMainTextView = (textMainTextView.equals("")) ? ("0.") : (textMainTextView + ".");
+                if (!text.contains(".")) {
+                    text = (text.equals("")) ? ("0.") : (text + ".");
                 } else return;
             }
-            changeSizeText(textMainTextView, mainTextView);
-            mainTextView.setText(textMainTextView);
+            Ext.changeSizeText(text, mainTextView);
+            mainTextView.setText(text);
+            isFinishOperation = false;
         };
 
 
@@ -99,34 +102,38 @@ public class MainActivity extends AppCompatActivity {
             /*Реализовано повторное нажатие на одну и ту же кнопку,
              *перевыбор действия сразу,
              *перевыбор в процессе вычислений  */
-            if (textMainTextView.equals("")) {
+            if (isFinishOperation) {
                 if (currentOperation == Operation.ADDITION) {
                     return;
                 } else {
                     var = 0;
                 }
             } else {
-                var = readMainTextView(mainTextView);
+                var = Ext.getNumFromTextView(mainTextView);
             }
 
-            CalculatorData calculatorData = calculator.operate(var, currentOperation, Operation.ADDITION);
-            setTextView(calculatorData);
+            CalculatorData calculatorData = calculator.operate(var, currentOperation,
+                    Operation.ADDITION);
+            currentOperation = Ext.setTextView(calculatorData, mainTextView);
+            isFinishOperation = true;
         };
 
         View.OnClickListener onClickListenerButtonMinus = v -> {
             double var;
-            if (textMainTextView.equals("")) {
+            if (isFinishOperation) {
                 if (currentOperation == Operation.SUBTRACTION) {
                     return;
                 } else {
                     var = 0;
                 }
             } else {
-                var = readMainTextView(mainTextView);
+                var = Ext.getNumFromTextView(mainTextView);
             }
 
-            CalculatorData calculatorData = calculator.operate(var, currentOperation, Operation.SUBTRACTION);
-            setTextView(calculatorData);
+            CalculatorData calculatorData = calculator.operate(var, currentOperation,
+                    Operation.SUBTRACTION);
+            currentOperation = Ext.setTextView(calculatorData, mainTextView);
+            isFinishOperation = true;
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = v -> {
@@ -143,46 +150,10 @@ public class MainActivity extends AppCompatActivity {
         buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
     }
 
-    private double readMainTextView(TextView mainTextView) {
-        return Double.parseDouble(mainTextView.getText().toString());
-    }
-
-    private void setTextView(CalculatorData calculatorData) {
-        currentOperation = calculatorData.nextOperation;
-        textMainTextView = Double.toString(calculatorData.result);
-        changeSizeText(textMainTextView, mainTextView);
-        mainTextView.setText(textMainTextView);
-        textMainTextView = "";
-        showAllInSecondary(calculatorData);
-    }
-
-    private void changeSizeText(String text, TextView textView) {
-        final int NUMBER_OF_LARGE_CHARACTERS = 8;
-        final int NUMBER_OF_MEDIUM_CHARACTERS = 11;
-        final int SIZE_LARGE_TEXT = 100;
-        final int SIZE_MEDIUM_TEXT = 70;
-        final int SIZE_SMALL_TEXT = 40;
-
-        if (text.length() < NUMBER_OF_LARGE_CHARACTERS) {
-            textView.setTextSize(SIZE_LARGE_TEXT);
-        } else if (text.length() < NUMBER_OF_MEDIUM_CHARACTERS) {
-            textView.setTextSize(SIZE_MEDIUM_TEXT);
-        } else {
-            textView.setTextSize(SIZE_SMALL_TEXT);
-        }
-    }
-
-    private void showErrorForDivideByZero() {
+    private void showErrorForDivideByZero(boolean b) {
         Toast.makeText(getApplicationContext(),
                 R.string.division_error, Toast.LENGTH_LONG).show();
         mainTextView.setText(R.string.error);
-        textMainTextView = "";
-    }
-
-    private void showAllInSecondary(CalculatorData calculatorData) {
-        secondaryTextView.setText(
-                "operation=" + calculatorData.nextOperation + "  var=" + calculatorData.var +
-                        "   result=" + calculatorData.result
-        );
+        isFinishOperation = true;
     }
 }

@@ -26,7 +26,6 @@ class Calculator {
                 result = var;
                 break;
         }
-
         return new CalculatorData(nextOperation, result, var);
     }
 }
