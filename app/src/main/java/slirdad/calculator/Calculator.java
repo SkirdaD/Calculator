@@ -19,7 +19,7 @@ class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    //что-то с CallBack
+                    return null;
                 }
                 break;
             case NONE:

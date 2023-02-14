@@ -6,19 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Calculator calculator = new Calculator();
-
-    private TextView mainTextView;
-
     private Operation currentOperation = Operation.NONE;
-
     private boolean isFinishOperation;
 
 
@@ -27,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
+        final Calculator calculator = new Calculator();
+
+        final TextView mainTextView = (TextView) findViewById(R.id.textView1);
         final Button buttonNum1 = (Button) findViewById(R.id.button1);
         final Button buttonNum2 = (Button) findViewById(R.id.button2);
         final Button buttonNum3 = (Button) findViewById(R.id.button3);
@@ -50,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Button> numButtons = new ArrayList<>(11);
         Collections.addAll(numButtons, buttonNum1, buttonNum2, buttonNum3, buttonNum4, buttonNum5,
                 buttonNum6, buttonNum7, buttonNum8, buttonNum9, buttonNum0, buttonPoint);
-
-
-        mainTextView = (TextView) findViewById(R.id.textView1);
 
         mainTextView.setText("0"); // так сделано, пока нет шареда
 
@@ -91,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     text = (text.equals("")) ? ("0.") : (text + ".");
                 } else return;
             }
-            Ext.changeSizeText(text, mainTextView);
+            ExtensionMethods.changeSizeText(text, mainTextView);
             mainTextView.setText(text);
             isFinishOperation = false;
         };
@@ -109,12 +103,13 @@ public class MainActivity extends AppCompatActivity {
                     var = 0;
                 }
             } else {
-                var = Ext.getNumFromTextView(mainTextView);
+                var = ExtensionMethods.getNum(mainTextView);
             }
 
             CalculatorData calculatorData = calculator.operate(var, currentOperation,
                     Operation.ADDITION);
-            currentOperation = Ext.setTextView(calculatorData, mainTextView);
+            ExtensionMethods.setCalcData(mainTextView, calculatorData);
+            currentOperation = calculatorData.nextOperation;
             isFinishOperation = true;
         };
 
@@ -127,12 +122,13 @@ public class MainActivity extends AppCompatActivity {
                     var = 0;
                 }
             } else {
-                var = Ext.getNumFromTextView(mainTextView);
+                var = ExtensionMethods.getNum(mainTextView);
             }
 
             CalculatorData calculatorData = calculator.operate(var, currentOperation,
                     Operation.SUBTRACTION);
-            currentOperation = Ext.setTextView(calculatorData, mainTextView);
+            ExtensionMethods.setCalcData(mainTextView, calculatorData);
+            currentOperation = calculatorData.nextOperation;
             isFinishOperation = true;
         };
 
@@ -148,12 +144,5 @@ public class MainActivity extends AppCompatActivity {
         buttonPlus.setOnClickListener(onClickListenerButtonPlus);
         buttonMinus.setOnClickListener(onClickListenerButtonMinus);
         buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
-    }
-
-    private void showErrorForDivideByZero(boolean b) {
-        Toast.makeText(getApplicationContext(),
-                R.string.division_error, Toast.LENGTH_LONG).show();
-        mainTextView.setText(R.string.error);
-        isFinishOperation = true;
     }
 }
