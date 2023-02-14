@@ -1,19 +1,18 @@
 package slirdad.calculator;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Ext {
+public class ExtensionMethods {
 
-    public static double getNumFromTextView(TextView textView) {
+    public static double getNum(TextView textView) {
         return Double.parseDouble(textView.getText().toString());
     }
 
-    public static Operation setTextView(CalculatorData calculatorData, TextView textView) {
-        Operation currentOperation = calculatorData.nextOperation;
+    public static void setCalcData(TextView textView, CalculatorData calculatorData) {
         String textTextView = Double.toString(calculatorData.result);
-        Ext.changeSizeText(textTextView, textView);
+        ExtensionMethods.changeSizeText(textTextView, textView);
         textView.setText(textTextView);
-        return currentOperation;
     }
 
     public static void changeSizeText(String text, TextView textView) {
@@ -30,5 +29,10 @@ public class Ext {
         } else {
             textView.setTextSize(SIZE_SMALL_TEXT);
         }
+    }
+
+    public static void showErrorForDivideByZero(MainActivity mainActivity, TextView textView) {
+        Toast.makeText(mainActivity, R.string.division_error, Toast.LENGTH_LONG).show();
+        textView.setText(R.string.error);
     }
 }
