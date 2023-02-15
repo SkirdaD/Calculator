@@ -3,8 +3,10 @@ package slirdad.calculator;
 
 class Calculator {
     private double result;
+    private Operation currentOperation = Operation.NONE;
+    private boolean isOperationFinished;
 
-    CalculatorData operate(double var, Operation currentOperation, Operation nextOperation) {
+    CalculatorData operate(double var, Operation nextOperation) {
         switch (currentOperation) {
             case ADDITION:
                 result = result + var;
@@ -27,5 +29,21 @@ class Calculator {
                 break;
         }
         return new CalculatorData(nextOperation, result, var);
+    }
+
+    public Operation getCurrentOperation() {
+        return currentOperation;
+    }
+
+    public void setCurrentOperation(Operation currentOperation) {
+        this.currentOperation = currentOperation;
+    }
+
+    public boolean isOperationFinished() {
+        return isOperationFinished;
+    }
+
+    public void setOperationFinished(boolean operationFinished) {
+        isOperationFinished = operationFinished;
     }
 }

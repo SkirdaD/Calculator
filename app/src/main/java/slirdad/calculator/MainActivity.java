@@ -12,10 +12,6 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Operation currentOperation = Operation.NONE;
-    private boolean isFinishOperation;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             String text = mainTextView.getText().toString();
             /*При вводе затирался начальный ноль или
             после нажатия на кнопку операции затирается то, что сейчас в mainTextView*/
-            if (text.equals("0") || isFinishOperation) {
+            if (text.equals("0") || calculator.isOperationFinished()) {
                 text = "";
             }
 
@@ -87,17 +83,17 @@ public class MainActivity extends AppCompatActivity {
             }
             ExtensionMethods.changeSizeText(text, mainTextView);
             mainTextView.setText(text);
-            isFinishOperation = false;
+            calculator.setOperationFinished(false);
         };
 
 
-        View.OnClickListener onClickListenerButtonPlus = view -> {
+        View.OnClickListener onPlusButtonClickListener = view -> {
             double var;
             /*Реализовано повторное нажатие на одну и ту же кнопку,
              *перевыбор действия сразу,
              *перевыбор в процессе вычислений  */
-            if (isFinishOperation) {
-                if (currentOperation == Operation.ADDITION) {
+            if (calculator.isOperationFinished()) {
+                if (calculator.getCurrentOperation() == Operation.ADDITION) {
                     return;
                 } else {
                     var = 0;
@@ -106,17 +102,16 @@ public class MainActivity extends AppCompatActivity {
                 var = ExtensionMethods.getNum(mainTextView);
             }
 
-            CalculatorData calculatorData = calculator.operate(var, currentOperation,
-                    Operation.ADDITION);
+            CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION);
             ExtensionMethods.setCalcData(mainTextView, calculatorData);
-            currentOperation = calculatorData.nextOperation;
-            isFinishOperation = true;
+            calculator.setCurrentOperation(calculatorData.nextOperation);
+            calculator.setOperationFinished(true);
         };
 
-        View.OnClickListener onClickListenerButtonMinus = v -> {
+        View.OnClickListener onMinusButtonClickListener = v -> {
             double var;
-            if (isFinishOperation) {
-                if (currentOperation == Operation.SUBTRACTION) {
+            if (calculator.isOperationFinished()) {
+                if (calculator.getCurrentOperation() == Operation.SUBTRACTION) {
                     return;
                 } else {
                     var = 0;
@@ -125,11 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 var = ExtensionMethods.getNum(mainTextView);
             }
 
-            CalculatorData calculatorData = calculator.operate(var, currentOperation,
-                    Operation.SUBTRACTION);
+            CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION);
             ExtensionMethods.setCalcData(mainTextView, calculatorData);
-            currentOperation = calculatorData.nextOperation;
-            isFinishOperation = true;
+            calculator.setCurrentOperation(calculatorData.nextOperation);
+            calculator.setOperationFinished(true);
         };
 
         View.OnClickListener onClickListenerButtonEqualMark = v -> {
@@ -141,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        buttonPlus.setOnClickListener(onClickListenerButtonPlus);
-        buttonMinus.setOnClickListener(onClickListenerButtonMinus);
+        buttonPlus.setOnClickListener(onPlusButtonClickListener);
+        buttonMinus.setOnClickListener(onMinusButtonClickListener);
         buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
     }
 }

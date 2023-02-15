@@ -1,5 +1,6 @@
 package slirdad.calculator;
 
+import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,8 @@ public class ExtensionMethods {
         }
     }
 
-    public static void showErrorForDivideByZero(MainActivity mainActivity, TextView textView) {
-        Toast.makeText(mainActivity, R.string.division_error, Toast.LENGTH_LONG).show();
+    public static void showDivisionByZeroError(Context context, TextView textView) {
+        Toast.makeText(context, R.string.division_error, Toast.LENGTH_LONG).show();
         textView.setText(R.string.error);
     }
 }
