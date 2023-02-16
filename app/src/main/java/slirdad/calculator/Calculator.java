@@ -1,70 +1,49 @@
 package slirdad.calculator;
 
-// Класс сделал дефолтным для видимости только в пакете.
+
 class Calculator {
-    /*
-    Используются:
-      - во всех лисенерах кнопок операций;
-      - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в методе ::operate;
-      - в лисенере АС
-     */
-    double result;
-    double var1;
-    double var2;
+    private double result;
+    private Operation currentOperation = Operation.NONE;
+    private boolean isOperationFinished;
 
-    /*
-    Инициализация переменной, которая показывает было ли нажато последним "=".
-    Используется:
-      - во всех лисенерах кнопок операций;
-      - в методах onRestoreInstanceState и onSaveInstanceState;
-      - в методе ::operate;
-      - в лисенере АС
-     */
-    boolean isLastPressButtonEqualMark;
-
-    /*
-    lastOperation используется:
-        - в лисенерах кнопок арифметических операций;
-        - в лисенере кнопки равно для отображения нужного символа в secondaryField;
-        - в методе ::operate;
-        - в лисенере АС
-        - в onSaveInstanceState и onRestoreInstanceState
-    */
-    LastOperation lastOperation = LastOperation.NULL;
-
-    enum LastOperation {
-        ADDITION,
-        SUBTRACTION,
-        DIVISION,
-        MULTIPLICATION,
-        NULL
-    }
-
-    /*
-    ::operate используется в лисенерах кнопок "/" "*" "-" "+" "="
-     */
-    void operate() {
-        switch (lastOperation) {
+    CalculatorData operate(double var, Operation nextOperation) {
+        switch (currentOperation) {
             case ADDITION:
-                result = result + var1;
+                result = result + var;
                 break;
             case MULTIPLICATION:
-                result = result * var1;
+                result = result * var;
                 break;
             case SUBTRACTION:
-                result = result - var1;
+                result = result - var;
                 break;
             case DIVISION:
-                if (var1 != 0) {
-                    result = result / var1;
+                if (var != 0) {
+                    result = result / var;
                 } else {
-                    result = 0;
-                    isLastPressButtonEqualMark = false;
-                    return;
+                    return null;
                 }
                 break;
+            case NONE:
+                result = var;
+                break;
         }
-        var2 = var1;
+
+        isOperationFinished = true;
+        currentOperation = nextOperation;
+
+        return new CalculatorData(result, var);
+    }
+
+    public Operation getCurrentOperation() {
+        return currentOperation;
+    }
+
+    public boolean isOperationFinished() {
+        return isOperationFinished;
+    }
+
+    public void setOperationFinished(boolean operationFinished) {
+        isOperationFinished = operationFinished;
     }
 }
