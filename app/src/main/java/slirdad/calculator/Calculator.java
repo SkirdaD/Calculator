@@ -28,15 +28,15 @@ class Calculator {
                 result = var;
                 break;
         }
-        return new CalculatorData(nextOperation, result, var);
+
+        isOperationFinished = true;
+        currentOperation = nextOperation;
+
+        return new CalculatorData(result, var);
     }
 
     public Operation getCurrentOperation() {
         return currentOperation;
-    }
-
-    public void setCurrentOperation(Operation currentOperation) {
-        this.currentOperation = currentOperation;
     }
 
     public boolean isOperationFinished() {

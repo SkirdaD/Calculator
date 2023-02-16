@@ -104,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
             CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION);
             ExtensionMethods.setCalcData(mainTextView, calculatorData);
-            calculator.setCurrentOperation(calculatorData.nextOperation);
-            calculator.setOperationFinished(true);
         };
 
         View.OnClickListener onMinusButtonClickListener = v -> {
@@ -122,11 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
             CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION);
             ExtensionMethods.setCalcData(mainTextView, calculatorData);
-            calculator.setCurrentOperation(calculatorData.nextOperation);
-            calculator.setOperationFinished(true);
         };
 
-        View.OnClickListener onClickListenerButtonEqualMark = v -> {
+        View.OnClickListener onEqualMarkButtonClickListener = v -> {
         };
 
 
@@ -137,6 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
         buttonPlus.setOnClickListener(onPlusButtonClickListener);
         buttonMinus.setOnClickListener(onMinusButtonClickListener);
-        buttonEqualMark.setOnClickListener(onClickListenerButtonEqualMark);
+        buttonEqualMark.setOnClickListener(onEqualMarkButtonClickListener);
     }
 }
