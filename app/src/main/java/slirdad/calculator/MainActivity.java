@@ -17,13 +17,6 @@ public class MainActivity extends AppCompatActivity {
         final Calculator calculator = new Calculator();
         final ViewHolder viewHolder = new ViewHolder();
 
-        final Button buttonAllClean = (Button) findViewById(R.id.buttonAC);
-        final Button buttonDeleteLastCharacter = (Button) findViewById(R.id.buttonDelete);
-        final Button buttonPositiveToNegative = (Button) findViewById(R.id.buttonPlusMinus);
-        final Button buttonDivisionSign = (Button) findViewById(R.id.buttonDivision);
-        final Button buttonMultiplicationSign = (Button) findViewById(R.id.buttonMultiplication);
-        final Button buttonEqualMark = (Button) findViewById(R.id.buttonResult);
-
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
         View.OnClickListener onClickListenerForNumbers = view -> {
@@ -116,6 +109,6 @@ public class MainActivity extends AppCompatActivity {
         }
         viewHolder.getButtonPlus().setOnClickListener(onPlusButtonClickListener);
         viewHolder.getButtonMinus().setOnClickListener(onMinusButtonClickListener);
-        buttonEqualMark.setOnClickListener(onEqualMarkButtonClickListener);
+        viewHolder.getButtonEqualMark().setOnClickListener(onEqualMarkButtonClickListener);
     }
 }

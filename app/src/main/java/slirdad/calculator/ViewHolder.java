@@ -24,6 +24,12 @@ class ViewHolder extends AppCompatActivity {
     private final TextView mainTextView = (TextView) findViewById(R.id.textView1);
     private final Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
     private final Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
+    private final Button buttonAllClean = (Button) findViewById(R.id.buttonAC);
+    private final Button buttonDeleteLastCharacter = (Button) findViewById(R.id.buttonDelete);
+    private final Button buttonPositiveToNegative = (Button) findViewById(R.id.buttonPlusMinus);
+    private final Button buttonDivisionSign = (Button) findViewById(R.id.buttonDivision);
+    private final Button buttonMultiplicationSign = (Button) findViewById(R.id.buttonMultiplication);
+    private final Button buttonEqualMark = (Button) findViewById(R.id.buttonResult);
 
     public ArrayList<Button> getNumButtons() {
         ArrayList<Button> numButtons = new ArrayList<>(11);
@@ -42,5 +48,29 @@ class ViewHolder extends AppCompatActivity {
 
     public Button getButtonMinus() {
         return buttonMinus;
+    }
+
+    public Button getButtonAllClean() {
+        return buttonAllClean;
+    }
+
+    public Button getButtonDeleteLastCharacter() {
+        return buttonDeleteLastCharacter;
+    }
+
+    public Button getButtonPositiveToNegative() {
+        return buttonPositiveToNegative;
+    }
+
+    public Button getButtonDivisionSign() {
+        return buttonDivisionSign;
+    }
+
+    public Button getButtonMultiplicationSign() {
+        return buttonMultiplicationSign;
+    }
+
+    public Button getButtonEqualMark() {
+        return buttonEqualMark;
     }
 }
