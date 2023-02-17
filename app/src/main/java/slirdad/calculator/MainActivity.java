@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_constraint);
 
         final Calculator calculator = new Calculator();
-        final ViewHolder viewHolder = new ViewHolder();
+        final ViewHolderMainActivity viewHolder = new ViewHolderMainActivity(this);
 
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(onClickListenerForNumbers);
         }
-        viewHolder.getButtonPlus().setOnClickListener(onPlusButtonClickListener);
-        viewHolder.getButtonMinus().setOnClickListener(onMinusButtonClickListener);
-        viewHolder.getButtonEqualMark().setOnClickListener(onEqualMarkButtonClickListener);
+        viewHolder.getPlusButton().setOnClickListener(onPlusButtonClickListener);
+        viewHolder.getMinusButton().setOnClickListener(onMinusButtonClickListener);
+        viewHolder.getEqualMarkButton().setOnClickListener(onEqualMarkButtonClickListener);
     }
 }
