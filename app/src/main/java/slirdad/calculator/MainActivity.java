@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_constraint);
 
         final Calculator calculator = new Calculator();
-        final ViewHolderMainActivity viewHolder = new ViewHolderMainActivity(this);
+        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
 
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
