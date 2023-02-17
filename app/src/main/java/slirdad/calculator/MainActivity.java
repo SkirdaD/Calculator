@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import slirdad.calculator.OnClickListeners.OnMinusButtonClickListener;
+import slirdad.calculator.OnClickListeners.OnNumberButtonsClickListener;
+import slirdad.calculator.OnClickListeners.OnPlusButtonClickListener;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

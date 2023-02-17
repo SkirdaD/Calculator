@@ -1,13 +1,19 @@
-package slirdad.calculator;
+package slirdad.calculator.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
+
+import slirdad.calculator.Calculator;
+import slirdad.calculator.CalculatorData;
+import slirdad.calculator.ExtensionMethods;
+import slirdad.calculator.MainActivityViewHolder;
+import slirdad.calculator.Operation;
 
 public class OnMinusButtonClickListener implements View.OnClickListener {
     Calculator calculator;
     MainActivityViewHolder holder;
 
-    OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }

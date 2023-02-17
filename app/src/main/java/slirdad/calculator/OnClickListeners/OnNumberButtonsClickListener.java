@@ -1,14 +1,19 @@
-package slirdad.calculator;
+package slirdad.calculator.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
+
+import slirdad.calculator.Calculator;
+import slirdad.calculator.ExtensionMethods;
+import slirdad.calculator.MainActivityViewHolder;
+import slirdad.calculator.R;
 
 public class OnNumberButtonsClickListener implements View.OnClickListener {
 
     Calculator calculator;
     MainActivityViewHolder holder;
 
-    OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
