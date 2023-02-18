@@ -9,12 +9,11 @@ import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.Operation;
 
-
-public class OnPlusButtonClickListener implements View.OnClickListener {
+public class OnEqualMarkButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
 
-    public OnPlusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnEqualMarkButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -25,17 +24,17 @@ public class OnPlusButtonClickListener implements View.OnClickListener {
 
         double var;
 
-        if (calculator.isAfterOperation()) {
-            if (calculator.getCurrentOperation() != Operation.ADDITION) {
-                calculator.setVar(1);
-                calculator.setCurrentOperation(Operation.ADDITION);
+        if (!calculator.isAfterOperation()) {
+            if (calculator.getCurrentOperation() == Operation.NONE) {
+                return;
+            } else {
+                var = MainActivityExtensionMethods.getNum(mainTextView);
             }
-            return;
         } else {
-            var = MainActivityExtensionMethods.getNum(mainTextView);
+            var = calculator.getVar();
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION);
+        CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation());
         MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
     }
 }

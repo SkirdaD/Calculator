@@ -4,14 +4,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import slirdad.calculator.Calculator;
-import slirdad.calculator.ExtensionMethods;
+import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.R;
 
 public class OnNumberButtonsClickListener implements View.OnClickListener {
 
-    Calculator calculator;
-    MainActivityViewHolder holder;
+    private final Calculator calculator;
+    private final MainActivityViewHolder holder;
 
     public OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
@@ -24,7 +24,7 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
         String text = mainTextView.getText().toString();
             /*При вводе затирался начальный ноль или
             после нажатия на кнопку операции затирается то, что сейчас в mainTextView*/
-        if (text.equals("0") || calculator.isOperationFinished()) {
+        if (text.equals("0") || calculator.isAfterOperation()) {
             text = "";
         }
 
@@ -55,8 +55,9 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
                 text = (text.equals("")) ? ("0.") : (text + ".");
             } else return;
         }
-        ExtensionMethods.changeSizeText(text, mainTextView);
+        text = MainActivityExtensionMethods.formattingWholeDoubleAsInt(text);
+        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
-        calculator.setOperationFinished(false);
+        calculator.setAfterOperation(false);
     }
 }

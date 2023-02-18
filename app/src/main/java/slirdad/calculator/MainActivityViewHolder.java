@@ -15,7 +15,7 @@ public class MainActivityViewHolder {
     private final TextView mainTextView;
 
     private final Button plusButton, minusButton, allCleanButton, deleteLastCharacterButton,
-            positiveToNegativeButton, divisionSignButton, multiplicationSignButton, equalMarkButton;
+            signChangeButton, divisionSignButton, multiplicationSignButton, equalMarkButton;
 
 
     MainActivityViewHolder(AppCompatActivity activity) {
@@ -37,7 +37,7 @@ public class MainActivityViewHolder {
         minusButton = (Button) activity.findViewById(R.id.buttonMinus);
         allCleanButton = (Button) activity.findViewById(R.id.buttonAC);
         deleteLastCharacterButton = (Button) activity.findViewById(R.id.buttonDelete);
-        positiveToNegativeButton = (Button) activity.findViewById(R.id.buttonPlusMinus);
+        signChangeButton = (Button) activity.findViewById(R.id.buttonPlusMinus);
         divisionSignButton = (Button) activity.findViewById(R.id.buttonDivision);
         multiplicationSignButton = (Button) activity.findViewById(R.id.buttonMultiplication);
         equalMarkButton = (Button) activity.findViewById(R.id.buttonResult);
@@ -71,8 +71,8 @@ public class MainActivityViewHolder {
         return deleteLastCharacterButton;
     }
 
-    public Button getPositiveToNegativeButton() {
-        return positiveToNegativeButton;
+    public Button getSignChangeButton() {
+        return signChangeButton;
     }
 
     public Button getDivisionSignButton() {

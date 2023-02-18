@@ -1,21 +1,24 @@
 package slirdad.calculator.OnClickListeners;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import slirdad.calculator.Calculator;
 import slirdad.calculator.CalculatorData;
-import slirdad.calculator.ExtensionMethods;
+import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.Operation;
 
 public class OnMinusButtonClickListener implements View.OnClickListener {
-    Calculator calculator;
-    MainActivityViewHolder holder;
+    private final Calculator calculator;
+    private final MainActivityViewHolder holder;
+    private final Context context;
 
-    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder, Context context) {
         this.calculator = calculator;
         this.holder = holder;
+        this.context = context;
     }
 
     @Override
@@ -24,17 +27,21 @@ public class OnMinusButtonClickListener implements View.OnClickListener {
 
         double var;
 
-        if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() == Operation.SUBTRACTION) {
-                return;
-            } else {
-                var = 0;
+        if (calculator.isAfterOperation()) {
+            if (calculator.getCurrentOperation() != Operation.SUBTRACTION) {
+                calculator.setVar(0);
+                calculator.setCurrentOperation(Operation.SUBTRACTION);
             }
+            return;
         } else {
-            var = ExtensionMethods.getNum(mainTextView);
+            var = MainActivityExtensionMethods.getNum(mainTextView);
         }
 
         CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION);
-        ExtensionMethods.setCalcData(mainTextView, calculatorData);
+        if (!calculator.isDivisionByZero()) {
+            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        } else {
+            MainActivityExtensionMethods.showDivisionByZeroError(context, holder, calculator);
+        }
     }
 }
