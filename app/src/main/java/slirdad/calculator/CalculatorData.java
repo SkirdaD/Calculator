@@ -1,6 +1,6 @@
 package slirdad.calculator;
 
-class CalculatorData {
+public class CalculatorData {
     final double result;
     final double var;
 

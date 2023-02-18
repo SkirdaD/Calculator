@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class MainActivityViewHolder {
+public class MainActivityViewHolder {
 
     private final ArrayList<Button> numButtons = new ArrayList<>();
 

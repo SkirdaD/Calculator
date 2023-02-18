@@ -1,12 +1,12 @@
 package slirdad.calculator;
 
 
-class Calculator {
+public class Calculator {
     private double result;
     private Operation currentOperation = Operation.NONE;
     private boolean isOperationFinished;
 
-    CalculatorData operate(double var, Operation nextOperation) {
+    public CalculatorData operate(double var, Operation nextOperation) {
         switch (currentOperation) {
             case ADDITION:
                 result = result + var;
