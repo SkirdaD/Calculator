@@ -18,12 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
         final Calculator calculator = new Calculator();
         final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
+        final OnNumberButtonsClickListener onNumberButtonsClickListener =
+                new OnNumberButtonsClickListener(calculator, viewHolder);
 
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
         for (Button button : viewHolder.getNumButtons()) {
-            button.setOnClickListener(new OnNumberButtonsClickListener(calculator, viewHolder));
+            button.setOnClickListener(onNumberButtonsClickListener);
         }
+
         viewHolder.getPlusButton().
                 setOnClickListener(new OnPlusButtonClickListener(calculator, viewHolder));
 
