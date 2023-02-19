@@ -44,12 +44,11 @@ public class MainActivity extends AppCompatActivity {
         final OnAllCleanButtonClickListener onAllCleanButtonClickListener =
                 new OnAllCleanButtonClickListener(calculator, viewHolder);
 
+        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
+
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(onNumberButtonsClickListener);
         }
-
-        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
-
         viewHolder.getPlusButton().setOnClickListener(onPlusButtonClickListener);
         viewHolder.getMinusButton().setOnClickListener(onMinusButtonClickListener);
         viewHolder.getMultiplicationSignButton().setOnClickListener(onMultiplicationButtonClickListener);
