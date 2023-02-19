@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         final Calculator calculator = new Calculator();
         final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
 
-        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
-
         final OnNumberButtonsClickListener onNumberButtonsClickListener =
                 new OnNumberButtonsClickListener(calculator, viewHolder);
         final OnPlusButtonClickListener onPlusButtonClickListener =
@@ -49,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(onNumberButtonsClickListener);
         }
+
+        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
+
         viewHolder.getPlusButton().setOnClickListener(onPlusButtonClickListener);
         viewHolder.getMinusButton().setOnClickListener(onMinusButtonClickListener);
         viewHolder.getMultiplicationSignButton().setOnClickListener(onMultiplicationButtonClickListener);
