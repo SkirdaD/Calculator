@@ -9,11 +9,12 @@ public class Calculator {
     private Operation currentOperation = Operation.NONE;
     private boolean isOperationFinished;
     private boolean isDivisionByZero;
+    final private HashMap<Operation, Double> operationMap = new HashMap<>();
+
 
     public CalculatorData operate(double var, Operation nextOperation) {
         this.var = var;
 
-        final HashMap<Operation, Double> operationMap = new HashMap<>();
         operationMap.put(Operation.ADDITION, result + var);
         operationMap.put(Operation.SUBTRACTION, result - var);
         operationMap.put(Operation.MULTIPLICATION, result * var);
