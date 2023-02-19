@@ -28,6 +28,7 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
         buttonValuesMap.put(R.id.button7, "7");
         buttonValuesMap.put(R.id.button8, "8");
         buttonValuesMap.put(R.id.button9, "9");
+        buttonValuesMap.put(R.id.buttonPoint, null);
     }
 
     public OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
@@ -50,7 +51,6 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
             text = (text.equals("")) ? ("0.") : (text + ".");
         } else return;
 
-        text = MainActivityExtensionMethods.formatWholeDoubleAsInt(text);
         MainActivityExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
         calculator.setOperationFinished(false);
