@@ -27,7 +27,7 @@ public class OnMinusButtonClickListener implements View.OnClickListener {
 
         double var;
 
-        if (calculator.isAfterOperation()) {
+        if (calculator.isOperationFinished()) {
             if (calculator.getCurrentOperation() != Operation.SUBTRACTION) {
                 calculator.setVar(0);
                 calculator.setCurrentOperation(Operation.SUBTRACTION);

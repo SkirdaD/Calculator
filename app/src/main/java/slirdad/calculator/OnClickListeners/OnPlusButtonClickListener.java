@@ -25,7 +25,7 @@ public class OnPlusButtonClickListener implements View.OnClickListener {
 
         double var;
 
-        if (calculator.isAfterOperation()) {
+        if (calculator.isOperationFinished()) {
             if (calculator.getCurrentOperation() != Operation.ADDITION) {
                 calculator.setVar(1);
                 calculator.setCurrentOperation(Operation.ADDITION);

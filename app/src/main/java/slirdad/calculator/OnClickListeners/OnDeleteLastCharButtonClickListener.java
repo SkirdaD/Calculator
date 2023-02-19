@@ -18,7 +18,7 @@ public class OnDeleteLastCharButtonClickListener implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if (calculator.isAfterOperation()) {
+        if (calculator.isOperationFinished()) {
             return;
         }
 

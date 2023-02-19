@@ -12,7 +12,7 @@ public class MainActivityExtensionMethods {
 
     public static void setCalcData(TextView textView, CalculatorData calculatorData) {
         String textTextView = Double.toString(calculatorData.result);
-        textTextView = formattingWholeDoubleAsInt(textTextView);
+        textTextView = formatWholeDoubleAsInt(textTextView);
         MainActivityExtensionMethods.changeSizeText(textTextView, textView);
         textView.setText(textTextView);
     }
@@ -51,17 +51,21 @@ public class MainActivityExtensionMethods {
         changeSizeText(mainTextView);
         mainTextView.setText(R.string.error);
 
-        calculator.setAfterOperation(false);
-        calculator.setCurrentOperation(Operation.NONE);
-        calculator.setVar(0);
-        calculator.setResult(0);
-        calculator.setDivisionByZero(false);
+        resetData(calculator);
     }
 
-    public static String formattingWholeDoubleAsInt(String text) {
+    public static String formatWholeDoubleAsInt(String text) {
         if ((text.indexOf(".") + 2) == text.length() &&
                 Character.toString(text.charAt(text.indexOf(".") + 1)).compareTo("0") == 0) {
             return text.substring(0, text.indexOf("."));
         } else return text;
+    }
+
+    public static void resetData(Calculator calculator) {
+        calculator.setOperationFinished(false);
+        calculator.setCurrentOperation(Operation.NONE);
+        calculator.setVar(0);
+        calculator.setResult(0);
+        calculator.setDivisionByZero(false);
     }
 }

@@ -1,39 +1,33 @@
 package slirdad.calculator;
 
 
+import java.util.HashMap;
+
 public class Calculator {
     private double result;
     private double var;
     private Operation currentOperation = Operation.NONE;
-    private boolean isAfterOperation;
+    private boolean isOperationFinished;
     private boolean isDivisionByZero;
 
     public CalculatorData operate(double var, Operation nextOperation) {
         this.var = var;
-        switch (currentOperation) {
-            case ADDITION:
-                result = result + var;
-                break;
-            case MULTIPLICATION:
-                result = result * var;
-                break;
-            case SUBTRACTION:
-                result = result - var;
-                break;
-            case DIVISION:
-                if (var != 0) {
-                    result = result / var;
-                } else {
-                    isDivisionByZero = true;
-                    return null;
-                }
-                break;
-            case NONE:
-                result = var;
-                break;
+
+        final HashMap<Operation, Double> operationMap = new HashMap<>();
+        operationMap.put(Operation.ADDITION, result + var);
+        operationMap.put(Operation.SUBTRACTION, result - var);
+        operationMap.put(Operation.MULTIPLICATION, result * var);
+        operationMap.put(Operation.DIVISION, result / var);
+        operationMap.put(Operation.NONE, var);
+
+        if (var == 0 && currentOperation == Operation.DIVISION) {
+            isDivisionByZero = true;
+            return null;
+        } else {
+            result = operationMap.get(currentOperation);
         }
 
-        isAfterOperation = true;
+        isOperationFinished = true;
         currentOperation = nextOperation;
 
         return new CalculatorData(result, var);
@@ -47,12 +41,12 @@ public class Calculator {
         this.currentOperation = currentOperation;
     }
 
-    public boolean isAfterOperation() {
-        return isAfterOperation;
+    public boolean isOperationFinished() {
+        return isOperationFinished;
     }
 
-    public void setAfterOperation(boolean afterOperation) {
-        isAfterOperation = afterOperation;
+    public void setOperationFinished(boolean operationFinished) {
+        isOperationFinished = operationFinished;
     }
 
     public double getVar() {

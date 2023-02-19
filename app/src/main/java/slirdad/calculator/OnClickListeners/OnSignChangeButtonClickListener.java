@@ -33,9 +33,9 @@ public class OnSignChangeButtonClickListener implements View.OnClickListener {
         MainActivityExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
 
-        if (calculator.isAfterOperation()) {
+        if (calculator.isOperationFinished()) {
             calculator.setCurrentOperation(Operation.NONE);
-            calculator.setAfterOperation(false);
+            calculator.setOperationFinished(false);
         }
     }
 }

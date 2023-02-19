@@ -24,7 +24,7 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener {
 
         double var;
 
-        if (!calculator.isAfterOperation()) {
+        if (!calculator.isOperationFinished()) {
             if (calculator.getCurrentOperation() == Operation.NONE) {
                 return;
             } else {

@@ -3,6 +3,8 @@ package slirdad.calculator.OnClickListeners;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import slirdad.calculator.Calculator;
 import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
@@ -24,40 +26,31 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
         String text = mainTextView.getText().toString();
             /*При вводе затирался начальный ноль или
             после нажатия на кнопку операции затирается то, что сейчас в mainTextView*/
-        if (text.equals("0") || calculator.isAfterOperation()) {
+        if (text.equals("0") || calculator.isOperationFinished()) {
             text = "";
         }
 
-        int id = v.getId();
+        final HashMap<Integer, String> buttonValues = new HashMap<>();
+        buttonValues.put(R.id.button0, "0");
+        buttonValues.put(R.id.button1, "1");
+        buttonValues.put(R.id.button2, "2");
+        buttonValues.put(R.id.button3, "3");
+        buttonValues.put(R.id.button4, "4");
+        buttonValues.put(R.id.button5, "5");
+        buttonValues.put(R.id.button6, "6");
+        buttonValues.put(R.id.button7, "7");
+        buttonValues.put(R.id.button8, "8");
+        buttonValues.put(R.id.button9, "9");
 
-        if (id == R.id.button1) {
-            text = text + "1";
-        } else if (id == R.id.button2) {
-            text = text + "2";
-        } else if (id == R.id.button3) {
-            text = text + "3";
-        } else if (id == R.id.button4) {
-            text = text + "4";
-        } else if (id == R.id.button5) {
-            text = text + "5";
-        } else if (id == R.id.button6) {
-            text = text + "6";
-        } else if (id == R.id.button7) {
-            text = text + "7";
-        } else if (id == R.id.button8) {
-            text = text + "8";
-        } else if (id == R.id.button9) {
-            text = text + "9";
-        } else if (id == R.id.button0) {
-            text = text + "0";
-        } else if (id == R.id.buttonPoint) {
-            if (!text.contains(".")) {
-                text = (text.equals("")) ? ("0.") : (text + ".");
-            } else return;
-        }
-        text = MainActivityExtensionMethods.formattingWholeDoubleAsInt(text);
+        if (buttonValues.get(v.getId())!= null){
+            text = text + buttonValues.get(v.getId());
+        } else if (!text.contains(".")){
+            text = (text.equals("")) ? ("0.") : (text + ".");
+        } else return;
+
+        text = MainActivityExtensionMethods.formatWholeDoubleAsInt(text);
         MainActivityExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
-        calculator.setAfterOperation(false);
+        calculator.setOperationFinished(false);
     }
 }

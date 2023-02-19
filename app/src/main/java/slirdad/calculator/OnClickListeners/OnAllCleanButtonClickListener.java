@@ -6,7 +6,6 @@ import android.widget.TextView;
 import slirdad.calculator.Calculator;
 import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
-import slirdad.calculator.Operation;
 
 public class OnAllCleanButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
@@ -20,10 +19,7 @@ public class OnAllCleanButtonClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         TextView mainTextView = holder.getMainTextView();
-        calculator.setAfterOperation(false);
-        calculator.setCurrentOperation(Operation.NONE);
-        calculator.setVar(0);
-        calculator.setResult(0);
+        MainActivityExtensionMethods.resetData(calculator);
 
         String text = "0";
         MainActivityExtensionMethods.changeSizeText(text, mainTextView);
