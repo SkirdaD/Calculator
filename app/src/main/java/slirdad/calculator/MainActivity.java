@@ -13,6 +13,7 @@ import slirdad.calculator.OnClickListeners.OnMinusButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnMultiplicationButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnNumberButtonsClickListener;
 import slirdad.calculator.OnClickListeners.OnPlusButtonClickListener;
+import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 new OnEqualMarkButtonClickListener(calculator, viewHolder);
         final OnAllCleanButtonClickListener onAllCleanButtonClickListener =
                 new OnAllCleanButtonClickListener(calculator, viewHolder);
+        final OnPointButtonClickListener onPointButtonClickListener =
+                new OnPointButtonClickListener(calculator, viewHolder);
 
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
@@ -57,5 +60,6 @@ public class MainActivity extends AppCompatActivity {
         viewHolder.getSignChangeButton().setOnClickListener(onSignChangeButtonClickListener);
         viewHolder.getEqualMarkButton().setOnClickListener(onEqualMarkButtonClickListener);
         viewHolder.getAllCleanButton().setOnClickListener(onAllCleanButtonClickListener);
+        viewHolder.getPointButton().setOnClickListener(onPointButtonClickListener);
     }
 }
