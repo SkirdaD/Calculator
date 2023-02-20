@@ -5,17 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import slirdad.calculator.OnClickListeners.OnAllCleanButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDeleteLastCharButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDivisionButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnEqualMarkButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMinusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMultiplicationButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnNumberButtonsClickListener;
-import slirdad.calculator.OnClickListeners.OnPlusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,24 +12,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
         final OnClickListenerFactory onCLFactory = new OnClickListenerFactory(this);
+        final MainActivityViewHolderFactory holderFactory = new MainActivityViewHolderFactory(this);
 
+        holderFactory.getMainActivityViewHolder().getMainTextView().setText("0"); //пока нет шареда
 
-
-        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
-
-        for (Button button : viewHolder.getNumButtons()) {
+        for (Button button : holderFactory.getMainActivityViewHolder().getNumButtons()) {
             button.setOnClickListener(onCLFactory.getOnNumberButtonsClickListener());
         }
-        viewHolder.getPlusButton().setOnClickListener(onCLFactory.getOnPlusButtonClickListener());
-        viewHolder.getMinusButton().setOnClickListener(onCLFactory.getOnMinusButtonClickListener());
-        viewHolder.getMultiplicationSignButton().setOnClickListener(onCLFactory.getOnMultiplicationButtonClickListener());
-        viewHolder.getDivisionSignButton().setOnClickListener(onCLFactory.getOnDivisionButtonClickListener());
-        viewHolder.getDeleteLastCharacterButton().setOnClickListener(onCLFactory.getOnDeleteLastCharButtonClickListener());
-        viewHolder.getSignChangeButton().setOnClickListener(onCLFactory.getOnSignChangeButtonClickListener());
-        viewHolder.getEqualMarkButton().setOnClickListener(onCLFactory.getOnEqualMarkButtonClickListener());
-        viewHolder.getAllCleanButton().setOnClickListener(onCLFactory.getOnAllCleanButtonClickListener());
-        viewHolder.getPointButton().setOnClickListener(onCLFactory.getOnPointButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getPlusButton().
+                setOnClickListener(onCLFactory.getOnPlusButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getMinusButton().
+                setOnClickListener(onCLFactory.getOnMinusButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getMultiplicationSignButton().
+                setOnClickListener(onCLFactory.getOnMultiplicationButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getDivisionSignButton().
+                setOnClickListener(onCLFactory.getOnDivisionButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getDeleteLastCharacterButton().
+                setOnClickListener(onCLFactory.getOnDeleteLastCharButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getSignChangeButton().
+                setOnClickListener(onCLFactory.getOnSignChangeButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getEqualMarkButton().
+                setOnClickListener(onCLFactory.getOnEqualMarkButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getAllCleanButton().
+                setOnClickListener(onCLFactory.getOnAllCleanButtonClickListener());
+        holderFactory.getMainActivityViewHolder().getPointButton().
+                setOnClickListener(onCLFactory.getOnPointButtonClickListener());
     }
 }

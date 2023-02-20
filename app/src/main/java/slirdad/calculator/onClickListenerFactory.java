@@ -16,13 +16,16 @@ import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
 
 class OnClickListenerFactory {
-    CalculatorFactory calculatorFactory = new CalculatorFactory();
-    Calculator calculator = calculatorFactory.getCalculator();
-    MainActivityViewHolder viewHolder = new MainActivityViewHolder;
+    final private CalculatorFactory calculatorFactory = new CalculatorFactory();
+    private MainActivityViewHolderFactory holderFactory;// = new MainActivityViewHolderFactory()
+
+    final private Calculator calculator = calculatorFactory.getCalculator();
+    final private MainActivityViewHolder viewHolder = holderFactory.getMainActivityViewHolder();
     Context context;
 
     public OnClickListenerFactory(AppCompatActivity activity) {
         this.context = activity;
+        holderFactory = new MainActivityViewHolderFactory(activity);
     }
 
     final private OnNumberButtonsClickListener onNumberButtonsClickListener =
