@@ -15,7 +15,7 @@ public class MainActivityViewHolder {
     private final TextView mainTextView;
 
     private final Button plusButton, minusButton, allCleanButton, deleteLastCharacterButton,
-            positiveToNegativeButton, divisionSignButton, multiplicationSignButton, equalMarkButton;
+            signChangeButton, divisionSignButton, multiplicationSignButton, equalMarkButton, pointButton;
 
 
     MainActivityViewHolder(AppCompatActivity activity) {
@@ -29,7 +29,6 @@ public class MainActivityViewHolder {
         Button num8Button = (Button) activity.findViewById(R.id.button8);
         Button num9Button = (Button) activity.findViewById(R.id.button9);
         Button num0Button = (Button) activity.findViewById(R.id.button0);
-        Button pointButton = (Button) activity.findViewById(R.id.buttonPoint);
 
         mainTextView = (TextView) activity.findViewById(R.id.textView1);
 
@@ -37,13 +36,14 @@ public class MainActivityViewHolder {
         minusButton = (Button) activity.findViewById(R.id.buttonMinus);
         allCleanButton = (Button) activity.findViewById(R.id.buttonAC);
         deleteLastCharacterButton = (Button) activity.findViewById(R.id.buttonDelete);
-        positiveToNegativeButton = (Button) activity.findViewById(R.id.buttonPlusMinus);
+        signChangeButton = (Button) activity.findViewById(R.id.buttonPlusMinus);
         divisionSignButton = (Button) activity.findViewById(R.id.buttonDivision);
         multiplicationSignButton = (Button) activity.findViewById(R.id.buttonMultiplication);
         equalMarkButton = (Button) activity.findViewById(R.id.buttonResult);
+        pointButton = (Button) activity.findViewById(R.id.buttonPoint);
 
         Collections.addAll(numButtons, num1Button, num2Button, num3Button, num4Button, num5Button,
-                num6Button, num7Button, num8Button, num9Button, num0Button, pointButton);
+                num6Button, num7Button, num8Button, num9Button, num0Button);
     }
 
 
@@ -71,8 +71,8 @@ public class MainActivityViewHolder {
         return deleteLastCharacterButton;
     }
 
-    public Button getPositiveToNegativeButton() {
-        return positiveToNegativeButton;
+    public Button getSignChangeButton() {
+        return signChangeButton;
     }
 
     public Button getDivisionSignButton() {
@@ -85,5 +85,9 @@ public class MainActivityViewHolder {
 
     public Button getEqualMarkButton() {
         return equalMarkButton;
+    }
+
+    public Button getPointButton() {
+        return pointButton;
     }
 }

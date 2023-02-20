@@ -1,6 +1,5 @@
 package slirdad.calculator.OnClickListeners;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,15 +9,13 @@ import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.Operation;
 
-public class OnMinusButtonClickListener implements View.OnClickListener {
+public class OnMultiplicationButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
-    private final Context context;
 
-    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder, Context context) {
+    public OnMultiplicationButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
-        this.context = context;
     }
 
     @Override
@@ -28,20 +25,16 @@ public class OnMinusButtonClickListener implements View.OnClickListener {
         double var;
 
         if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() != Operation.SUBTRACTION) {
-                calculator.setVar(0);
-                calculator.setCurrentOperation(Operation.SUBTRACTION);
+            if (calculator.getCurrentOperation() != Operation.MULTIPLICATION) {
+                calculator.setVar(1);
+                calculator.setCurrentOperation(Operation.MULTIPLICATION);
             }
             return;
         } else {
             var = MainActivityExtensionMethods.getNum(mainTextView);
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION);
-        if (!calculator.isDivisionByZero()) {
-            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
-        } else {
-            MainActivityExtensionMethods.showDivisionByZeroError(context, holder, calculator);
-        }
+        CalculatorData calculatorData = calculator.operate(var, Operation.MULTIPLICATION);
+        MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
     }
 }

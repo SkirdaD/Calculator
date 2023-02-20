@@ -3,15 +3,30 @@ package slirdad.calculator.OnClickListeners;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import slirdad.calculator.Calculator;
-import slirdad.calculator.ExtensionMethods;
+import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.R;
 
 public class OnNumberButtonsClickListener implements View.OnClickListener {
 
-    Calculator calculator;
-    MainActivityViewHolder holder;
+    private final Calculator calculator;
+    private final MainActivityViewHolder holder;
+
+    final private HashMap<Integer, String> buttonValuesMap = new HashMap<Integer, String>(){{
+        put(R.id.button0, "0");
+        put(R.id.button1, "1");
+        put(R.id.button2, "2");
+        put(R.id.button3, "3");
+        put(R.id.button4, "4");
+        put(R.id.button5, "5");
+        put(R.id.button6, "6");
+        put(R.id.button7, "7");
+        put(R.id.button8, "8");
+        put(R.id.button9, "9");
+    }};
 
     public OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
@@ -22,40 +37,14 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
     public void onClick(View v) {
         TextView mainTextView = holder.getMainTextView();
         String text = mainTextView.getText().toString();
-            /*При вводе затирался начальный ноль или
-            после нажатия на кнопку операции затирается то, что сейчас в mainTextView*/
+
         if (text.equals("0") || calculator.isOperationFinished()) {
             text = "";
         }
 
-        int id = v.getId();
+        text = text + buttonValuesMap.get(v.getId());
 
-        if (id == R.id.button1) {
-            text = text + "1";
-        } else if (id == R.id.button2) {
-            text = text + "2";
-        } else if (id == R.id.button3) {
-            text = text + "3";
-        } else if (id == R.id.button4) {
-            text = text + "4";
-        } else if (id == R.id.button5) {
-            text = text + "5";
-        } else if (id == R.id.button6) {
-            text = text + "6";
-        } else if (id == R.id.button7) {
-            text = text + "7";
-        } else if (id == R.id.button8) {
-            text = text + "8";
-        } else if (id == R.id.button9) {
-            text = text + "9";
-        } else if (id == R.id.button0) {
-            text = text + "0";
-        } else if (id == R.id.buttonPoint) {
-            if (!text.contains(".")) {
-                text = (text.equals("")) ? ("0.") : (text + ".");
-            } else return;
-        }
-        ExtensionMethods.changeSizeText(text, mainTextView);
+        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
         calculator.setOperationFinished(false);
     }
