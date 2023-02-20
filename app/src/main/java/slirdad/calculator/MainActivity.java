@@ -23,43 +23,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final Calculator calculator = new Calculator();
         final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
+        final OnClickListenerFactory onCLFactory = new OnClickListenerFactory(this);
 
-        final OnNumberButtonsClickListener onNumberButtonsClickListener =
-                new OnNumberButtonsClickListener(calculator, viewHolder);
-        final OnPlusButtonClickListener onPlusButtonClickListener =
-                new OnPlusButtonClickListener(calculator, viewHolder);
-        final OnMinusButtonClickListener onMinusButtonClickListener =
-                new OnMinusButtonClickListener(calculator, viewHolder, this);
-        final OnMultiplicationButtonClickListener onMultiplicationButtonClickListener =
-                new OnMultiplicationButtonClickListener(calculator, viewHolder);
-        final OnDivisionButtonClickListener onDivisionButtonClickListener =
-                new OnDivisionButtonClickListener(calculator, viewHolder);
-        final OnDeleteLastCharButtonClickListener onDeleteLastCharButtonClickListener =
-                new OnDeleteLastCharButtonClickListener(calculator, viewHolder);
-        final OnSignChangeButtonClickListener onSignChangeButtonClickListener =
-                new OnSignChangeButtonClickListener(calculator, viewHolder);
-        final OnEqualMarkButtonClickListener onEqualMarkButtonClickListener =
-                new OnEqualMarkButtonClickListener(calculator, viewHolder);
-        final OnAllCleanButtonClickListener onAllCleanButtonClickListener =
-                new OnAllCleanButtonClickListener(calculator, viewHolder);
-        final OnPointButtonClickListener onPointButtonClickListener =
-                new OnPointButtonClickListener(calculator, viewHolder);
+
 
         viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
 
         for (Button button : viewHolder.getNumButtons()) {
-            button.setOnClickListener(onNumberButtonsClickListener);
+            button.setOnClickListener(onCLFactory.getOnNumberButtonsClickListener());
         }
-        viewHolder.getPlusButton().setOnClickListener(onPlusButtonClickListener);
-        viewHolder.getMinusButton().setOnClickListener(onMinusButtonClickListener);
-        viewHolder.getMultiplicationSignButton().setOnClickListener(onMultiplicationButtonClickListener);
-        viewHolder.getDivisionSignButton().setOnClickListener(onDivisionButtonClickListener);
-        viewHolder.getDeleteLastCharacterButton().setOnClickListener(onDeleteLastCharButtonClickListener);
-        viewHolder.getSignChangeButton().setOnClickListener(onSignChangeButtonClickListener);
-        viewHolder.getEqualMarkButton().setOnClickListener(onEqualMarkButtonClickListener);
-        viewHolder.getAllCleanButton().setOnClickListener(onAllCleanButtonClickListener);
-        viewHolder.getPointButton().setOnClickListener(onPointButtonClickListener);
+        viewHolder.getPlusButton().setOnClickListener(onCLFactory.getOnPlusButtonClickListener());
+        viewHolder.getMinusButton().setOnClickListener(onCLFactory.getOnMinusButtonClickListener());
+        viewHolder.getMultiplicationSignButton().setOnClickListener(onCLFactory.getOnMultiplicationButtonClickListener());
+        viewHolder.getDivisionSignButton().setOnClickListener(onCLFactory.getOnDivisionButtonClickListener());
+        viewHolder.getDeleteLastCharacterButton().setOnClickListener(onCLFactory.getOnDeleteLastCharButtonClickListener());
+        viewHolder.getSignChangeButton().setOnClickListener(onCLFactory.getOnSignChangeButtonClickListener());
+        viewHolder.getEqualMarkButton().setOnClickListener(onCLFactory.getOnEqualMarkButtonClickListener());
+        viewHolder.getAllCleanButton().setOnClickListener(onCLFactory.getOnAllCleanButtonClickListener());
+        viewHolder.getPointButton().setOnClickListener(onCLFactory.getOnPointButtonClickListener());
     }
 }
