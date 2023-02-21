@@ -12,31 +12,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final OnClickListenerFactory onCLFactory = new OnClickListenerFactory(this);
-        final MainActivityViewHolderFactory holderFactory = new MainActivityViewHolderFactory(this);
+        final MainActivityViewHolder holder =
+                MainActivityViewHolderFactory.getMainActivityViewHolder(this);
 
-        holderFactory.getMainActivityViewHolder().getMainTextView().setText("0"); //пока нет шареда
+        holder.getMainTextView().setText("0"); //пока нет шареда
 
-        for (Button button : holderFactory.getMainActivityViewHolder().getNumButtons()) {
-            button.setOnClickListener(onCLFactory.getOnNumberButtonsClickListener());
+        for (Button button : holder.getNumButtons()) {
+            button.setOnClickListener(OnClickListenerFactory.getOnNumberButtonsClickListener());
         }
-        holderFactory.getMainActivityViewHolder().getPlusButton().
-                setOnClickListener(onCLFactory.getOnPlusButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getMinusButton().
-                setOnClickListener(onCLFactory.getOnMinusButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getMultiplicationSignButton().
-                setOnClickListener(onCLFactory.getOnMultiplicationButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getDivisionSignButton().
-                setOnClickListener(onCLFactory.getOnDivisionButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getDeleteLastCharacterButton().
-                setOnClickListener(onCLFactory.getOnDeleteLastCharButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getSignChangeButton().
-                setOnClickListener(onCLFactory.getOnSignChangeButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getEqualMarkButton().
-                setOnClickListener(onCLFactory.getOnEqualMarkButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getAllCleanButton().
-                setOnClickListener(onCLFactory.getOnAllCleanButtonClickListener());
-        holderFactory.getMainActivityViewHolder().getPointButton().
-                setOnClickListener(onCLFactory.getOnPointButtonClickListener());
+        holder.getPlusButton().
+                setOnClickListener(OnClickListenerFactory.getOnPlusButtonClickListener());
+        holder.getMinusButton().
+                setOnClickListener(OnClickListenerFactory.getOnMinusButtonClickListener());
+        holder.getMultiplicationSignButton().
+                setOnClickListener(OnClickListenerFactory.getOnMultiplicationButtonClickListener());
+        holder.getDivisionSignButton().
+                setOnClickListener(OnClickListenerFactory.getOnDivisionButtonClickListener());
+        holder.getDeleteLastCharacterButton().
+                setOnClickListener(OnClickListenerFactory.getOnDeleteLastCharButtonClickListener());
+        holder.getSignChangeButton().
+                setOnClickListener(OnClickListenerFactory.getOnSignChangeButtonClickListener());
+        holder.getEqualMarkButton().
+                setOnClickListener(OnClickListenerFactory.getOnEqualMarkButtonClickListener());
+        holder.getAllCleanButton().
+                setOnClickListener(OnClickListenerFactory.getOnAllCleanButtonClickListener());
+        holder.getPointButton().
+                setOnClickListener(OnClickListenerFactory.getOnPointButtonClickListener());
     }
 }

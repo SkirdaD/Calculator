@@ -1,9 +1,9 @@
 package slirdad.calculator;
 
-public class CalculatorFactory {
-    final private Calculator calculator = new Calculator();
+import androidx.appcompat.app.AppCompatActivity;
 
-    public Calculator getCalculator() {
-        return calculator;
+public class CalculatorFactory {
+    public static Calculator getCalculator() {
+        return new Calculator();
     }
 }
