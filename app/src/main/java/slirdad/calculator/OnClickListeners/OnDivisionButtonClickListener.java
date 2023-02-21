@@ -25,9 +25,9 @@ public class OnDivisionButtonClickListener implements View.OnClickListener {
         double var;
 
         if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() != Operation.MULTIPLICATION) {
+            if (calculator.getCurrentOperation() != Operation.DIVISION) {
                 calculator.setVar(1);
-                calculator.setCurrentOperation(Operation.MULTIPLICATION);
+                calculator.setCurrentOperation(Operation.DIVISION);
             }
             return;
         } else {
