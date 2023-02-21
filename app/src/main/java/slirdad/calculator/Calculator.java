@@ -8,6 +8,15 @@ public class Calculator {
     private boolean isOperationFinished;
     private boolean isDivisionByZero;
 
+    public interface Callback{
+        void showDivisionByZeroError();
+    }
+    Callback callback;
+
+    public void registerCallBack(Callback callback){
+        this.callback = callback;
+    }
+
     public CalculatorData operate(double var, Operation nextOperation) {
         this.var = var;
         switch (currentOperation) {
@@ -24,8 +33,7 @@ public class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    isDivisionByZero = true;
-                    return null;
+                    callback.showDivisionByZeroError();
                 }
                 break;
             case NONE:

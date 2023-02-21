@@ -9,13 +9,15 @@ import slirdad.calculator.MainActivityExtensionMethods;
 import slirdad.calculator.MainActivityViewHolder;
 import slirdad.calculator.Operation;
 
-public class OnEqualMarkButtonClickListener implements View.OnClickListener {
+public class OnEqualMarkButtonClickListener implements View.OnClickListener, Calculator.Callback {
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
 
     public OnEqualMarkButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
+        calculator.registerCallBack(this);
+
     }
 
     @Override
@@ -36,5 +38,11 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener {
 
         CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation());
         MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+    }
+
+    @Override
+    public void showDivisionByZeroError() {
+        calculator.setVar(999999);
+        holder.getMainTextView().setText("Залупа");
     }
 }
