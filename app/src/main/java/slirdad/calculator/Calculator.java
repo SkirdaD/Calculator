@@ -34,6 +34,7 @@ public class Calculator {
                     result = result / var;
                 } else {
                     callback.showDivisionByZeroError();
+                    return null;
                 }
                 break;
             case NONE:

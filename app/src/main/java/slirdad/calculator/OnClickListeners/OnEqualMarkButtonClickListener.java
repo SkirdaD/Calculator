@@ -37,12 +37,13 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener, Cal
         }
 
         CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation());
-        MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        if (calculatorData != null) {
+            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        }
     }
 
     @Override
     public void showDivisionByZeroError() {
-        calculator.setVar(999999);
-        holder.getMainTextView().setText("Залупа");
+        holder.getMainTextView().setText("Error");
     }
 }
