@@ -1,5 +1,7 @@
 package slirdad.calculator;
 
+import android.content.Context;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import slirdad.calculator.OnClickListeners.OnAllCleanButtonClickListener;
@@ -14,61 +16,56 @@ import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
 
 public class Factory {
+    private final Context context;
     private static final Calculator calculator = new Calculator();
     private static MainActivityViewHolder holder;
 
-    public static MainActivityViewHolder getMainActivityViewHolder(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
-        return new MainActivityViewHolder(activity);
+    public Factory(Context context) {
+        this.context = context;
     }
 
-    public static OnNumberButtonsClickListener getOnNumberButtonsClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public MainActivityViewHolder getMainActivityViewHolder() {
+        holder = new MainActivityViewHolder((AppCompatActivity) context);
+        return holder;
+    }
+
+    public static OnNumberButtonsClickListener getOnNumberButtonsClickListener() {
         return new OnNumberButtonsClickListener(calculator, holder);
     }
 
-    public static OnPlusButtonClickListener getOnPlusButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnPlusButtonClickListener getOnPlusButtonClickListener() {
         return new OnPlusButtonClickListener(calculator, holder);
     }
 
-    public static OnMinusButtonClickListener getOnMinusButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
-        return new OnMinusButtonClickListener(calculator, holder, activity);
+    public static OnMinusButtonClickListener getOnMinusButtonClickListener() {
+        return new OnMinusButtonClickListener(calculator, holder);
     }
 
-    public static OnMultiplicationButtonClickListener getOnMultiplicationButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnMultiplicationButtonClickListener getOnMultiplicationButtonClickListener() {
         return new OnMultiplicationButtonClickListener(calculator, holder);
     }
 
-    public static OnDivisionButtonClickListener getOnDivisionButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnDivisionButtonClickListener getOnDivisionButtonClickListener() {
         return new OnDivisionButtonClickListener(calculator, holder);
     }
 
-    public static OnDeleteLastCharButtonClickListener getOnDeleteLastCharButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnDeleteLastCharButtonClickListener getOnDeleteLastCharButtonClickListener() {
         return new OnDeleteLastCharButtonClickListener(calculator, holder);
     }
 
-    public static OnSignChangeButtonClickListener getOnSignChangeButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnSignChangeButtonClickListener getOnSignChangeButtonClickListener() {
         return new OnSignChangeButtonClickListener(calculator, holder);
     }
 
-    public static OnEqualMarkButtonClickListener getOnEqualMarkButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnEqualMarkButtonClickListener getOnEqualMarkButtonClickListener() {
         return new OnEqualMarkButtonClickListener(calculator, holder);
     }
 
-    public static OnAllCleanButtonClickListener getOnAllCleanButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnAllCleanButtonClickListener getOnAllCleanButtonClickListener() {
         return new OnAllCleanButtonClickListener(calculator, holder);
     }
 
-    public static OnPointButtonClickListener getOnPointButtonClickListener(AppCompatActivity activity) {
-        holder = new MainActivityViewHolder(activity);
+    public static OnPointButtonClickListener getOnPointButtonClickListener() {
         return new OnPointButtonClickListener(calculator, holder);
     }
 

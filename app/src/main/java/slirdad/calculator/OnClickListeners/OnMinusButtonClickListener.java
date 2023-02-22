@@ -1,6 +1,5 @@
 package slirdad.calculator.OnClickListeners;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,12 +12,10 @@ import slirdad.calculator.Operation;
 public class OnMinusButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
-    private final Context context;
 
-    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder, Context context) {
+    public OnMinusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
-        this.context = context;
     }
 
     @Override
@@ -38,10 +35,6 @@ public class OnMinusButtonClickListener implements View.OnClickListener {
         }
 
         CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION);
-        if (!calculator.isDivisionByZero()) {
-            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
-        } else {
-            MainActivityExtensionMethods.showDivisionByZeroError(context, holder, calculator);
-        }
+        MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
     }
 }
