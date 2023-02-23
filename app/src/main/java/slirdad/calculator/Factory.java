@@ -16,15 +16,19 @@ import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
 
 public class Factory {
-    private final Context context;
+    private static Context context;
     private static final Calculator calculator = new Calculator();
     private static MainActivityViewHolder holder;
 
-    public Factory(Context context) {
-        this.context = context;
+    private Factory(Context context) {
+        Factory.context = context;
     }
 
-    public MainActivityViewHolder getMainActivityViewHolder() {
+    public static void inject(Context context) {
+        new Factory(context);
+    }
+
+    public static MainActivityViewHolder getMainActivityViewHolder() {
         holder = new MainActivityViewHolder((AppCompatActivity) context);
         return holder;
     }

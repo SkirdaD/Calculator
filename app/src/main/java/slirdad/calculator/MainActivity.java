@@ -12,18 +12,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final Factory factory = new Factory(this);
+        Factory.inject(this);
 
-        final MainActivityViewHolder holder =
-                factory.getMainActivityViewHolder();
+        final MainActivityViewHolder holder = Factory.getMainActivityViewHolder();
 
         for (Button button : holder.getNumButtons()) {
-            button.setOnClickListener(
-                    Factory.getOnNumberButtonsClickListener());
+            button.setOnClickListener(Factory.getOnNumberButtonsClickListener());
         }
         holder.getPlusButton().setOnClickListener(Factory.getOnPlusButtonClickListener());
-        holder.getMinusButton().setOnClickListener(
-                Factory.getOnMinusButtonClickListener());
+        holder.getMinusButton().setOnClickListener(Factory.getOnMinusButtonClickListener());
         holder.getMultiplicationSignButton().setOnClickListener(
                 Factory.getOnMultiplicationButtonClickListener());
         holder.getDivisionSignButton().setOnClickListener(
@@ -32,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 Factory.getOnDeleteLastCharButtonClickListener());
         holder.getSignChangeButton().setOnClickListener(
                 Factory.getOnSignChangeButtonClickListener());
-        holder.getEqualMarkButton().setOnClickListener(
-                Factory.getOnEqualMarkButtonClickListener());
-        holder.getAllCleanButton().setOnClickListener(
-                Factory.getOnAllCleanButtonClickListener());
+        holder.getEqualMarkButton().setOnClickListener(Factory.getOnEqualMarkButtonClickListener());
+        holder.getAllCleanButton().setOnClickListener(Factory.getOnAllCleanButtonClickListener());
         holder.getPointButton().setOnClickListener(Factory.getOnPointButtonClickListener());
     }
 }
