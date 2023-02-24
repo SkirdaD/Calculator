@@ -12,25 +12,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        Factory.inject(this);
-
-        final MainActivityViewHolder holder = Factory.getMainActivityViewHolder();
+        final MainActivityViewHolder holder = new MainActivityViewHolder(this);
+        final OnCLFactory factory = new OnCLFactory(holder);
 
         for (Button button : holder.getNumButtons()) {
-            button.setOnClickListener(Factory.getOnNumberButtonsClickListener());
+            button.setOnClickListener(factory.getOnNumberButtonsClickListener());
         }
-        holder.getPlusButton().setOnClickListener(Factory.getOnPlusButtonClickListener());
-        holder.getMinusButton().setOnClickListener(Factory.getOnMinusButtonClickListener());
+        holder.getPlusButton().setOnClickListener(factory.getOnPlusButtonClickListener());
+        holder.getMinusButton().setOnClickListener(factory.getOnMinusButtonClickListener());
         holder.getMultiplicationSignButton().setOnClickListener(
-                Factory.getOnMultiplicationButtonClickListener());
+                factory.getOnMultiplicationButtonClickListener());
         holder.getDivisionSignButton().setOnClickListener(
-                Factory.getOnDivisionButtonClickListener());
+                factory.getOnDivisionButtonClickListener());
         holder.getDeleteLastCharacterButton().setOnClickListener(
-                Factory.getOnDeleteLastCharButtonClickListener());
+                factory.getOnDeleteLastCharButtonClickListener());
         holder.getSignChangeButton().setOnClickListener(
-                Factory.getOnSignChangeButtonClickListener());
-        holder.getEqualMarkButton().setOnClickListener(Factory.getOnEqualMarkButtonClickListener());
-        holder.getAllCleanButton().setOnClickListener(Factory.getOnAllCleanButtonClickListener());
-        holder.getPointButton().setOnClickListener(Factory.getOnPointButtonClickListener());
+                factory.getOnSignChangeButtonClickListener());
+        holder.getEqualMarkButton().setOnClickListener(factory.getOnEqualMarkButtonClickListener());
+        holder.getAllCleanButton().setOnClickListener(factory.getOnAllCleanButtonClickListener());
+        holder.getPointButton().setOnClickListener(factory.getOnPointButtonClickListener());
     }
 }
