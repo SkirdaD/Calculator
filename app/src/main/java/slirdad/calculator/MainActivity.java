@@ -5,17 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import slirdad.calculator.OnClickListeners.OnAllCleanButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDeleteLastCharButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDivisionButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnEqualMarkButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMinusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMultiplicationButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnNumberButtonsClickListener;
-import slirdad.calculator.OnClickListeners.OnPlusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,43 +12,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final Calculator calculator = new Calculator();
-        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
+        final MainActivityViewHolder holder = new MainActivityViewHolder(this);
+        final OnCLFactory factory = new OnCLFactory(holder);
 
-        final OnNumberButtonsClickListener onNumberButtonsClickListener =
-                new OnNumberButtonsClickListener(calculator, viewHolder);
-        final OnPlusButtonClickListener onPlusButtonClickListener =
-                new OnPlusButtonClickListener(calculator, viewHolder);
-        final OnMinusButtonClickListener onMinusButtonClickListener =
-                new OnMinusButtonClickListener(calculator, viewHolder, this);
-        final OnMultiplicationButtonClickListener onMultiplicationButtonClickListener =
-                new OnMultiplicationButtonClickListener(calculator, viewHolder);
-        final OnDivisionButtonClickListener onDivisionButtonClickListener =
-                new OnDivisionButtonClickListener(calculator, viewHolder);
-        final OnDeleteLastCharButtonClickListener onDeleteLastCharButtonClickListener =
-                new OnDeleteLastCharButtonClickListener(calculator, viewHolder);
-        final OnSignChangeButtonClickListener onSignChangeButtonClickListener =
-                new OnSignChangeButtonClickListener(calculator, viewHolder);
-        final OnEqualMarkButtonClickListener onEqualMarkButtonClickListener =
-                new OnEqualMarkButtonClickListener(calculator, viewHolder);
-        final OnAllCleanButtonClickListener onAllCleanButtonClickListener =
-                new OnAllCleanButtonClickListener(calculator, viewHolder);
-        final OnPointButtonClickListener onPointButtonClickListener =
-                new OnPointButtonClickListener(calculator, viewHolder);
-
-        viewHolder.getMainTextView().setText("0"); // так сделано, пока нет шареда
-
-        for (Button button : viewHolder.getNumButtons()) {
-            button.setOnClickListener(onNumberButtonsClickListener);
+        for (Button button : holder.getNumButtons()) {
+            button.setOnClickListener(factory.getOnNumberButtonsClickListener());
         }
-        viewHolder.getPlusButton().setOnClickListener(onPlusButtonClickListener);
-        viewHolder.getMinusButton().setOnClickListener(onMinusButtonClickListener);
-        viewHolder.getMultiplicationSignButton().setOnClickListener(onMultiplicationButtonClickListener);
-        viewHolder.getDivisionSignButton().setOnClickListener(onDivisionButtonClickListener);
-        viewHolder.getDeleteLastCharacterButton().setOnClickListener(onDeleteLastCharButtonClickListener);
-        viewHolder.getSignChangeButton().setOnClickListener(onSignChangeButtonClickListener);
-        viewHolder.getEqualMarkButton().setOnClickListener(onEqualMarkButtonClickListener);
-        viewHolder.getAllCleanButton().setOnClickListener(onAllCleanButtonClickListener);
-        viewHolder.getPointButton().setOnClickListener(onPointButtonClickListener);
+        holder.getPlusButton().setOnClickListener(factory.getOnPlusButtonClickListener());
+        holder.getMinusButton().setOnClickListener(factory.getOnMinusButtonClickListener());
+        holder.getMultiplicationSignButton().setOnClickListener(
+                factory.getOnMultiplicationButtonClickListener());
+        holder.getDivisionSignButton().setOnClickListener(
+                factory.getOnDivisionButtonClickListener());
+        holder.getDeleteLastCharacterButton().setOnClickListener(
+                factory.getOnDeleteLastCharButtonClickListener());
+        holder.getSignChangeButton().setOnClickListener(
+                factory.getOnSignChangeButtonClickListener());
+        holder.getEqualMarkButton().setOnClickListener(factory.getOnEqualMarkButtonClickListener());
+        holder.getAllCleanButton().setOnClickListener(factory.getOnAllCleanButtonClickListener());
+        holder.getPointButton().setOnClickListener(factory.getOnPointButtonClickListener());
     }
 }
