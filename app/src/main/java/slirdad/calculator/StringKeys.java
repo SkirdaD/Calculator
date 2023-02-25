@@ -1,7 +1,5 @@
 package slirdad.calculator;
 
-//Дефолтный для видимости только в пакете
-//Полями этого класса будет пользоваться только мэйн
 class StringKeys {
     /*
     Переменные (ключи) для методов onRestoreInstanceState и onSaveInstanceState.
