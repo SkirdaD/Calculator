@@ -66,6 +66,5 @@ public class MainActivityExtensionMethods {
         calculator.setCurrentOperation(Operation.NONE);
         calculator.setVar(0);
         calculator.setResult(0);
-        calculator.setDivisionByZero(false);
     }
 }

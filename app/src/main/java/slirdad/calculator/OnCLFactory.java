@@ -1,5 +1,7 @@
 package slirdad.calculator;
 
+import android.content.Context;
+
 import slirdad.calculator.OnClickListeners.OnAllCleanButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnDeleteLastCharButtonClickListener;
 import slirdad.calculator.OnClickListeners.OnDivisionButtonClickListener;
