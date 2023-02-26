@@ -8,7 +8,7 @@ public class Calculator {
     private boolean isOperationFinished;
 
     public interface Callback {
-        void showDivisionByZeroError();//
+        void showDivisionByZeroError();
     }
 
     public CalculatorData operate(double var, Operation nextOperation, Callback onDivisionError) {
