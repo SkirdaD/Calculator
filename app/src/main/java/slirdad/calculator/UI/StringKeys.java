@@ -1,4 +1,4 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 class StringKeys {
     /*

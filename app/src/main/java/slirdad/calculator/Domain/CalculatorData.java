@@ -1,7 +1,7 @@
-package slirdad.calculator;
+package slirdad.calculator.Domain;
 
 public class CalculatorData {
-    final double result;
+    public final double result;
     final double var;
 
     CalculatorData(double result, double var) {

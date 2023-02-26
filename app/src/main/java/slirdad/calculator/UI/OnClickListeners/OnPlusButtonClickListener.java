@@ -1,19 +1,20 @@
-package slirdad.calculator.OnClickListeners;
+package slirdad.calculator.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.Calculator;
-import slirdad.calculator.CalculatorData;
-import slirdad.calculator.MainActivityExtensionMethods;
-import slirdad.calculator.MainActivityViewHolder;
-import slirdad.calculator.Operation;
+import slirdad.calculator.Domain.Calculator;
+import slirdad.calculator.Domain.CalculatorData;
+import slirdad.calculator.UI.MainActivityExtensionMethods;
+import slirdad.calculator.UI.MainActivityViewHolder;
+import slirdad.calculator.Domain.Operation;
 
-public class OnDivisionButtonClickListener implements View.OnClickListener {
+
+public class OnPlusButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
 
-    public OnDivisionButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnPlusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -25,16 +26,16 @@ public class OnDivisionButtonClickListener implements View.OnClickListener {
         double var;
 
         if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() != Operation.DIVISION) {
+            if (calculator.getCurrentOperation() != Operation.ADDITION) {
                 calculator.setVar(1);
-                calculator.setCurrentOperation(Operation.DIVISION);
+                calculator.setCurrentOperation(Operation.ADDITION);
             }
             return;
         } else {
             var = MainActivityExtensionMethods.getNum(mainTextView);
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.DIVISION, () -> {
+        CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION, () -> {
             String error = "Ошибка деления на ноль";
             MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
             holder.getMainTextView().setText(error);

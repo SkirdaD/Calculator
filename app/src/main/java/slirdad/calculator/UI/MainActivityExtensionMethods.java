@@ -1,8 +1,10 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
-import android.content.Context;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import slirdad.calculator.Domain.Calculator;
+import slirdad.calculator.Domain.CalculatorData;
+import slirdad.calculator.Domain.Operation;
 
 public class MainActivityExtensionMethods {
 
@@ -35,23 +37,6 @@ public class MainActivityExtensionMethods {
 
     public static void changeSizeText(TextView textView) {
         changeSizeText("", textView);
-    }
-
-
-    /*сделано только в кнопке минус
-     * не реализовано стирание слова ошибка с экрана,
-     * в других калькуляторах просто становятся не кликабельны все кнопки кроме АС*/
-    public static void showDivisionByZeroError(Context context, MainActivityViewHolder holder,
-                                               Calculator calculator) {
-
-        TextView mainTextView = holder.getMainTextView();
-
-        Toast.makeText(context, R.string.division_error, Toast.LENGTH_LONG).show();
-
-        changeSizeText(mainTextView);
-        mainTextView.setText(R.string.error);
-
-        resetData(calculator);
     }
 
     public static String formatWholeDoubleAsInt(String text) {
