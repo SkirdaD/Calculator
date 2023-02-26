@@ -11,7 +11,7 @@ public class Calculator {
         void showDivisionByZeroError();
     }
 
-    public CalculatorData operate(double var, Operation nextOperation, Callback divisionError) {
+    public CalculatorData operate(double var, Operation nextOperation, Callback onDivisionError) {
         this.var = var;
         switch (currentOperation) {
             case ADDITION:
@@ -27,7 +27,7 @@ public class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    divisionError.showDivisionByZeroError();
+                    onDivisionError.showDivisionByZeroError();
                     return null;
                 }
                 break;
