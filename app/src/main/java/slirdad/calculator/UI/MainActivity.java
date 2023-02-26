@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         for (Button button : holder.getNumButtons()) {
             button.setOnClickListener(factory.getOnNumberButtonsClickListener());
         }
-        holder.getPlusButton().setOnClickListener(factory.getOnPlusButtonClickListener());
+        //holder.getPlusButton().setOnClickListener(factory.getOnPlusButtonClickListener());
+        holder.getPlusButton().setOnClickListener(factory.pressPlus(holder));
         holder.getMinusButton().setOnClickListener(factory.getOnMinusButtonClickListener());
         holder.getMultiplicationSignButton().setOnClickListener(
                 factory.getOnMultiplicationButtonClickListener());
