@@ -1,4 +1,4 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 //Дефолтный для видимости только в пакете
 //Полями этого класса будет пользоваться только мэйн
