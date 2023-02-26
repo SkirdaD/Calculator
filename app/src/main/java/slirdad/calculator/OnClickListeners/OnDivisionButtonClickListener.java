@@ -11,7 +11,7 @@ import slirdad.calculator.Operation;
 
 public class OnDivisionButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
-    private final MainActivityViewHolder holder;//
+    private final MainActivityViewHolder holder;
 
     public OnDivisionButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
         this.calculator = calculator;
