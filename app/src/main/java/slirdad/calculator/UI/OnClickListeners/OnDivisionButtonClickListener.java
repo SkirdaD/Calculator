@@ -34,7 +34,15 @@ public class OnDivisionButtonClickListener implements View.OnClickListener {
             var = MainActivityExtensionMethods.getNum(mainTextView);
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.DIVISION);
-        MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        CalculatorData calculatorData = calculator.operate(var, Operation.DIVISION, () -> {
+            String error = "Ошибка деления на ноль";
+            MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
+            holder.getMainTextView().setText(error);
+            MainActivityExtensionMethods.resetData(calculator);
+            calculator.setOperationFinished(true);
+        });
+        if (calculatorData != null) {
+            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        }
     }
 }

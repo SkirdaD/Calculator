@@ -9,7 +9,7 @@ import slirdad.calculator.UI.MainActivityExtensionMethods;
 import slirdad.calculator.UI.MainActivityViewHolder;
 import slirdad.calculator.Domain.Operation;
 
-public class OnEqualMarkButtonClickListener implements View.OnClickListener {
+public class OnEqualMarkButtonClickListener implements View.OnClickListener{
     private final Calculator calculator;
     private final MainActivityViewHolder holder;
 
@@ -34,7 +34,15 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener {
             var = calculator.getVar();
         }
 
-        CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation());
-        MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation(), () -> {
+            String error = "Ошибка деления на ноль";
+            MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
+            holder.getMainTextView().setText(error);
+            MainActivityExtensionMethods.resetData(calculator);
+            calculator.setOperationFinished(true);
+        });
+        if (calculatorData != null) {
+            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+        }
     }
 }

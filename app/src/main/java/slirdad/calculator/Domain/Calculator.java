@@ -6,9 +6,12 @@ public class Calculator {
     private double var;
     private Operation currentOperation = Operation.NONE;
     private boolean isOperationFinished;
-    private boolean isDivisionByZero;
 
-    public CalculatorData operate(double var, Operation nextOperation) {
+    public interface Callback {
+        void showDivisionByZeroError();
+    }
+
+    public CalculatorData operate(double var, Operation nextOperation, Callback onDivisionError) {
         this.var = var;
         switch (currentOperation) {
             case ADDITION:
@@ -24,7 +27,7 @@ public class Calculator {
                 if (var != 0) {
                     result = result / var;
                 } else {
-                    isDivisionByZero = true;
+                    onDivisionError.showDivisionByZeroError();
                     return null;
                 }
                 break;
@@ -65,13 +68,5 @@ public class Calculator {
 
     public void setResult(double result) {
         this.result = result;
-    }
-
-    public boolean isDivisionByZero() {
-        return isDivisionByZero;
-    }
-
-    public void setDivisionByZero(boolean divisionByZero) {
-        isDivisionByZero = divisionByZero;
     }
 }

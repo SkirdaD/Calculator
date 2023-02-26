@@ -32,7 +32,7 @@ class OnCLFactory {
         onMinusButtonClickListener = new OnMinusButtonClickListener(calculator, holder);
         onMultiplicationButtonClickListener = new OnMultiplicationButtonClickListener(calculator, holder);
         onDivisionButtonClickListener = new OnDivisionButtonClickListener(calculator, holder);
-        onDeleteLastCharButtonClickListener = new OnDeleteLastCharButtonClickListener(calculator,holder);
+        onDeleteLastCharButtonClickListener = new OnDeleteLastCharButtonClickListener(calculator, holder);
         onSignChangeButtonClickListener = new OnSignChangeButtonClickListener(calculator, holder);
         onEqualMarkButtonClickListener = new OnEqualMarkButtonClickListener(calculator, holder);
         onAllCleanButtonClickListener = new OnAllCleanButtonClickListener(calculator, holder);
