@@ -1,15 +1,16 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
-import slirdad.calculator.OnClickListeners.OnAllCleanButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDeleteLastCharButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnDivisionButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnEqualMarkButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMinusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnMultiplicationButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnNumberButtonsClickListener;
-import slirdad.calculator.OnClickListeners.OnPlusButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnPointButtonClickListener;
-import slirdad.calculator.OnClickListeners.OnSignChangeButtonClickListener;
+import slirdad.calculator.Domain.Calculator;
+import slirdad.calculator.UI.OnClickListeners.OnAllCleanButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnDivisionButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnEqualMarkButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnMinusButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnMultiplicationButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnNumberButtonsClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnPlusButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnPointButtonClickListener;
+import slirdad.calculator.UI.OnClickListeners.OnSignChangeButtonClickListener;
 
 class OnCLFactory {
     private final OnNumberButtonsClickListener onNumberButtonsClickListener;

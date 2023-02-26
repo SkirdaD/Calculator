@@ -1,9 +1,11 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+
+import slirdad.calculator.R;
 
 public class MainActivity extends AppCompatActivity {
 

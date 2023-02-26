@@ -1,4 +1,4 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 import android.widget.Button;
 import android.widget.TextView;
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import slirdad.calculator.R;
 
 public class MainActivityViewHolder {
 

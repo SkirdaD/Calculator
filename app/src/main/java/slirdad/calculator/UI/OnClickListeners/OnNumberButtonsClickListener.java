@@ -1,13 +1,13 @@
-package slirdad.calculator.OnClickListeners;
+package slirdad.calculator.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Calculator;
-import slirdad.calculator.MainActivityExtensionMethods;
-import slirdad.calculator.MainActivityViewHolder;
+import slirdad.calculator.Domain.Calculator;
+import slirdad.calculator.UI.MainActivityExtensionMethods;
+import slirdad.calculator.UI.MainActivityViewHolder;
 import slirdad.calculator.R;
 
 public class OnNumberButtonsClickListener implements View.OnClickListener {
