@@ -14,10 +14,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_constraint);
 
-        final MainActivityViewHolder holder = new MainActivityViewHolder(this);
-        final OnCLMainActivityFactory factory = new OnCLMainActivityFactory(holder);
+        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
+        final MainActivityLogicHolder logicHolder = new MainActivityLogicHolder(viewHolder);
 
-        holder.getPlusButton().setOnClickListener(factory);
-        holder.getMinusButton().setOnClickListener(factory);
+        for (Button button : viewHolder.getNumButtons()) {
+            button.setOnClickListener(logicHolder::putNum);
+        }
+
+        viewHolder.getPlusButton().setOnClickListener(v -> logicHolder.summarize());
+        viewHolder.getMinusButton().setOnClickListener(v -> logicHolder.subtract());
+        viewHolder.getMultiplicationSignButton().setOnClickListener(v -> logicHolder.multiply());
+        viewHolder.getDivisionSignButton().setOnClickListener(v -> logicHolder.divide());
+        viewHolder.getEqualMarkButton().setOnClickListener(v -> logicHolder.equal());
+
+        viewHolder.getAllCleanButton().setOnClickListener(v -> logicHolder.cleanAll());
+        viewHolder.getPointButton().setOnClickListener(v -> logicHolder.putDecimalPoint());
+        viewHolder.getSignChangeButton().setOnClickListener(v -> logicHolder.changeSign());
+        viewHolder.getDeleteLastCharacterButton().setOnClickListener(v -> logicHolder.deleteLastChar());
     }
 }
