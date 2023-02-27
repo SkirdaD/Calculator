@@ -1,11 +1,6 @@
 package slirdad.calculator.UI;
 
-import android.view.View;
-import android.widget.TextView;
-
 import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.Domain.Operation;
 import slirdad.calculator.UI.OnClickListeners.OnAllCleanButtonClickListener;
 import slirdad.calculator.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
 import slirdad.calculator.UI.OnClickListeners.OnDivisionButtonClickListener;
@@ -32,7 +27,6 @@ class OnCLFactory {
 
 
     OnCLFactory(MainActivityViewHolder holder) {
-        Calculator calculator = new Calculator();
         onNumberButtonsClickListener = new OnNumberButtonsClickListener(calculator, holder);
         onPlusButtonClickListener = new OnPlusButtonClickListener(calculator, holder);
         onMinusButtonClickListener = new OnMinusButtonClickListener(calculator, holder);
@@ -45,35 +39,6 @@ class OnCLFactory {
         onPointButtonClickListener = new OnPointButtonClickListener(calculator, holder);
 
     }
-
-        public View.OnClickListener pressPlus(MainActivityViewHolder holder) {
-
-            TextView mainTextView = holder.getMainTextView();
-
-            double var;
-
-            if (calculator.isOperationFinished()) {
-                if (calculator.getCurrentOperation() != Operation.ADDITION) {
-                    calculator.setVar(1);
-                    calculator.setCurrentOperation(Operation.ADDITION);
-                }
-                return null;
-            } else {
-                var = MainActivityExtensionMethods.getNum(mainTextView);
-            }
-
-            CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION, () -> {
-                String error = "Ошибка деления на ноль";
-                MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
-                holder.getMainTextView().setText(error);
-                MainActivityExtensionMethods.resetData(calculator);
-                calculator.setOperationFinished(true);
-            });
-            if (calculatorData != null) {
-                MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
-            }
-            return null;
-        }
 
     public Calculator getCalculator() {
         return calculator;

@@ -15,24 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_constraint);
 
         final MainActivityViewHolder holder = new MainActivityViewHolder(this);
-        final OnCLFactory factory = new OnCLFactory(holder);
+        final OnCLMainActivityFactory factory = new OnCLMainActivityFactory(holder);
 
-        for (Button button : holder.getNumButtons()) {
-            button.setOnClickListener(factory.getOnNumberButtonsClickListener());
-        }
-        //holder.getPlusButton().setOnClickListener(factory.getOnPlusButtonClickListener());
-        holder.getPlusButton().setOnClickListener(factory.pressPlus(holder));
-        holder.getMinusButton().setOnClickListener(factory.getOnMinusButtonClickListener());
-        holder.getMultiplicationSignButton().setOnClickListener(
-                factory.getOnMultiplicationButtonClickListener());
-        holder.getDivisionSignButton().setOnClickListener(
-                factory.getOnDivisionButtonClickListener());
-        holder.getDeleteLastCharacterButton().setOnClickListener(
-                factory.getOnDeleteLastCharButtonClickListener());
-        holder.getSignChangeButton().setOnClickListener(
-                factory.getOnSignChangeButtonClickListener());
-        holder.getEqualMarkButton().setOnClickListener(factory.getOnEqualMarkButtonClickListener());
-        holder.getAllCleanButton().setOnClickListener(factory.getOnAllCleanButtonClickListener());
-        holder.getPointButton().setOnClickListener(factory.getOnPointButtonClickListener());
+        holder.getPlusButton().setOnClickListener(factory);
+        holder.getMinusButton().setOnClickListener(factory);
     }
 }
