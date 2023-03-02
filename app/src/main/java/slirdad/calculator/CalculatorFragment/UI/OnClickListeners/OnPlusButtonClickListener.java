@@ -1,20 +1,20 @@
-package slirdad.calculator.UI.OnClickListeners;
+package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.UI.MainActivityExtensionMethods;
-import slirdad.calculator.UI.MainActivityViewHolder;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.CalculatorFragment.Domain.Operation;
 
 
 public class OnPlusButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
-    private final MainActivityViewHolder holder;
+    private final CalculatorFragmentViewHolder holder;
 
-    public OnPlusButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnPlusButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -32,18 +32,18 @@ public class OnPlusButtonClickListener implements View.OnClickListener {
             }
             return;
         } else {
-            var = MainActivityExtensionMethods.getNum(mainTextView);
+            var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
         }
 
         CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION, () -> {
             String error = "Ошибка деления на ноль";
-            MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
+            CalculatorFragmentExtensionMethods.changeSizeText(error, holder.getMainTextView());
             holder.getMainTextView().setText(error);
-            MainActivityExtensionMethods.resetData(calculator);
+            CalculatorFragmentExtensionMethods.resetData(calculator);
             calculator.setOperationFinished(true);
         });
         if (calculatorData != null) {
-            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+            CalculatorFragmentExtensionMethods.setCalcData(mainTextView, calculatorData);
         }
     }
 }

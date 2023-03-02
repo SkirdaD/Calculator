@@ -1,12 +1,12 @@
-package slirdad.calculator.UI;
+package slirdad.calculator.CalculatorFragment.UI;
 
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.CalculatorFragment.Domain.Operation;
 
-public class MainActivityExtensionMethods {
+public class CalculatorFragmentExtensionMethods {
 
     public static double getNum(TextView textView) {
         return Double.parseDouble(textView.getText().toString());
@@ -15,7 +15,7 @@ public class MainActivityExtensionMethods {
     public static void setCalcData(TextView textView, CalculatorData calculatorData) {
         String textTextView = Double.toString(calculatorData.result);
         textTextView = formatWholeDoubleAsInt(textTextView);
-        MainActivityExtensionMethods.changeSizeText(textTextView, textView);
+        CalculatorFragmentExtensionMethods.changeSizeText(textTextView, textView);
         textView.setText(textTextView);
     }
 

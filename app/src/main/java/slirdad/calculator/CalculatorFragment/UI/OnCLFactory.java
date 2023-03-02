@@ -1,16 +1,16 @@
-package slirdad.calculator.UI;
+package slirdad.calculator.CalculatorFragment.UI;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.UI.OnClickListeners.OnAllCleanButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnDivisionButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnEqualMarkButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnMinusButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnMultiplicationButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnNumberButtonsClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnPlusButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnPointButtonClickListener;
-import slirdad.calculator.UI.OnClickListeners.OnSignChangeButtonClickListener;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnAllCleanButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnDivisionButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnEqualMarkButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnMinusButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnMultiplicationButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnNumberButtonsClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnPlusButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnPointButtonClickListener;
+import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnSignChangeButtonClickListener;
 
 class OnCLFactory {
     private final OnNumberButtonsClickListener onNumberButtonsClickListener;
@@ -25,7 +25,7 @@ class OnCLFactory {
     private final OnPointButtonClickListener onPointButtonClickListener;
 
 
-    OnCLFactory(MainActivityViewHolder holder) {
+    OnCLFactory(CalculatorFragmentViewHolder holder) {
         Calculator calculator = new Calculator();
         onNumberButtonsClickListener = new OnNumberButtonsClickListener(calculator, holder);
         onPlusButtonClickListener = new OnPlusButtonClickListener(calculator, holder);

@@ -1,18 +1,18 @@
-package slirdad.calculator.UI.OnClickListeners;
+package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.UI.MainActivityExtensionMethods;
-import slirdad.calculator.UI.MainActivityViewHolder;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.CalculatorFragment.Domain.Operation;
 
 public class OnSignChangeButtonClickListener implements View.OnClickListener {
-    private final MainActivityViewHolder holder;
+    private final CalculatorFragmentViewHolder holder;
     private final Calculator calculator;
 
-    public OnSignChangeButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnSignChangeButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.holder = holder;
         this.calculator = calculator;
     }
@@ -30,7 +30,7 @@ public class OnSignChangeButtonClickListener implements View.OnClickListener {
             text = text.substring(1);
         }
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
 
         if (calculator.isOperationFinished()) {

@@ -1,17 +1,17 @@
-package slirdad.calculator.UI.OnClickListeners;
+package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.UI.MainActivityExtensionMethods;
-import slirdad.calculator.UI.MainActivityViewHolder;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
 
 public class OnDeleteLastCharButtonClickListener implements View.OnClickListener {
-    private final MainActivityViewHolder holder;
+    private final CalculatorFragmentViewHolder holder;
     private final Calculator calculator;
 
-    public OnDeleteLastCharButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnDeleteLastCharButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.holder = holder;
         this.calculator = calculator;
     }
@@ -29,7 +29,7 @@ public class OnDeleteLastCharButtonClickListener implements View.OnClickListener
             text = text.substring(0, text.length() - 1);
         } else text = "0";
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
     }
 }

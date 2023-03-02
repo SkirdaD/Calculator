@@ -1,19 +1,19 @@
-package slirdad.calculator.UI.OnClickListeners;
+package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.UI.MainActivityExtensionMethods;
-import slirdad.calculator.UI.MainActivityViewHolder;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
 import slirdad.calculator.R;
 
 public class OnNumberButtonsClickListener implements View.OnClickListener {
 
     private final Calculator calculator;
-    private final MainActivityViewHolder holder;
+    private final CalculatorFragmentViewHolder holder;
 
     final private HashMap<Integer, String> buttonValuesMap = new HashMap<Integer, String>(){{
         put(R.id.button0, "0");
@@ -28,7 +28,7 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
         put(R.id.button9, "9");
     }};
 
-    public OnNumberButtonsClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnNumberButtonsClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -44,7 +44,7 @@ public class OnNumberButtonsClickListener implements View.OnClickListener {
 
         text = text + buttonValuesMap.get(v.getId());
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
         calculator.setOperationFinished(false);
     }

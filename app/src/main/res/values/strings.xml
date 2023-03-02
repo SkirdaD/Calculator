@@ -22,4 +22,10 @@
     <string name="decimal_sign">,</string>
     <string name="equals_sign">=</string>
     <string name="about_app">About App</string>
+    <string name="aboutApp">О приложении</string>
+    <string name="copyright_c_skirdad_and_russabit_2023">Copyright © SkirdaD and russabit, 2023</string>
+    <string name="view_source_code_on_github">view source code on github</string>
+    <string name="write_to_developers">write to developers</string>
+    <string name="rate_the_application">rate the application</string>
+    <string name="calculator">Calculator</string>
 </resources>

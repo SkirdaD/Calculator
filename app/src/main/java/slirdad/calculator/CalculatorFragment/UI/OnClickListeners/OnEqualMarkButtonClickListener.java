@@ -1,19 +1,19 @@
-package slirdad.calculator.UI.OnClickListeners;
+package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.UI.MainActivityExtensionMethods;
-import slirdad.calculator.UI.MainActivityViewHolder;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.CalculatorFragment.Domain.Operation;
 
 public class OnEqualMarkButtonClickListener implements View.OnClickListener{
     private final Calculator calculator;
-    private final MainActivityViewHolder holder;
+    private final CalculatorFragmentViewHolder holder;
 
-    public OnEqualMarkButtonClickListener(Calculator calculator, MainActivityViewHolder holder) {
+    public OnEqualMarkButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -28,7 +28,7 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener{
             if (calculator.getCurrentOperation() == Operation.NONE) {
                 return;
             } else {
-                var = MainActivityExtensionMethods.getNum(mainTextView);
+                var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
             }
         } else {
             var = calculator.getVar();
@@ -36,13 +36,13 @@ public class OnEqualMarkButtonClickListener implements View.OnClickListener{
 
         CalculatorData calculatorData = calculator.operate(var, calculator.getCurrentOperation(), () -> {
             String error = "Ошибка деления на ноль";
-            MainActivityExtensionMethods.changeSizeText(error, holder.getMainTextView());
+            CalculatorFragmentExtensionMethods.changeSizeText(error, holder.getMainTextView());
             holder.getMainTextView().setText(error);
-            MainActivityExtensionMethods.resetData(calculator);
+            CalculatorFragmentExtensionMethods.resetData(calculator);
             calculator.setOperationFinished(true);
         });
         if (calculatorData != null) {
-            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+            CalculatorFragmentExtensionMethods.setCalcData(mainTextView, calculatorData);
         }
     }
 }

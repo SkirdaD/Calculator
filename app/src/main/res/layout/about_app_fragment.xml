@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutAppFragment">
+    tools:context=".AboutAppFragment.UI.AboutAppFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_blue_600">
+        android:background="@color/background">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="О приложении"
+            android:text="@string/aboutApp"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Copyright (C) SkirdaD and russabit, 2023"
+            android:text="@string/copyright_c_skirdad_and_russabit_2023"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -39,7 +39,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="100dp"
             android:backgroundTint="@color/light_gray_button"
-            android:text="view source code on github"
+            android:text="@string/view_source_code_on_github"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/button10"
@@ -52,7 +52,7 @@
             android:layout_width="180dp"
             android:layout_height="80dp"
             android:backgroundTint="@color/light_gray_button"
-            android:text="write to developers"
+            android:text="@string/write_to_developers"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_width="140dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/orange_button"
-            android:text="rate the application"
+            android:text="@string/rate_the_application"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calculator"
+            android:text="@string/calculator"
             android:textColor="@color/white"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
