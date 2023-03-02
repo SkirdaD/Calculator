@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(logicHolder::putNum);
         }
-
-        viewHolder.getPlusButton().setOnClickListener(v -> logicHolder.summarize());
+        viewHolder.getPlusButton().setOnClickListener(logicHolder::summarize);
         viewHolder.getMinusButton().setOnClickListener(v -> logicHolder.subtract());
         viewHolder.getMultiplicationSignButton().setOnClickListener(v -> logicHolder.multiply());
         viewHolder.getDivisionSignButton().setOnClickListener(v -> logicHolder.divide());

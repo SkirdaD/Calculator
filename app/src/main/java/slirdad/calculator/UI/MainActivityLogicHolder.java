@@ -107,7 +107,7 @@ class MainActivityLogicHolder {
         mainTextView.setText(text);
     }
 
-    void summarize() {
+    void summarize(View v) {
         double var = getVar(Operation.ADDITION);
         setCalculatorData(var, Operation.ADDITION);
     }
