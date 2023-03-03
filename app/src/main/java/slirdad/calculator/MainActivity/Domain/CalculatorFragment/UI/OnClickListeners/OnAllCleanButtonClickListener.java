@@ -1,11 +1,11 @@
-package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentViewHolder;
 
 public class OnAllCleanButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;

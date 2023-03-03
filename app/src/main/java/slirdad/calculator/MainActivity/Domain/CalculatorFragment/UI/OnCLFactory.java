@@ -1,16 +1,16 @@
-package slirdad.calculator.CalculatorFragment.UI;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnAllCleanButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnDivisionButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnEqualMarkButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnMinusButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnMultiplicationButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnNumberButtonsClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnPlusButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnPointButtonClickListener;
-import slirdad.calculator.CalculatorFragment.UI.OnClickListeners.OnSignChangeButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnAllCleanButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnDeleteLastCharButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnDivisionButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnEqualMarkButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnMinusButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnMultiplicationButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnNumberButtonsClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnPlusButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnPointButtonClickListener;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners.OnSignChangeButtonClickListener;
 
 class OnCLFactory {
     private final OnNumberButtonsClickListener onNumberButtonsClickListener;

@@ -1,19 +1,19 @@
-package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Operation;
 
-public class OnMultiplicationButtonClickListener implements View.OnClickListener {
+public class OnDivisionButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final CalculatorFragmentViewHolder holder;
 
-    public OnMultiplicationButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
+    public OnDivisionButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -25,16 +25,16 @@ public class OnMultiplicationButtonClickListener implements View.OnClickListener
         double var;
 
         if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() != Operation.MULTIPLICATION) {
+            if (calculator.getCurrentOperation() != Operation.DIVISION) {
                 calculator.setVar(1);
-                calculator.setCurrentOperation(Operation.MULTIPLICATION);
+                calculator.setCurrentOperation(Operation.DIVISION);
             }
             return;
         } else {
             var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.MULTIPLICATION, () -> {
+        CalculatorData calculatorData = calculator.operate(var, Operation.DIVISION, () -> {
             String error = "Ошибка деления на ноль";
             CalculatorFragmentExtensionMethods.changeSizeText(error, holder.getMainTextView());
             holder.getMainTextView().setText(error);

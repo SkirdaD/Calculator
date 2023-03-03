@@ -1,19 +1,20 @@
-package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Operation;
 
-public class OnMinusButtonClickListener implements View.OnClickListener {
+
+public class OnPlusButtonClickListener implements View.OnClickListener {
     private final Calculator calculator;
     private final CalculatorFragmentViewHolder holder;
 
-    public OnMinusButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
+    public OnPlusButtonClickListener(Calculator calculator, CalculatorFragmentViewHolder holder) {
         this.calculator = calculator;
         this.holder = holder;
     }
@@ -25,16 +26,16 @@ public class OnMinusButtonClickListener implements View.OnClickListener {
         double var;
 
         if (calculator.isOperationFinished()) {
-            if (calculator.getCurrentOperation() != Operation.SUBTRACTION) {
-                calculator.setVar(0);
-                calculator.setCurrentOperation(Operation.SUBTRACTION);
+            if (calculator.getCurrentOperation() != Operation.ADDITION) {
+                calculator.setVar(1);
+                calculator.setCurrentOperation(Operation.ADDITION);
             }
             return;
         } else {
             var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
         }
 
-        CalculatorData calculatorData = calculator.operate(var, Operation.SUBTRACTION, () -> {
+        CalculatorData calculatorData = calculator.operate(var, Operation.ADDITION, () -> {
             String error = "Ошибка деления на ноль";
             CalculatorFragmentExtensionMethods.changeSizeText(error, holder.getMainTextView());
             holder.getMainTextView().setText(error);

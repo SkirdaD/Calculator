@@ -1,13 +1,13 @@
-package slirdad.calculator.CalculatorFragment.UI.OnClickListeners;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.OnClickListeners;
 
 import android.view.View;
 import android.widget.TextView;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentViewHolder;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragmentViewHolder;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Operation;
 
 public class OnEqualMarkButtonClickListener implements View.OnClickListener{
     private final Calculator calculator;

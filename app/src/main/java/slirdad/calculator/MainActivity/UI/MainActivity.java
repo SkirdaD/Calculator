@@ -7,21 +7,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import slirdad.calculator.AboutAppFragment.UI.AboutAppFragment;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragment;
+import slirdad.calculator.MainActivity.Domain.AboutAppFragment.UI.AboutAppFragment;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragment;
 import slirdad.calculator.R;
 
 public class MainActivity extends AppCompatActivity {
-    private AboutAppFragment aboutAppFragment;
-    private CalculatorFragment calculatorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        aboutAppFragment = new AboutAppFragment();
-        calculatorFragment = new CalculatorFragment();
+        CalculatorFragment calculatorFragment = new CalculatorFragment();
 
         getSupportFragmentManager().beginTransaction().
                 add(R.id.fragment, calculatorFragment).commit();
@@ -33,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.about_app) {
-            getSupportFragmentManager().beginTransaction().hide(calculatorFragment).
-                    add(R.id.fragment, aboutAppFragment).addToBackStack("aboutApp").commit();
-        } else if (item.getItemId() == R.id.about_app2) {
+        if (item.getItemId() == R.id.aboutApp) {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragment, new AboutAppFragment()).addToBackStack("aboutApp").commit();
+        } else if (item.getItemId() == R.id.newFragment) {
             Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
