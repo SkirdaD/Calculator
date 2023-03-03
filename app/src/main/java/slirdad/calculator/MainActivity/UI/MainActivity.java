@@ -30,9 +30,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        item.setVisible(false);
+
         if (item.getItemId() == R.id.aboutApp) {
             getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragment, new AboutAppFragment()).addToBackStack("aboutApp").commit();
+                    replace(R.id.fragment, new AboutAppFragment(item)).addToBackStack("aboutApp").commit();
+            item.setVisible(false);
         } else if (item.getItemId() == R.id.newFragment) {
             Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
         }
