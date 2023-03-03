@@ -8,27 +8,15 @@ import java.util.HashMap;
 import slirdad.calculator.Domain.Calculator;
 import slirdad.calculator.Domain.CalculatorData;
 import slirdad.calculator.Domain.Operation;
-import slirdad.calculator.R;
 
 class MainActivityLogicHolder {
     private final MainActivityViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
-    private final HashMap<Integer, String> buttonValuesMap = new HashMap<Integer, String>() {{
-        put(R.id.button0, "0");
-        put(R.id.button1, "1");
-        put(R.id.button2, "2");
-        put(R.id.button3, "3");
-        put(R.id.button4, "4");
-        put(R.id.button5, "5");
-        put(R.id.button6, "6");
-        put(R.id.button7, "7");
-        put(R.id.button8, "8");
-        put(R.id.button9, "9");
-    }};
+    private final HashMap<Integer, String> buttonValuesMap;
 
-
-    MainActivityLogicHolder(MainActivityViewHolder viewHolder) {
+    MainActivityLogicHolder(MainActivityViewHolder viewHolder, HashMap<Integer, String> buttonValuesMap) {
         this.viewHolder = viewHolder;
+        this.buttonValuesMap = buttonValuesMap;
     }
 
     void putNum(View v) {
@@ -46,7 +34,7 @@ class MainActivityLogicHolder {
         calculator.setOperationFinished(false);
     }
 
-    void putDecimalPoint() {
+    void putDecimalPoint(View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         String text = mainTextView.getText().toString();
 
@@ -61,7 +49,7 @@ class MainActivityLogicHolder {
         calculator.setOperationFinished(false);
     }
 
-    void changeSign() {
+    void changeSign(View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         String text = mainTextView.getText().toString();
 
@@ -82,23 +70,19 @@ class MainActivityLogicHolder {
         }
     }
 
-    void deleteLastChar() {
-        if (calculator.isOperationFinished()) {
-            return;
+    void deleteLastChar(View v) {
+        if (!calculator.isOperationFinished()) {
+            TextView mainTextView = viewHolder.getMainTextView();
+            String text = mainTextView.getText().toString();
+            if (text.length() > 1) {
+                text = text.substring(0, text.length() - 1);
+            } else text = "0";
+            MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+            mainTextView.setText(text);
         }
-
-        TextView mainTextView = viewHolder.getMainTextView();
-        String text = mainTextView.getText().toString();
-
-        if (text.length() > 1) {
-            text = text.substring(0, text.length() - 1);
-        } else text = "0";
-
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
-        mainTextView.setText(text);
     }
 
-    void cleanAll() {
+    void cleanAll(View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         MainActivityExtensionMethods.resetData(calculator);
 
@@ -112,22 +96,22 @@ class MainActivityLogicHolder {
         setCalculatorData(var, Operation.ADDITION);
     }
 
-    void subtract() {
+    void subtract(View v) {
         double var = getVar(Operation.SUBTRACTION);
         setCalculatorData(var, Operation.SUBTRACTION);
     }
 
-    void divide() {
+    void divide(View v) {
         double var = getVar(Operation.DIVISION);
         setCalculatorData(var, Operation.DIVISION);
     }
 
-    void multiply() {
+    void multiply(View v) {
         double var = getVar(Operation.MULTIPLICATION);
         setCalculatorData(var, Operation.MULTIPLICATION);
     }
 
-    void equal() {
+    void equal(View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         double var;
         if (calculator.isOperationFinished()) {
