@@ -1,6 +1,8 @@
 package slirdad.calculator.MainActivity.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         CalculatorFragment calculatorFragment = new CalculatorFragment();
 
-        getSupportFragmentManager().beginTransaction().
-                add(R.id.fragment, calculatorFragment).commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment, calculatorFragment);
+        fragmentTransaction.commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
         item.setVisible(false);
 
         if (item.getItemId() == R.id.aboutApp) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragment, new AboutAppFragment(item)).addToBackStack("aboutApp").commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new AboutAppFragment(item));
+            fragmentTransaction.addToBackStack("aboutApp");
+            fragmentTransaction.commit();
+
             item.setVisible(false);
+
         } else if (item.getItemId() == R.id.newFragment) {
             Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
         }
