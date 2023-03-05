@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import slirdad.calculator.Data;
 import slirdad.calculator.Domain.Calculator;
 import slirdad.calculator.Domain.CalculatorData;
 import slirdad.calculator.Domain.Operation;
@@ -12,11 +13,10 @@ import slirdad.calculator.Domain.Operation;
 class MainActivityLogicHolder {
     private final MainActivityViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
-    private final HashMap<Integer, String> buttonValuesMap;
+    private final HashMap<Integer, String> buttonValuesMap = Data.getButtonValuesMap();
 
-    MainActivityLogicHolder(MainActivityViewHolder viewHolder, HashMap<Integer, String> buttonValuesMap) {
+    MainActivityLogicHolder(MainActivityViewHolder viewHolder) {
         this.viewHolder = viewHolder;
-        this.buttonValuesMap = buttonValuesMap;
     }
 
     void putNum(View v) {
