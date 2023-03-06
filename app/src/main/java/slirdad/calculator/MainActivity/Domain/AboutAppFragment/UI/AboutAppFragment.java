@@ -49,11 +49,12 @@ public class AboutAppFragment extends Fragment {
     }
 
     private void onWriteToDevelopersButtonClick(View v) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto", "skirda_git@mail.ru", null));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
-        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO).
+                setData(Uri.parse("mailto:")).
+                putExtra(Intent.EXTRA_EMAIL, new String[]{"skirda_git@mail.ru"}).
+                putExtra(Intent.EXTRA_SUBJECT, "Calculator.app").
+                putExtra(Intent.EXTRA_TEXT, "Your text");
+        startActivity(Intent.createChooser(emailIntent, "Send e-mail..."));
     }
 
     private void onRateApplicationButtonClick(View view) {
