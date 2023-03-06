@@ -1,8 +1,10 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 import java.util.HashMap;
 
-public class Data {
+import slirdad.calculator.R;
+
+public class NumButtonsMap {
     private static final HashMap<Integer, String> buttonValuesMap = new HashMap<Integer, String>() {{
         put(R.id.button0, "0");
         put(R.id.button1, "1");

@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Data;
 import slirdad.calculator.Domain.Calculator;
 import slirdad.calculator.Domain.CalculatorData;
 import slirdad.calculator.Domain.Operation;
@@ -13,7 +12,7 @@ import slirdad.calculator.Domain.Operation;
 class MainActivityLogicHolder {
     private final MainActivityViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
-    private final HashMap<Integer, String> buttonValuesMap = Data.getButtonValuesMap();
+    private final HashMap<Integer, String> buttonValuesMap = NumButtonsMap.getButtonValuesMap();
 
     MainActivityLogicHolder(MainActivityViewHolder viewHolder) {
         this.viewHolder = viewHolder;
@@ -34,7 +33,7 @@ class MainActivityLogicHolder {
         calculator.setOperationFinished(false);
     }
 
-    void putDecimalPoint(View v) {
+    void putDecimalPoint(@SuppressWarnings("unused") View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         String text = mainTextView.getText().toString();
 
@@ -49,7 +48,7 @@ class MainActivityLogicHolder {
         calculator.setOperationFinished(false);
     }
 
-    void changeSign(View v) {
+    void changeSign(@SuppressWarnings("unused") View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         String text = mainTextView.getText().toString();
 
@@ -70,7 +69,7 @@ class MainActivityLogicHolder {
         }
     }
 
-    void deleteLastChar(View v) {
+    void deleteLastChar(@SuppressWarnings("unused") View v) {
         if (!calculator.isOperationFinished()) {
             TextView mainTextView = viewHolder.getMainTextView();
             String text = mainTextView.getText().toString();
@@ -82,7 +81,7 @@ class MainActivityLogicHolder {
         }
     }
 
-    void cleanAll(View v) {
+    void cleanAll(@SuppressWarnings("unused") View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         MainActivityExtensionMethods.resetData(calculator);
 
@@ -91,27 +90,27 @@ class MainActivityLogicHolder {
         mainTextView.setText(text);
     }
 
-    void summarize(View v) {
+    void summarize(@SuppressWarnings("unused") View v) {
         double var = getVar(Operation.ADDITION);
         setCalculatorData(var, Operation.ADDITION);
     }
 
-    void subtract(View v) {
+    void subtract(@SuppressWarnings("unused") View v) {
         double var = getVar(Operation.SUBTRACTION);
         setCalculatorData(var, Operation.SUBTRACTION);
     }
 
-    void divide(View v) {
+    void divide(@SuppressWarnings("unused") View v) {
         double var = getVar(Operation.DIVISION);
         setCalculatorData(var, Operation.DIVISION);
     }
 
-    void multiply(View v) {
+    void multiply(@SuppressWarnings("unused") View v) {
         double var = getVar(Operation.MULTIPLICATION);
         setCalculatorData(var, Operation.MULTIPLICATION);
     }
 
-    void equal(View v) {
+    void equal(@SuppressWarnings("unused") View v) {
         TextView mainTextView = viewHolder.getMainTextView();
         double var;
         if (calculator.isOperationFinished()) {
