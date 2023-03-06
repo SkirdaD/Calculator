@@ -1,25 +1,25 @@
-package slirdad.calculator.UI;
+package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI;
 
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Operation;
 
-class MainActivityLogicHolder {
-    private final MainActivityViewHolder viewHolder;
+class CalculatorFragmentLogicHolder {
+    private final CalculatorFragmentViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
     private final HashMap<Integer, String> buttonValuesMap = NumButtonsMap.getButtonValuesMap();
 
-    MainActivityLogicHolder(MainActivityViewHolder viewHolder) {
+    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder) {
         this.viewHolder = viewHolder;
     }
 
     void putNum(View v) {
-        TextView mainTextView = viewHolder.getMainTextView();//
+        TextView mainTextView = viewHolder.getMainTextView();
         String text = mainTextView.getText().toString();
 
         if (text.equals("0") || calculator.isOperationFinished()) {
@@ -28,7 +28,7 @@ class MainActivityLogicHolder {
 
         text = text + buttonValuesMap.get(v.getId());
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
         calculator.setOperationFinished(false);
     }
@@ -43,7 +43,7 @@ class MainActivityLogicHolder {
             text = text + ".";
         } else return;
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
         calculator.setOperationFinished(false);
     }
@@ -60,7 +60,7 @@ class MainActivityLogicHolder {
             text = text.substring(1);
         }
 
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
 
         if (calculator.isOperationFinished()) {
@@ -76,17 +76,17 @@ class MainActivityLogicHolder {
             if (text.length() > 1) {
                 text = text.substring(0, text.length() - 1);
             } else text = "0";
-            MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+            CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
             mainTextView.setText(text);
         }
     }
 
     void cleanAll(@SuppressWarnings("unused") View v) {
         TextView mainTextView = viewHolder.getMainTextView();
-        MainActivityExtensionMethods.resetData(calculator);
+        CalculatorFragmentExtensionMethods.resetData(calculator);
 
         String text = "0";
-        MainActivityExtensionMethods.changeSizeText(text, mainTextView);
+        CalculatorFragmentExtensionMethods.changeSizeText(text, mainTextView);
         mainTextView.setText(text);
     }
 
@@ -116,7 +116,7 @@ class MainActivityLogicHolder {
         if (calculator.isOperationFinished()) {
             var = calculator.getVar();
         } else {
-            var = MainActivityExtensionMethods.getNum(mainTextView);
+            var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
         }
 
         setCalculatorData(var, calculator.getCurrentOperation());
@@ -136,7 +136,7 @@ class MainActivityLogicHolder {
                 calculator.setCurrentOperation(nextOperation);
             }
         } else {
-            var = MainActivityExtensionMethods.getNum(mainTextView);
+            var = CalculatorFragmentExtensionMethods.getNum(mainTextView);
         }
         return var;
     }
@@ -145,13 +145,13 @@ class MainActivityLogicHolder {
         TextView mainTextView = viewHolder.getMainTextView();
         CalculatorData calculatorData = calculator.operate(var, nextOperation, () -> {
             String error = "Ошибка деления на ноль";
-            MainActivityExtensionMethods.changeSizeText(error, viewHolder.getMainTextView());
+            CalculatorFragmentExtensionMethods.changeSizeText(error, viewHolder.getMainTextView());
             viewHolder.getMainTextView().setText(error);
-            MainActivityExtensionMethods.resetData(calculator);
+            CalculatorFragmentExtensionMethods.resetData(calculator);
             calculator.setOperationFinished(true);
         });
         if (calculatorData != null) {
-            MainActivityExtensionMethods.setCalcData(mainTextView, calculatorData);
+            CalculatorFragmentExtensionMethods.setCalcData(mainTextView, calculatorData);
         }
     }
 }

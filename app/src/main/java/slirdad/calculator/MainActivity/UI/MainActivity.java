@@ -1,8 +1,6 @@
 package slirdad.calculator.MainActivity.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        item.setVisible(false);
 
         if (item.getItemId() == R.id.aboutApp) {
             getSupportFragmentManager().

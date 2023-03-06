@@ -35,10 +35,6 @@ public class CalculatorFragmentExtensionMethods {
         }
     }
 
-    public static void changeSizeText(TextView textView) {
-        changeSizeText("", textView);
-    }
-
     public static String formatWholeDoubleAsInt(String text) {
         if ((text.indexOf(".") + 2) == text.length() &&
                 Character.toString(text.charAt(text.indexOf(".") + 1)).compareTo("0") == 0) {

@@ -19,6 +19,7 @@ public class CalculatorFragmentViewHolder {
             signChangeButton, divisionSignButton, multiplicationSignButton, equalMarkButton, pointButton;
 
 
+    @SuppressWarnings("RedundantCast")
     CalculatorFragmentViewHolder(View view) {
         Button num1Button = (Button) view.findViewById(R.id.button1);
         Button num2Button = (Button) view.findViewById(R.id.button2);

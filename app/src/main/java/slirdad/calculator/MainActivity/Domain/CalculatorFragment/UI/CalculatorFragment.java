@@ -9,7 +9,6 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import slirdad.calculator.R;
-import slirdad.calculator.UI.MainActivityLogicHolder;
 
 
 public class CalculatorFragment extends Fragment {
@@ -19,8 +18,8 @@ public class CalculatorFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.calculator_fragment, container, false);
 
-        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
-        final MainActivityLogicHolder logicHolder = new MainActivityLogicHolder(viewHolder);
+        final CalculatorFragmentViewHolder viewHolder = new CalculatorFragmentViewHolder(view);
+        final CalculatorFragmentLogicHolder logicHolder = new CalculatorFragmentLogicHolder(viewHolder);
 
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(logicHolder::putNum);
@@ -35,5 +34,7 @@ public class CalculatorFragment extends Fragment {
         viewHolder.getPointButton().setOnClickListener(logicHolder::putDecimalPoint);
         viewHolder.getSignChangeButton().setOnClickListener(logicHolder::changeSign);
         viewHolder.getDeleteLastCharacterButton().setOnClickListener(logicHolder::deleteLastChar);
+
+        return view;
     }
 }

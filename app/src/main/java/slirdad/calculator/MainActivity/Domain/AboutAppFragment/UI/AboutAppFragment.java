@@ -20,6 +20,7 @@ public class AboutAppFragment extends Fragment {
         this.item = item;
     }
 
+    @SuppressWarnings("RedundantCast")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
