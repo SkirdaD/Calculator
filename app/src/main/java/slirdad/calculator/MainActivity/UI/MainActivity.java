@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         CalculatorFragment calculatorFragment = new CalculatorFragment();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment, calculatorFragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().
+                beginTransaction().
+                add(R.id.fragment, calculatorFragment).
+                commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         item.setVisible(false);
 
         if (item.getItemId() == R.id.aboutApp) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, new AboutAppFragment(item));
-            fragmentTransaction.addToBackStack("aboutApp");
-            fragmentTransaction.commit();
+            getSupportFragmentManager().
+                    beginTransaction().
+                    replace(R.id.fragment, new AboutAppFragment(item)).
+                    addToBackStack("aboutApp").
+                    commit();
 
             item.setVisible(false);
 
