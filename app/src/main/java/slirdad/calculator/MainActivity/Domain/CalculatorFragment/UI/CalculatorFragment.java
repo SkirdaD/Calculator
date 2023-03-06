@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import slirdad.calculator.R;
+import slirdad.calculator.UI.MainActivityLogicHolder;
 
 
 public class CalculatorFragment extends Fragment {
