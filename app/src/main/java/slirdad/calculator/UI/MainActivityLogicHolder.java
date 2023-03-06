@@ -19,7 +19,7 @@ class MainActivityLogicHolder {
     }
 
     void putNum(View v) {
-        TextView mainTextView = viewHolder.getMainTextView();
+        TextView mainTextView = viewHolder.getMainTextView();//
         String text = mainTextView.getText().toString();
 
         if (text.equals("0") || calculator.isOperationFinished()) {
