@@ -34,7 +34,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/go_to_github_button"
             android:layout_width="180dp"
             android:layout_height="80dp"
             android:layout_marginTop="100dp"
@@ -42,13 +42,13 @@
             android:text="@string/view_source_code_on_github"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/button10"
+            app:layout_constraintEnd_toStartOf="@+id/write_to_developers_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/write_to_developers_button"
             android:layout_width="180dp"
             android:layout_height="80dp"
             android:backgroundTint="@color/light_gray_button"
@@ -57,11 +57,11 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="@+id/button" />
+            app:layout_constraintStart_toEndOf="@+id/go_to_github_button"
+            app:layout_constraintTop_toTopOf="@+id/go_to_github_button" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/rate_the_app_button"
             android:layout_width="140dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/orange_button"
@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button10" />
+            app:layout_constraintTop_toBottomOf="@+id/write_to_developers_button" />
 
         <ImageView
             android:id="@+id/imageView"
