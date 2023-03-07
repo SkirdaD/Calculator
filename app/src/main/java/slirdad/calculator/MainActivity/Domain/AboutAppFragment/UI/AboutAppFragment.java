@@ -1,13 +1,10 @@
 package slirdad.calculator.MainActivity.Domain.AboutAppFragment.UI;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,19 +17,17 @@ public class AboutAppFragment extends Fragment {
         this.item = item;
     }
 
-    @SuppressWarnings("RedundantCast")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.about_app_fragment, container, false);
 
-        Button viewGithubButton = (Button) view.findViewById(R.id.go_to_github_button);
-        Button writeToDevelopersButton = (Button) view.findViewById(R.id.write_to_developers_button);
-        Button rateApplicationButton = (Button) view.findViewById(R.id.rate_the_app_button);
+        AboutAppViewHolder viewHolder = new AboutAppViewHolder(view);
+        AboutAppLogicHolder logicHolder = new AboutAppLogicHolder(this);
 
-        viewGithubButton.setOnClickListener(this::onViewGithubButtonClick);
-        writeToDevelopersButton.setOnClickListener(this::onWriteToDevelopersButtonClick);
-        rateApplicationButton.setOnClickListener(this::onRateApplicationButtonClick);
+        viewHolder.getViewGithubButton().setOnClickListener(logicHolder::goToGitHub);
+        viewHolder.getWriteToDevelopersButton().setOnClickListener(logicHolder::sendEmail);
+        viewHolder.getRateApplicationButton().setOnClickListener(logicHolder::rateApplication);
 
         return view;
     }
@@ -41,22 +36,5 @@ public class AboutAppFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         item.setVisible(true);
-    }
-
-    private void onViewGithubButtonClick(View v) {
-        startActivity
-                (new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/SkirdaD/Calculator")));
-    }
-
-    private void onWriteToDevelopersButtonClick(View v) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO).
-                setData(Uri.parse("mailto:")).
-                putExtra(Intent.EXTRA_EMAIL, new String[]{"skirda_git@mail.ru"}).
-                putExtra(Intent.EXTRA_SUBJECT, "Calculator.app").
-                putExtra(Intent.EXTRA_TEXT, "Your text");
-        startActivity(Intent.createChooser(emailIntent, "Send e-mail..."));
-    }
-
-    private void onRateApplicationButtonClick(View view) {
     }
 }
