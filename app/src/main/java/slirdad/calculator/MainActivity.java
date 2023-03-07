@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivity.UI;
+package slirdad.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import slirdad.calculator.MainActivity.Domain.AboutAppFragment.UI.AboutAppFragment;
-import slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI.CalculatorFragment;
+import slirdad.calculator.AboutAppFragment.UI.AboutAppFragment;
+import slirdad.calculator.CalculatorFragment.UI.CalculatorFragment;
 import slirdad.calculator.R;
 
 public class MainActivity extends AppCompatActivity {

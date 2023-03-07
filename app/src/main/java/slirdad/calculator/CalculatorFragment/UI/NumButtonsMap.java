@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI;
+package slirdad.calculator.CalculatorFragment.UI;
 
 import java.util.HashMap;
 

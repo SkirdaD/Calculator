@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain;
+package slirdad.calculator.CalculatorFragment.Domain;
 
 public enum Operation {
     ADDITION,

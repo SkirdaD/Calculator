@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivity.Domain.AboutAppFragment.UI;
+package slirdad.calculator.AboutAppFragment.UI;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,10 +1,10 @@
-package slirdad.calculator.MainActivity.Domain.CalculatorFragment.UI;
+package slirdad.calculator.CalculatorFragment.UI;
 
 import android.widget.TextView;
 
-import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.MainActivity.Domain.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.CalculatorFragment.Domain.Operation;
 
 public class CalculatorFragmentExtensionMethods {
 

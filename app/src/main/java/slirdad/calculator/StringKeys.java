@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivity.UI;
+package slirdad.calculator;
 
 class StringKeys {
     /*
