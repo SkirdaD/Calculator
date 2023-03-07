@@ -7,23 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import slirdad.calculator.AboutAppFragment.UI.AboutAppFragment;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragment;
-import slirdad.calculator.R;
-
 public class MainActivity extends AppCompatActivity {
+
+    private final MainActivityLogicHolder holder = new MainActivityLogicHolder(getSupportFragmentManager());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CalculatorFragment calculatorFragment = new CalculatorFragment();
-
-        getSupportFragmentManager().
-                beginTransaction().
-                add(R.id.fragment, calculatorFragment).
-                commit();
+        holder.showCalculatorFragment();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,14 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.aboutApp) {
-            getSupportFragmentManager().
-                    beginTransaction().
-                    replace(R.id.fragment, new AboutAppFragment(item)).
-                    addToBackStack("aboutApp").
-                    commit();
-
-            item.setVisible(false);
-
+            holder.showAboutAppFragment(item);
         } else if (item.getItemId() == R.id.newFragment) {
             Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
         }
