@@ -28,4 +28,5 @@
     <string name="write_to_developers">write to developers</string>
     <string name="rate_the_application">rate the application</string>
     <string name="calculator">Calculator</string>
+    <string name="calculation_training">Calculation Training</string>
 </resources>

@@ -1,8 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+
+    <TextView
+        android:id="@+id/firstNumTextView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/gray_button"
+        android:text="8"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/orange_button"
+        android:textSize="96sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/operationTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/secondNumTextView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@color/gray_button"
+        android:text="10"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/orange_button"
+        android:textSize="96sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/operationTextView"
+        app:layout_constraintTop_toTopOf="@+id/firstNumTextView" />
+
+    <TextView
+        android:id="@+id/operationTextView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@color/gray_button"
+        android:text="*"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/orange_button"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/firstNumTextView"
+        app:layout_constraintEnd_toStartOf="@+id/secondNumTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/firstNumTextView"
+        app:layout_constraintTop_toTopOf="@+id/firstNumTextView" />
+
+    <Button
+        android:id="@+id/helpMeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Help me count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="246dp"
+        android:layout_height="77dp"
+        android:background="@color/light_gray_button"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/secondNumTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/answerEditTextNumber"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:background="@color/light_gray_button"
+        android:ems="10"
+        android:hint="Your Answer"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/helpMeCount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondNumTextView"
+        app:layout_constraintVertical_bias="0.215" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/orange_button"
+        android:text="OK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answerEditTextNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

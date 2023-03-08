@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import slirdad.calculator.R;
 
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.aboutApp) {
             holder.showAboutAppFragment(item);
-        } else if (item.getItemId() == R.id.newFragment) {
-            Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.training) {
+            holder.showCalculatorTrainingFragment(item);
         }
         return super.onOptionsItemSelected(item);
     }
