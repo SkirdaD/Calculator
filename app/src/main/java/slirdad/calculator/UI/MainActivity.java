@@ -3,34 +3,36 @@ package slirdad.calculator.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
-
-import java.util.HashMap;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import slirdad.calculator.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final MainActivityLogicHolder holder = new MainActivityLogicHolder(getSupportFragmentManager());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_constraint);
+        setContentView(R.layout.activity_main);
 
-        final MainActivityViewHolder viewHolder = new MainActivityViewHolder(this);
-        final MainActivityLogicHolder logicHolder = new MainActivityLogicHolder(viewHolder);
+        holder.showCalculatorFragment();
+    }
 
-        for (Button button : viewHolder.getNumButtons()) {
-            button.setOnClickListener(logicHolder::putNum);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.aboutApp) {
+            holder.showAboutAppFragment(item);
+        } else if (item.getItemId() == R.id.newFragment) {
+            Toast.makeText(getApplicationContext(), "Экран в разработке", Toast.LENGTH_LONG).show();
         }
-        viewHolder.getPlusButton().setOnClickListener(logicHolder::summarize);
-        viewHolder.getMinusButton().setOnClickListener(logicHolder::subtract);
-        viewHolder.getMultiplicationSignButton().setOnClickListener(logicHolder::multiply);
-        viewHolder.getDivisionSignButton().setOnClickListener(logicHolder::divide);
-        viewHolder.getEqualMarkButton().setOnClickListener(logicHolder::equal);
-
-        viewHolder.getAllCleanButton().setOnClickListener(logicHolder::cleanAll);
-        viewHolder.getPointButton().setOnClickListener(logicHolder::putDecimalPoint);
-        viewHolder.getSignChangeButton().setOnClickListener(logicHolder::changeSign);
-        viewHolder.getDeleteLastCharacterButton().setOnClickListener(logicHolder::deleteLastChar);
+        return super.onOptionsItemSelected(item);
     }
 }
