@@ -1,4 +1,4 @@
-package slirdad.calculator;
+package slirdad.calculator.UI;
 
 import android.view.MenuItem;
 
@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import slirdad.calculator.AboutAppFragment.UI.AboutAppFragment;
 import slirdad.calculator.CalculatorFragment.UI.CalculatorFragment;
+import slirdad.calculator.R;
 
 public class MainActivityLogicHolder {
 
