@@ -14,7 +14,7 @@ public class CalculationTrainingViewHolder {
 
 
     CalculationTrainingViewHolder(View view){
-        helpMeCountButton = (Button) view.findViewById(R.id.helpMeCount);
+        helpMeCountButton = (Button) view.findViewById(R.id.helpMeCountButton);
         firstNumTextView = (TextView) view.findViewById(R.id.firstNumTextView);
         secondNumTextView = (TextView) view.findViewById(R.id.secondNumTextView);
         operationTextView = (TextView) view.findViewById(R.id.operationTextView);
