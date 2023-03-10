@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/orange_button"
+        android:text="@string/refresh"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/answerEditTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/secondNumTextView" />
+
+    <TextView
+        android:id="@+id/firstNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="@color/background"
+        android:text="*"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="120sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/operationTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/secondNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="@color/background"
+        android:text="*"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="120sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/operationTextView"
+        app:layout_constraintTop_toTopOf="@+id/firstNumTextView" />
+
+    <TextView
+        android:id="@+id/operationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="111dp"
+        android:background="@color/background"
+        android:text="*"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/firstNumTextView"
+        app:layout_constraintEnd_toStartOf="@+id/secondNumTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/firstNumTextView"
+        app:layout_constraintTop_toTopOf="@+id/firstNumTextView"
+        app:layout_constraintVertical_bias="0.148" />
+
+    <Button
+        android:id="@+id/helpMeCountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/help_me_count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="421dp"
+        android:layout_height="57dp"
+        android:background="@color/background"
+        android:text="@string/try_to_count"
+        android:textAlignment="center"
+        android:textColor="@color/light_gray_button"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/answerEditTextNumber"
+        android:layout_width="179dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/light_gray_button"
+        android:ems="10"
+        android:hint="@string/your_answer"
+        android:inputType="numberDecimal"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/okButton"
+        app:layout_constraintEnd_toStartOf="@+id/refreshButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/refreshButton" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/orange_button"
+        android:text="@string/ok"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/refreshButton"
+        app:layout_constraintStart_toStartOf="@+id/refreshButton"
+        app:layout_constraintTop_toBottomOf="@+id/refreshButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
