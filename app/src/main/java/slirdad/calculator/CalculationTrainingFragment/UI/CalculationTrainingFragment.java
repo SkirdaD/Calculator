@@ -23,9 +23,14 @@ public class CalculationTrainingFragment extends Fragment {
         View view = inflater.inflate(R.layout.calculation_training_fragment, container, false);
 
         CalculationTrainingViewHolder viewHolder = new CalculationTrainingViewHolder(view);
-        CalculationTrainingLogicHolder logicHolder = new CalculationTrainingLogicHolder();
+        CalculationTrainingLogicHolder logicHolder = new CalculationTrainingLogicHolder(viewHolder);
 
-        viewHolder.getHelpMeCountButton().setOnClickListener(logicHolder::calculate);
+        logicHolder.setRandomValues(view);
+
+        viewHolder.getRefreshButton().setOnClickListener(logicHolder::setRandomValues);
+        viewHolder.getHelpMeCountButton().setOnClickListener(logicHolder::showAnswer);
+        viewHolder.getOkButton().setOnClickListener(logicHolder::checkAnswer);
+
 
         return view;
     }

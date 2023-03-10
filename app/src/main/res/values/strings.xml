@@ -30,4 +30,8 @@
     <string name="calculator">Calculator</string>
     <string name="calculation_training">Calculation Training</string>
     <string name="your_answer">Answer</string>
+    <string name="ok">OK</string>
+    <string name="refresh">refresh</string>
+    <string name="help_me_count">Help me count</string>
+    <string name="try_to_count">Try to count...</string>
 </resources>
