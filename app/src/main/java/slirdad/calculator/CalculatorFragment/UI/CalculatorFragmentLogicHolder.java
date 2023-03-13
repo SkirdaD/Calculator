@@ -126,9 +126,6 @@ class CalculatorFragmentLogicHolder {
 
     private double getVar(Operation nextOperation) {
         double var;
-        if (viewHolder.getHistoryTextView().getText().toString().contains("=")) {
-            viewHolder.getHistoryTextView().setText("");
-        }
         TextView mainTextView = viewHolder.getMainTextView();
 
         if (calculator.isOperationFinished()) {
@@ -142,6 +139,8 @@ class CalculatorFragmentLogicHolder {
 
     private void setCalculatorData(double var, Operation nextOperation) {
         if (calculator.isOperationFinished()) {
+            viewHolder.getHistoryTextView().setText(
+                    changeHistoryTextViewOperationChar(nextOperation));
             return;
         }
         TextView mainTextView = viewHolder.getMainTextView();
@@ -166,11 +165,21 @@ class CalculatorFragmentLogicHolder {
             textHistory = textHistory + viewHolder.getMainTextView().getText().toString() + operator;
         } else {
             operator = CalculatorFragmentExtensionMethods.
-                    getOperationChar(calculator.getCurrentOperation());
+                    getOperationChar(
+                            calculator.getCurrentOperation());
             String var = CalculatorFragmentExtensionMethods.
-                    formatWholeDoubleAsInt(String.valueOf(calculator.getVar()));
+                    formatWholeDoubleAsInt(String.valueOf(
+                            calculator.getVar()));
             textHistory = viewHolder.getMainTextView().getText().toString() + operator + var + " = ";
         }
         viewHolder.getHistoryTextView().setText(textHistory);
+    }
+
+    private String changeHistoryTextViewOperationChar(Operation operation) {
+        String textHistory = viewHolder.getHistoryTextView().getText().toString();
+        textHistory = textHistory.substring(
+                0, (textHistory.length() - 6 - viewHolder.getMainTextView().getText().toString().length())) +
+                CalculatorFragmentExtensionMethods.getOperationChar(operation);
+        return textHistory;
     }
 }
