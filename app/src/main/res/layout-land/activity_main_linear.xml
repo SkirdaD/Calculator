@@ -19,14 +19,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/historyTextView"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/mainTextView"
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
                 android:layout_weight="1"
