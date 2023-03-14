@@ -1,10 +1,13 @@
 package slirdad.calculator.CalculatorFragment.UI;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
+import slirdad.calculator.CalculatorFragment.Data.HistoryDataBaseHelper;
 import slirdad.calculator.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
 import slirdad.calculator.CalculatorFragment.Domain.Operation;
@@ -13,9 +16,11 @@ class CalculatorFragmentLogicHolder {
     private final CalculatorFragmentViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
     private final HashMap<Integer, String> buttonValuesMap = NumButtonsMap.getButtonValuesMap();
+    private final HistoryDataBaseHelper historyDataBaseHelper;
 
-    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder) {
+    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder, HistoryDataBaseHelper historyDataBaseHelper) {
         this.viewHolder = viewHolder;
+        this.historyDataBaseHelper = historyDataBaseHelper;
     }
 
     void putNum(View v) {
@@ -121,6 +126,23 @@ class CalculatorFragmentLogicHolder {
 
         setHistoryTextView(Operation.NONE);
         setCalculatorData(var, calculator.getCurrentOperation());
+
+
+        // создаем объект для данных
+        ContentValues cv = new ContentValues();
+
+        // получаем данные из полей ввода
+        String expression = viewHolder.getHistoryTextView().getText().toString();
+        String result = viewHolder.getMainTextView().getText().toString();
+
+        // подключаемся к БД
+        SQLiteDatabase db = historyDataBaseHelper.getWritableDatabase();
+
+        // подготовим данные для вставки в виде пар: наименование столбца - значение
+        cv.put("expression", expression);
+        cv.put("result", result);
+        // вставляем запись
+        db.insert("calculationTable", null, cv);
     }
 
 
