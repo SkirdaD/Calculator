@@ -34,4 +34,5 @@
     <string name="refresh">refresh</string>
     <string name="help_me_count">Help me count</string>
     <string name="try_to_count">Try to count...</string>
+    <string name="operations_history">Operations History</string>
 </resources>

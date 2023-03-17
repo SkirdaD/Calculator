@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
             holder.showAboutAppFragment(item);
         } else if (item.getItemId() == R.id.training) {
             holder.showCalculatorTrainingFragment(item);
+        } else if (item.getItemId() == R.id.operationHistory) {
+            holder.showHistoryScreenFragment(item);
         }
         return super.onOptionsItemSelected(item);
     }

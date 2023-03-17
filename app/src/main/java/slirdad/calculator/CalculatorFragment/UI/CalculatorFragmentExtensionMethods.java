@@ -48,4 +48,25 @@ public class CalculatorFragmentExtensionMethods {
         calculator.setVar(0);
         calculator.setResult(0);
     }
+
+    public static String getOperationChar(Operation operation) {
+        String operator;
+        switch (operation) {
+            case ADDITION:
+                operator = " + ";
+                break;
+            case SUBTRACTION:
+                operator = " - ";
+                break;
+            case DIVISION:
+                operator = " / ";
+                break;
+            case MULTIPLICATION:
+                operator = " * ";
+                break;
+            default:
+                operator = " = ";
+        }
+        return operator;
+    }
 }
