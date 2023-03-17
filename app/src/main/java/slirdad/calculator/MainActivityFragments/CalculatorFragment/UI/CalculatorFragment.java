@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculatorFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.UI;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import slirdad.calculator.CalculatorFragment.Data.HistoryDataBaseHelper;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Data.HistoryDataBaseHelper;
 import slirdad.calculator.R;
 
 

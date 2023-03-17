@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculatorFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.UI;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.CalculatorFragment.Data.HistoryDataBaseHelper;
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Data.HistoryDataBaseHelper;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
 
 class CalculatorFragmentLogicHolder {
     private final CalculatorFragmentViewHolder viewHolder;

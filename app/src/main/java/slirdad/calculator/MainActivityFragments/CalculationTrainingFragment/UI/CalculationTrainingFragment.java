@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculationTrainingFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

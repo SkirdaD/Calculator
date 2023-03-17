@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculatorFragment.Data;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.Data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

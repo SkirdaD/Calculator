@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculatorFragment.Domain;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain;
 
 
 public class Calculator {

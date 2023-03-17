@@ -1,4 +1,4 @@
-package slirdad.calculator.CalculationTrainingFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI;
 
 import android.view.View;
 import android.widget.Button;

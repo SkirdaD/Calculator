@@ -1,12 +1,12 @@
-package slirdad.calculator.CalculationTrainingFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.View;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
 
 public class CalculationTrainingLogicHolder {
 

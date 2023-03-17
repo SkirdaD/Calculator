@@ -1,4 +1,4 @@
-package slirdad.calculator.AboutAppFragment.UI;
+package slirdad.calculator.MainActivityFragments.AboutAppFragment.UI;
 
 import android.content.Intent;
 import android.net.Uri;

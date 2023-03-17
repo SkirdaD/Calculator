@@ -1,4 +1,4 @@
-package slirdad.calculator.HistoryScreenFragment;
+package slirdad.calculator.MainActivityFragments.HistoryScreenFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

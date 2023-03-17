@@ -1,14 +1,13 @@
-package slirdad.calculator.UI;
+package slirdad.calculator;
 
 import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentManager;
 
-import slirdad.calculator.AboutAppFragment.UI.AboutAppFragment;
-import slirdad.calculator.CalculationTrainingFragment.UI.CalculationTrainingFragment;
-import slirdad.calculator.CalculatorFragment.UI.CalculatorFragment;
-import slirdad.calculator.HistoryScreenFragment.HistoryScreenFragment;
-import slirdad.calculator.R;
+import slirdad.calculator.MainActivityFragments.AboutAppFragment.UI.AboutAppFragment;
+import slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI.CalculationTrainingFragment;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragment;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.HistoryScreenFragment;
 
 public class MainActivityLogicHolder {
 

@@ -1,10 +1,10 @@
-package slirdad.calculator.CalculationTrainingFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI;
 
 import java.util.Random;
 
-import slirdad.calculator.CalculatorFragment.Domain.Calculator;
-import slirdad.calculator.CalculatorFragment.Domain.CalculatorData;
-import slirdad.calculator.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
 
 public class CalculationTrainingExtensionMethods {
 
