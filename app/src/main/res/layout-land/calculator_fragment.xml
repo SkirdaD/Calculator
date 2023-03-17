@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/historyTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="@color/white"
@@ -19,7 +19,7 @@
         app:layout_constraintWidth_percent="0.6" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/mainTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="end|center_vertical"
@@ -28,7 +28,7 @@
         android:textSize="100sp"
         app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/historyTextView"
         app:layout_constraintWidth_percent="0.6" />
 
     <Button
@@ -42,7 +42,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/historyTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.093" />
 
@@ -103,7 +103,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
         app:layout_constraintTop_toBottomOf="@+id/buttonAC"
         app:layout_constraintWidth_percent="0.093" />
 
@@ -165,7 +165,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
         app:layout_constraintTop_toBottomOf="@+id/button7"
         app:layout_constraintWidth_percent="0.093" />
 
@@ -225,7 +225,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
         app:layout_constraintTop_toBottomOf="@+id/button4"
         app:layout_constraintWidth_percent="0.093" />
 
@@ -240,7 +240,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
         app:layout_constraintTop_toBottomOf="@+id/button2"
         app:layout_constraintWidth_percent="0.193"
         tools:ignore="DuplicateSpeakableTextCheck" />
@@ -327,7 +327,7 @@
         android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.18"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
         app:layout_constraintTop_toBottomOf="@+id/button1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

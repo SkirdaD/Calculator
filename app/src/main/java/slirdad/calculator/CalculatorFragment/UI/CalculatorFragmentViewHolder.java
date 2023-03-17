@@ -13,7 +13,7 @@ public class CalculatorFragmentViewHolder {
 
     private final ArrayList<Button> numButtons = new ArrayList<>();
 
-    private final TextView mainTextView;
+    private final TextView mainTextView, historyTextView;
 
     private final Button plusButton, minusButton, allCleanButton, deleteLastCharacterButton,
             signChangeButton, divisionSignButton, multiplicationSignButton, equalMarkButton, pointButton;
@@ -32,7 +32,8 @@ public class CalculatorFragmentViewHolder {
         Button num9Button = (Button) view.findViewById(R.id.button9);
         Button num0Button = (Button) view.findViewById(R.id.button0);
 
-        mainTextView = (TextView) view.findViewById(R.id.textView1);
+        mainTextView = (TextView) view.findViewById(R.id.mainTextView);
+        historyTextView = (TextView) view.findViewById(R.id.historyTextView);
 
         plusButton = (Button) view.findViewById(R.id.buttonPlus);
         minusButton = (Button) view.findViewById(R.id.buttonMinus);
@@ -91,5 +92,9 @@ public class CalculatorFragmentViewHolder {
 
     public Button getPointButton() {
         return pointButton;
+    }
+
+    public TextView getHistoryTextView() {
+        return historyTextView;
     }
 }

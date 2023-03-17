@@ -5,6 +5,9 @@
         android:id="@+id/aboutApp"
         android:title="@string/about_app" />
     <item
-        android:id="@+id/newFragment"
-        android:title="New Fragment" />
+        android:id="@+id/training"
+        android:title="@string/calculation_training" />
+    <item
+        android:id="@+id/operationHistory"
+        android:title="@string/operations_history" />
 </menu>
