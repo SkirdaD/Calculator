@@ -5,6 +5,7 @@ import android.widget.TextView;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.StringValues;
 
 public class CalculatorFragmentExtensionMethods {
 
@@ -53,19 +54,19 @@ public class CalculatorFragmentExtensionMethods {
         String operator;
         switch (operation) {
             case ADDITION:
-                operator = " + ";
+                operator = " " + StringValues.PLUS_SIGN + " ";
                 break;
             case SUBTRACTION:
-                operator = " - ";
+                operator = " " + StringValues.MINUS_SIGN + " ";
                 break;
             case DIVISION:
-                operator = " / ";
+                operator = " " + StringValues.DIVISION_SIGN + " ";
                 break;
             case MULTIPLICATION:
-                operator = " * ";
+                operator = " " + StringValues.MULTIPLICATION_SIGN + " ";
                 break;
             default:
-                operator = " = ";
+                operator = " " + StringValues.EQUAL_SIGN + " ";
         }
         return operator;
     }

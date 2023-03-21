@@ -58,6 +58,10 @@ public class Calculator {
         isOperationFinished = operationFinished;
     }
 
+    public double getResult() {
+        return result;
+    }
+
     public double getVar() {
         return var;
     }

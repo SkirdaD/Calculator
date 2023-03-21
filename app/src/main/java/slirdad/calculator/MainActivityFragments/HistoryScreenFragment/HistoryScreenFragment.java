@@ -17,11 +17,16 @@ public class HistoryScreenFragment extends Fragment {
         this.item = item;
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.history_screen_fragment, container, false);
+
+        HistoryScreenViewHolder viewHolder = new HistoryScreenViewHolder(view);
+        HistoryScreenLogicHolder logicHolder = new HistoryScreenLogicHolder(getContext());
+
+        viewHolder.getRecyclerView().setAdapter(logicHolder.getAdapter());
+
         return view;
     }
 

@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivityFragments.AboutAppFragment.UI;
+package slirdad.calculator.MainActivityFragments.AboutAppFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +23,7 @@ public class AboutAppFragment extends Fragment {
         View view = inflater.inflate(R.layout.about_app_fragment, container, false);
 
         AboutAppViewHolder viewHolder = new AboutAppViewHolder(view);
-        AboutAppLogicHolder logicHolder = new AboutAppLogicHolder(this);
+        AboutAppLogicHolder logicHolder = new AboutAppLogicHolder(getContext());
 
         viewHolder.getViewGithubButton().setOnClickListener(logicHolder::goToGitHub);
         viewHolder.getWriteToDevelopersButton().setOnClickListener(logicHolder::sendEmail);

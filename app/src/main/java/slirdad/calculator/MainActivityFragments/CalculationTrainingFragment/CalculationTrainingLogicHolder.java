@@ -1,4 +1,4 @@
-package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI;
+package slirdad.calculator.MainActivityFragments.CalculationTrainingFragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.view.View;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragmentExtensionMethods;
+import slirdad.calculator.MainActivityFragments.StringValues;
 
 public class CalculationTrainingLogicHolder {
 
@@ -46,19 +47,19 @@ public class CalculationTrainingLogicHolder {
 
         switch (operation) {
             case ADDITION: {
-                viewHolder.getOperationTextView().setText("+");
+                viewHolder.getOperationTextView().setText(StringValues.PLUS_SIGN);
                 break;
             }
             case SUBTRACTION: {
-                viewHolder.getOperationTextView().setText("-");
+                viewHolder.getOperationTextView().setText(StringValues.MINUS_SIGN);
                 break;
             }
             case MULTIPLICATION: {
-                viewHolder.getOperationTextView().setText("*");
+                viewHolder.getOperationTextView().setText(StringValues.MULTIPLICATION_SIGN);
                 break;
             }
             case DIVISION: {
-                viewHolder.getOperationTextView().setText("/");
+                viewHolder.getOperationTextView().setText(StringValues.DIVISION_SIGN);
                 break;
             }
         }

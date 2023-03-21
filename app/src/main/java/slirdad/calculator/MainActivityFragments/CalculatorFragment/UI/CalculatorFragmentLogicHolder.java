@@ -1,26 +1,23 @@
 package slirdad.calculator.MainActivityFragments.CalculatorFragment.UI;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.MainActivityFragments.CalculatorFragment.Data.HistoryDataBaseHelper;
+import slirdad.calculator.Data.ExpressionArrayList;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.StringValues;
 
 class CalculatorFragmentLogicHolder {
     private final CalculatorFragmentViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
     private final HashMap<Integer, String> buttonValuesMap = NumButtonsMap.getButtonValuesMap();
-    private final HistoryDataBaseHelper historyDataBaseHelper;
 
-    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder, HistoryDataBaseHelper historyDataBaseHelper) {
+    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder) {
         this.viewHolder = viewHolder;
-        this.historyDataBaseHelper = historyDataBaseHelper;
     }
 
     void putNum(View v) {
@@ -128,21 +125,12 @@ class CalculatorFragmentLogicHolder {
         setCalculatorData(var, calculator.getCurrentOperation());
 
 
-        // создаем объект для данных
-        ContentValues cv = new ContentValues();
+        String expressionResult = CalculatorFragmentExtensionMethods.formatWholeDoubleAsInt
+                (String.valueOf(calculator.getResult()));
 
-        // получаем данные из полей ввода
-        String expression = viewHolder.getHistoryTextView().getText().toString();
-        String result = viewHolder.getMainTextView().getText().toString();
+        String expressionBody = viewHolder.getHistoryTextView().getText().toString();
 
-        // подключаемся к БД
-        SQLiteDatabase db = historyDataBaseHelper.getWritableDatabase();
-
-        // подготовим данные для вставки в виде пар: наименование столбца - значение
-        cv.put("expression", expression);
-        cv.put("result", result);
-        // вставляем запись
-        db.insert("calculationTable", null, cv);
+        ExpressionArrayList.addExpression(expressionResult, expressionBody);
     }
 
 
@@ -167,9 +155,8 @@ class CalculatorFragmentLogicHolder {
         }
         TextView mainTextView = viewHolder.getMainTextView();
         CalculatorData calculatorData = calculator.operate(var, nextOperation, () -> {
-            String error = "Ошибка деления на ноль";
-            CalculatorFragmentExtensionMethods.changeSizeText(error, viewHolder.getMainTextView());
-            viewHolder.getMainTextView().setText(error);
+            CalculatorFragmentExtensionMethods.changeSizeText(StringValues.ERROR, viewHolder.getMainTextView());
+            viewHolder.getMainTextView().setText(StringValues.ERROR);
             CalculatorFragmentExtensionMethods.resetData(calculator);
             calculator.setOperationFinished(true);
         });

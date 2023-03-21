@@ -4,8 +4,8 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentManager;
 
-import slirdad.calculator.MainActivityFragments.AboutAppFragment.UI.AboutAppFragment;
-import slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.UI.CalculationTrainingFragment;
+import slirdad.calculator.MainActivityFragments.AboutAppFragment.AboutAppFragment;
+import slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.CalculationTrainingFragment;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragment;
 import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.HistoryScreenFragment;
 
