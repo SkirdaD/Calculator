@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Data.ExpressionArrayList;
+import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
@@ -15,9 +15,11 @@ class CalculatorFragmentLogicHolder {
     private final CalculatorFragmentViewHolder viewHolder;
     private final Calculator calculator = new Calculator();
     private final HashMap<Integer, String> buttonValuesMap = NumButtonsMap.getButtonValuesMap();
+    private final HistoryDataBaseManager dataBaseManager;
 
-    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder) {
+    CalculatorFragmentLogicHolder(CalculatorFragmentViewHolder viewHolder, HistoryDataBaseManager dataBaseManager) {
         this.viewHolder = viewHolder;
+        this.dataBaseManager = dataBaseManager;
     }
 
     void putNum(View v) {
@@ -125,12 +127,11 @@ class CalculatorFragmentLogicHolder {
         setCalculatorData(var, calculator.getCurrentOperation());
 
 
-        String expressionResult = CalculatorFragmentExtensionMethods.formatWholeDoubleAsInt
+        String result = CalculatorFragmentExtensionMethods.formatWholeDoubleAsInt
                 (String.valueOf(calculator.getResult()));
+        String expression = viewHolder.getHistoryTextView().getText().toString();
 
-        String expressionBody = viewHolder.getHistoryTextView().getText().toString();
-
-        ExpressionArrayList.addExpression(expressionResult, expressionBody);
+        dataBaseManager.insertToDataBase(result, expression);
     }
 
 

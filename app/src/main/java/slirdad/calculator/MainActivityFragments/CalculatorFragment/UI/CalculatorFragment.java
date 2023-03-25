@@ -8,18 +8,27 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
 
 
 public class CalculatorFragment extends Fragment {
+
+    private final HistoryDataBaseManager dataBaseManager;
+
+    public CalculatorFragment(HistoryDataBaseManager dataBaseManager) {
+        this.dataBaseManager = dataBaseManager;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.calculator_fragment, container, false);
 
         final CalculatorFragmentViewHolder viewHolder = new CalculatorFragmentViewHolder(view);
         final CalculatorFragmentLogicHolder logicHolder =
-                new CalculatorFragmentLogicHolder(viewHolder);
+                new CalculatorFragmentLogicHolder(viewHolder, dataBaseManager);
 
         for (Button button : viewHolder.getNumButtons()) {
             button.setOnClickListener(logicHolder::putNum);
@@ -36,5 +45,17 @@ public class CalculatorFragment extends Fragment {
         viewHolder.getDeleteLastCharacterButton().setOnClickListener(logicHolder::deleteLastChar);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dataBaseManager.openDataBase();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dataBaseManager.closeDatabase();
     }
 }

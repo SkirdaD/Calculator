@@ -2,16 +2,16 @@ package slirdad.calculator.MainActivityFragments.HistoryScreenFragment;
 
 import android.content.Context;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.Data.Expression;
-import slirdad.calculator.Data.ExpressionArrayList;
 
 class HistoryScreenLogicHolder {
     private final ExpressionAdapter adapter;
 
-    HistoryScreenLogicHolder(Context context) {
-        ArrayList<Expression> expressions = ExpressionArrayList.getExpressionArrayList();
+    HistoryScreenLogicHolder(Context context, HistoryDataBaseManager dataBaseManager) {
+        List<Expression> expressions = dataBaseManager.getFromDataBase();
         adapter = new ExpressionAdapter(context, expressions);
     }
 

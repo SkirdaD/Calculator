@@ -6,16 +6,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+
 public class MainActivity extends AppCompatActivity {
 
-    private final MainActivityLogicHolder holder = new MainActivityLogicHolder(getSupportFragmentManager());
+    private MainActivityLogicHolder logicHolder;
+    private HistoryDataBaseManager dataBaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        holder.showCalculatorFragment();
+        dataBaseManager = new HistoryDataBaseManager(this);
+        logicHolder= new MainActivityLogicHolder(getSupportFragmentManager(), dataBaseManager);
+
+        logicHolder.showCalculatorFragment();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,12 +32,24 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.aboutApp) {
-            holder.showAboutAppFragment(item);
+            logicHolder.showAboutAppFragment(item);
         } else if (item.getItemId() == R.id.training) {
-            holder.showCalculatorTrainingFragment(item);
+            logicHolder.showCalculatorTrainingFragment(item);
         } else if (item.getItemId() == R.id.operationHistory) {
-            holder.showHistoryScreenFragment(item);
+            logicHolder.showHistoryScreenFragment(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dataBaseManager.openDataBase();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dataBaseManager.closeDatabase();
     }
 }

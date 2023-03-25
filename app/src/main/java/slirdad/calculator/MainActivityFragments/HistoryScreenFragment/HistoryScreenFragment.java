@@ -8,13 +8,17 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
 
 public class HistoryScreenFragment extends Fragment {
     private final MenuItem item;
+    private final HistoryDataBaseManager dataBaseManager;
 
-    public HistoryScreenFragment(MenuItem item) {
+
+    public HistoryScreenFragment(MenuItem item, HistoryDataBaseManager dataBaseManager) {
         this.item = item;
+        this.dataBaseManager = dataBaseManager;
     }
 
     @Override
@@ -23,7 +27,7 @@ public class HistoryScreenFragment extends Fragment {
         View view = inflater.inflate(R.layout.history_screen_fragment, container, false);
 
         HistoryScreenViewHolder viewHolder = new HistoryScreenViewHolder(view);
-        HistoryScreenLogicHolder logicHolder = new HistoryScreenLogicHolder(getContext());
+        HistoryScreenLogicHolder logicHolder = new HistoryScreenLogicHolder(getContext(), dataBaseManager);
 
         viewHolder.getRecyclerView().setAdapter(logicHolder.getAdapter());
 
@@ -31,8 +35,15 @@ public class HistoryScreenFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        dataBaseManager.openDataBase();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         item.setVisible(true);
+        dataBaseManager.closeDatabase();
     }
 }
