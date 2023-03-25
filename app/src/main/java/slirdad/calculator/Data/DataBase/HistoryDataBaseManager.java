@@ -18,10 +18,15 @@ public class HistoryDataBaseManager {
         dataBaseHelper = new HistoryDataBaseHelper(context);
     }
 
+    // вот тут у тебя самая большая ошибка - почему кто-то другой (активити и два фрагмента)
+    // должны открывать БД?
     public void openDataBase() {
         database = dataBaseHelper.getWritableDatabase();
     }
 
+    // какой у тебя хелпер если перед инсёртом надо открывать бд тому кто им пользуется?
+    // ты в микроволновке когда включаешь на разогрев отдельно кнопкой перед этим
+    // нажимаешь "зарядить магнетрон", а потом только нажимаешь "разогреть"?
     public void insertToDataBase(String result, String expression) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseStringValues.RESULT_COLUMN, result);
@@ -30,6 +35,7 @@ public class HistoryDataBaseManager {
         database.insert(DataBaseStringValues.TABLE_NAME, null, contentValues);
     }
 
+    // здесь тоже самое
     public List<Expression> getFromDataBase() {
 
         ArrayList<Expression> calculationsList = new ArrayList<>();
@@ -46,6 +52,7 @@ public class HistoryDataBaseManager {
         return calculationsList;
     }
 
+    // это тоже зачем должен делать клиент?
     public void closeDatabase(){
         dataBaseHelper.close();
     }

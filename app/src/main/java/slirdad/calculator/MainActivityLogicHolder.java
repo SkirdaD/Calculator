@@ -29,6 +29,8 @@ public class MainActivityLogicHolder {
     }
 
     public void showAboutAppFragment(MenuItem item) {
+        // тут и в других у тебя при нажатии пользователь видит как исчезает айтем,
+        // закрывай перед этим меню или чё-то сделай с этим
         fragmentManager.beginTransaction().
                 replace(R.id.fragment, new AboutAppFragment(item)).
                 addToBackStack("aboutApp").

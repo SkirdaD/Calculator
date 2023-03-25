@@ -1,10 +1,10 @@
 package slirdad.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 
@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        // это логика?
+        // значит можно вынести внутрь logicHolder'a
+        // чтобы активити только вызывала один метод у него
         if (item.getItemId() == R.id.aboutApp) {
             logicHolder.showAboutAppFragment(item);
         } else if (item.getItemId() == R.id.training) {
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // зачем здесь открывать бд? активити ей пользуется?
     @Override
     protected void onResume() {
         super.onResume();

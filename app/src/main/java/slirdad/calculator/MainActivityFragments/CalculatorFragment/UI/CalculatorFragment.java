@@ -46,13 +46,14 @@ public class CalculatorFragment extends Fragment {
 
         return view;
     }
-
+    // почему в onResume??
     @Override
     public void onResume() {
         super.onResume();
         dataBaseManager.openDataBase();
     }
 
+    // и когда он сработает? в каких случаях вызывается onDestroy?
     @Override
     public void onDestroy() {
         super.onDestroy();
