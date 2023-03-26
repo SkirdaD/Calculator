@@ -34,19 +34,15 @@ public class HistoryScreenFragment extends Fragment {
         return view;
     }
 
-    // она же уже открыта в мейн активити до этого, а потом в CalculatorFragment.
-    // проверь по дебагеру закрывалась ли она до этого чтобы снова её открывать
-    // и ещё, тут тебе надо только достать значения, зачем тогда пользоваться getWritable...?
     @Override
     public void onResume() {
         super.onResume();
-        dataBaseManager.openDataBase();
+        item.setVisible(false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         item.setVisible(true);
-        dataBaseManager.closeDatabase();
     }
 }

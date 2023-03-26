@@ -22,6 +22,16 @@ public class MainActivityLogicHolder {
         calculatorFragment = new CalculatorFragment(dataBaseManager);
     }
 
+    public void showSelectedFragment(MenuItem item) {
+        if (item.getItemId() == R.id.aboutApp) {
+            showAboutAppFragment(item);
+        } else if (item.getItemId() == R.id.training) {
+            showCalculatorTrainingFragment(item);
+        } else if (item.getItemId() == R.id.operationHistory) {
+            showHistoryScreenFragment(item);
+        }
+    }
+
     public void showCalculatorFragment() {
         fragmentManager.beginTransaction().
                 add(R.id.fragment, calculatorFragment).
@@ -29,13 +39,10 @@ public class MainActivityLogicHolder {
     }
 
     public void showAboutAppFragment(MenuItem item) {
-        // тут и в других у тебя при нажатии пользователь видит как исчезает айтем,
-        // закрывай перед этим меню или чё-то сделай с этим
         fragmentManager.beginTransaction().
                 replace(R.id.fragment, new AboutAppFragment(item)).
                 addToBackStack("aboutApp").
                 commit();
-        item.setVisible(false);
     }
 
     public void showCalculatorTrainingFragment(MenuItem item) {
@@ -43,7 +50,6 @@ public class MainActivityLogicHolder {
                 replace(R.id.fragment, new CalculationTrainingFragment(item)).
                 addToBackStack("calculatorTraining").
                 commit();
-        item.setVisible(false);
     }
 
     public void showHistoryScreenFragment(MenuItem item) {
@@ -51,6 +57,5 @@ public class MainActivityLogicHolder {
                 replace(R.id.fragment, new HistoryScreenFragment((item), dataBaseManager)).
                 addToBackStack("historyScreen").
                 commit();
-        item.setVisible(false);
     }
 }
