@@ -32,6 +32,8 @@ public class MainActivityLogicHolder {
         }
     }
 
+    // я тебе кажется несколько раз скидывал как правильно точки расставлять
+    // в цепочках вызова методов ??
     public void showCalculatorFragment() {
         fragmentManager.beginTransaction().
                 add(R.id.fragment, calculatorFragment).
