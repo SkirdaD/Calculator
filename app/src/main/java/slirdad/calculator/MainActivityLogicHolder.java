@@ -1,5 +1,6 @@
 package slirdad.calculator;
 
+import android.content.Context;
 import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentManager;
@@ -16,9 +17,9 @@ public class MainActivityLogicHolder {
     private final FragmentManager fragmentManager;
     private final CalculatorFragment calculatorFragment;
 
-    public MainActivityLogicHolder(FragmentManager fragmentManager, HistoryDataBaseManager dataBaseManager) {
+    public MainActivityLogicHolder(FragmentManager fragmentManager, Context context) {
         this.fragmentManager = fragmentManager;
-        this.dataBaseManager = dataBaseManager;
+        this.dataBaseManager = new HistoryDataBaseManager(context);
         calculatorFragment = new CalculatorFragment(dataBaseManager);
     }
 
@@ -34,28 +35,34 @@ public class MainActivityLogicHolder {
 
     // я тебе кажется несколько раз скидывал как правильно точки расставлять
     // в цепочках вызова методов ??
+
+    // Да. Каждая строчка - одна операция.
     public void showCalculatorFragment() {
-        fragmentManager.beginTransaction().
+        fragmentManager.
+                beginTransaction().
                 add(R.id.fragment, calculatorFragment).
                 commit();
     }
 
     public void showAboutAppFragment(MenuItem item) {
-        fragmentManager.beginTransaction().
+        fragmentManager.
+                beginTransaction().
                 replace(R.id.fragment, new AboutAppFragment(item)).
                 addToBackStack("aboutApp").
                 commit();
     }
 
     public void showCalculatorTrainingFragment(MenuItem item) {
-        fragmentManager.beginTransaction().
+        fragmentManager.
+                beginTransaction().
                 replace(R.id.fragment, new CalculationTrainingFragment(item)).
                 addToBackStack("calculatorTraining").
                 commit();
     }
 
     public void showHistoryScreenFragment(MenuItem item) {
-        fragmentManager.beginTransaction().
+        fragmentManager.
+                beginTransaction().
                 replace(R.id.fragment, new HistoryScreenFragment((item), dataBaseManager)).
                 addToBackStack("historyScreen").
                 commit();
