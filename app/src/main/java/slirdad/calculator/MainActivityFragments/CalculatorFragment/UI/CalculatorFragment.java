@@ -33,11 +33,11 @@ public class CalculatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        if (view == null){
-//            view = inflater.inflate(R.layout.calculator_fragment, container, false);
-//        } else {
-//            ((ViewGroup)view.getParent()).removeView(view);
-//        }
+        if (view == null){
+            view = inflater.inflate(R.layout.calculator_fragment, container, false);
+        } else {
+            ((ViewGroup)view.getParent()).removeView(view);
+        }
 
         final CalculatorFragmentViewHolder viewHolder = new CalculatorFragmentViewHolder(view);
         final CalculatorFragmentLogicHolder logicHolder =

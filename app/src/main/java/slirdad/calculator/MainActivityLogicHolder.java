@@ -36,12 +36,12 @@ public class MainActivityLogicHolder {
         if (calculatorFragment == null) {
             showCalculatorFragment();
         }
-//        else {
-//            fragmentManager.
-//                    beginTransaction().
-//                    add(R.id.fragment, calculatorFragment, FRAGMENT_INSTANCE_NAME).
-//                    commit();
-//        }
+        else {
+            fragmentManager.
+                    beginTransaction().
+                    add(R.id.fragment, calculatorFragment, FRAGMENT_INSTANCE_NAME).
+                    commit();
+        }
     }
 
 
