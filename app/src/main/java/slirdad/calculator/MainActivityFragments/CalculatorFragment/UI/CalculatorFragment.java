@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
@@ -17,27 +17,24 @@ import slirdad.calculator.R;
 public class CalculatorFragment extends Fragment {
 
     private final HistoryDataBaseManager dataBaseManager;
-    View view;
+    //private CalculatorViewModel calculatorViewModel;
+    //View view;
 
     public CalculatorFragment(HistoryDataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        //calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (view == null){
-            view = inflater.inflate(R.layout.calculator_fragment, container, false);
-        } else {
-            ((ViewGroup)view.getParent()).removeView(view);
-        }
+        View view = inflater.inflate(R.layout.calculator_fragment, container, false);
 
         final CalculatorFragmentViewHolder viewHolder = new CalculatorFragmentViewHolder(view);
         final CalculatorFragmentLogicHolder logicHolder =

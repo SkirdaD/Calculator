@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
@@ -17,33 +16,14 @@ public class MainActivityLogicHolder {
 
     private final HistoryDataBaseManager dataBaseManager;
     private final FragmentManager fragmentManager;
-    private  CalculatorFragment calculatorFragment;
-
-    private static String FRAGMENT_INSTANCE_NAME = "fragment";
+    private final CalculatorFragment calculatorFragment;
 
     public MainActivityLogicHolder(Context context) {
 
         this.fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
         this.dataBaseManager = new HistoryDataBaseManager(context);
-        //calculatorFragment = new CalculatorFragment(dataBaseManager);
+        this.calculatorFragment = new CalculatorFragment(dataBaseManager);
     }
-
-    public void show() {
-        // Восстанавливаем уже созданный фрагмент
-        calculatorFragment = (CalculatorFragment) fragmentManager.findFragmentByTag(FRAGMENT_INSTANCE_NAME);
-
-        // Если фрагмент не сохранен, создаем новый экземпляр
-        if (calculatorFragment == null) {
-            showCalculatorFragment();
-        }
-        else {
-            fragmentManager.
-                    beginTransaction().
-                    add(R.id.fragment, calculatorFragment, FRAGMENT_INSTANCE_NAME).
-                    commit();
-        }
-    }
-
 
     public void showSelectedFragment(MenuItem item) {
         if (item.getItemId() == R.id.aboutApp) {
@@ -58,7 +38,7 @@ public class MainActivityLogicHolder {
     public void showCalculatorFragment() {
         fragmentManager.
                 beginTransaction().
-                add(R.id.fragment, new CalculatorFragment(dataBaseManager), FRAGMENT_INSTANCE_NAME).
+                add(R.id.fragment, calculatorFragment).//new CalculatorFragment(dataBaseManager)).
                 commit();
     }
 
@@ -66,23 +46,23 @@ public class MainActivityLogicHolder {
         fragmentManager.
                 beginTransaction().
                 replace(R.id.fragment, new AboutAppFragment(item)).
-//                addToBackStack("aboutApp").
-        commit();
+                addToBackStack("aboutApp").
+                commit();
     }
 
     public void showCalculatorTrainingFragment(MenuItem item) {
         fragmentManager.
                 beginTransaction().
                 replace(R.id.fragment, new CalculationTrainingFragment(item)).
-//                addToBackStack("calculatorTraining").
-        commit();
+                addToBackStack("calculatorTraining").
+                commit();
     }
 
     public void showHistoryScreenFragment(MenuItem item) {
         fragmentManager.
                 beginTransaction().
                 replace(R.id.fragment, new HistoryScreenFragment((item), dataBaseManager)).
-//                addToBackStack("historyScreen").
-        commit();
+                addToBackStack("historyScreen").
+                commit();
     }
 }

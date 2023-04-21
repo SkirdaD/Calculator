@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         logicHolder = new MainActivityLogicHolder(this);
-        logicHolder.show();
-        //logicHolder.showCalculatorFragment();
+        logicHolder.showCalculatorFragment();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
