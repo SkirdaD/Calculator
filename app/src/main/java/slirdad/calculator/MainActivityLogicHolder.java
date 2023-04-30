@@ -36,31 +36,27 @@ public class MainActivityLogicHolder {
     }
 
     public void showCalculatorFragment() {
-        fragmentManager.
-                beginTransaction().
-                add(R.id.fragment, calculatorFragment).//new CalculatorFragment(dataBaseManager)).
+        fragmentManager.beginTransaction().
+                add(R.id.fragment, calculatorFragment).
                 commit();
     }
 
     public void showAboutAppFragment(MenuItem item) {
-        fragmentManager.
-                beginTransaction().
-                replace(R.id.fragment, new AboutAppFragment(item)).
+        fragmentManager.beginTransaction().
+                replace(R.id.fragment, new AboutAppFragment()).
                 addToBackStack("aboutApp").
                 commit();
     }
 
     public void showCalculatorTrainingFragment(MenuItem item) {
-        fragmentManager.
-                beginTransaction().
+        fragmentManager.beginTransaction().
                 replace(R.id.fragment, new CalculationTrainingFragment(item)).
                 addToBackStack("calculatorTraining").
                 commit();
     }
 
     public void showHistoryScreenFragment(MenuItem item) {
-        fragmentManager.
-                beginTransaction().
+        fragmentManager.beginTransaction().
                 replace(R.id.fragment, new HistoryScreenFragment((item), dataBaseManager)).
                 addToBackStack("historyScreen").
                 commit();

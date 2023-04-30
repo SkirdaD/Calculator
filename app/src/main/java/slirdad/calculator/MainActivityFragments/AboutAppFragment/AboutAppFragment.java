@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import slirdad.calculator.R;
 
 public class AboutAppFragment extends Fragment {
-    private final MenuItem item;
+    private MenuItem item;
 
-    public AboutAppFragment(MenuItem item) {
-        this.item = item;
+//    public AboutAppFragment(MenuItem item) {
+//        this.item = item;
+//    }
+    public AboutAppFragment() {
     }
 
     @Override
@@ -32,15 +34,15 @@ public class AboutAppFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        item.setVisible(false);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        item.setVisible(true);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        item.setVisible(false);
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        item.setVisible(true);
+//    }
 }

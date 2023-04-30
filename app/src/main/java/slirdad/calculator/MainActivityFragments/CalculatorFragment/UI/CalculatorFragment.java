@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,19 +17,16 @@ import slirdad.calculator.R;
 
 public class CalculatorFragment extends Fragment {
 
-    private final HistoryDataBaseManager dataBaseManager;
-    //private CalculatorViewModel calculatorViewModel;
-    //View view;
+    private HistoryDataBaseManager dataBaseManager;
+    private CalculatorViewModel calculatorViewModel;
+    CalculatorFragmentViewHolder viewHolder;
 
     public CalculatorFragment(HistoryDataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        //calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
-//    }
+    public CalculatorFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +34,10 @@ public class CalculatorFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.calculator_fragment, container, false);
 
-        final CalculatorFragmentViewHolder viewHolder = new CalculatorFragmentViewHolder(view);
+        calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
+
+        viewHolder = new CalculatorFragmentViewHolder(view);
+
         final CalculatorFragmentLogicHolder logicHolder =
                 new CalculatorFragmentLogicHolder(viewHolder, dataBaseManager);
 
@@ -55,5 +56,18 @@ public class CalculatorFragment extends Fragment {
         viewHolder.getDeleteLastCharacterButton().setOnClickListener(logicHolder::deleteLastChar);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String s = calculatorViewModel.getMainText();
+        viewHolder.getMainTextView().setText(s);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        calculatorViewModel.setMainText(viewHolder.getMainTextView().getText().toString());
     }
 }
