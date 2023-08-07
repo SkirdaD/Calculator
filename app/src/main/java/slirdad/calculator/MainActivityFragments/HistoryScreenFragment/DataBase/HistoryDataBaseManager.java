@@ -1,4 +1,4 @@
-package slirdad.calculator.Data.DataBase;
+package slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import slirdad.calculator.Data.Expression;
 
 public class HistoryDataBaseManager {
     private final HistoryDataBaseHelper dataBaseHelper;

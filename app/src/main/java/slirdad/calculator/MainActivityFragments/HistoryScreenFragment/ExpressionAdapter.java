@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import slirdad.calculator.Data.Expression;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.Expression;
 import slirdad.calculator.R;
 
 public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.ViewHolder> {

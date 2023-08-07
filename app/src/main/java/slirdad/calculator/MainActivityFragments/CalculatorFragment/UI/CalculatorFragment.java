@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
 
 

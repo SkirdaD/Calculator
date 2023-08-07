@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;

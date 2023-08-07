@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
 
 public class HistoryScreenFragment extends Fragment {

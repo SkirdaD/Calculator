@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.MainActivityFragments.AboutAppFragment.AboutAppFragment;
 import slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.CalculationTrainingFragment;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragment;
