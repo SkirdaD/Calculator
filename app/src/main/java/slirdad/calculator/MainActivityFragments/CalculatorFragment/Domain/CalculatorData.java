@@ -1,4 +1,4 @@
-package slirdad.calculator.Domain;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain;
 
 public class CalculatorData {
     public final double result;

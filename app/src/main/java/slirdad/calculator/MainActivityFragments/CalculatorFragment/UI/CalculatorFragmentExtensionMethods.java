@@ -1,12 +1,13 @@
-package slirdad.calculator.UI;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.UI;
 
 import android.widget.TextView;
 
-import slirdad.calculator.Domain.Calculator;
-import slirdad.calculator.Domain.CalculatorData;
-import slirdad.calculator.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Calculator;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.CalculatorData;
+import slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain.Operation;
+import slirdad.calculator.MainActivityFragments.StringValues;
 
-public class MainActivityExtensionMethods {
+public class CalculatorFragmentExtensionMethods {
 
     public static double getNum(TextView textView) {
         return Double.parseDouble(textView.getText().toString());
@@ -15,7 +16,7 @@ public class MainActivityExtensionMethods {
     public static void setCalcData(TextView textView, CalculatorData calculatorData) {
         String textTextView = Double.toString(calculatorData.result);
         textTextView = formatWholeDoubleAsInt(textTextView);
-        MainActivityExtensionMethods.changeSizeText(textTextView, textView);
+        CalculatorFragmentExtensionMethods.changeSizeText(textTextView, textView);
         textView.setText(textTextView);
     }
 
@@ -35,10 +36,6 @@ public class MainActivityExtensionMethods {
         }
     }
 
-    public static void changeSizeText(TextView textView) {
-        changeSizeText("", textView);
-    }
-
     public static String formatWholeDoubleAsInt(String text) {
         if ((text.indexOf(".") + 2) == text.length() &&
                 Character.toString(text.charAt(text.indexOf(".") + 1)).compareTo("0") == 0) {
@@ -51,5 +48,26 @@ public class MainActivityExtensionMethods {
         calculator.setCurrentOperation(Operation.NONE);
         calculator.setVar(0);
         calculator.setResult(0);
+    }
+
+    public static String getOperationChar(Operation operation) {
+        String operator;
+        switch (operation) {
+            case ADDITION:
+                operator = " " + StringValues.PLUS_SIGN + " ";
+                break;
+            case SUBTRACTION:
+                operator = " " + StringValues.MINUS_SIGN + " ";
+                break;
+            case DIVISION:
+                operator = " " + StringValues.DIVISION_SIGN + " ";
+                break;
+            case MULTIPLICATION:
+                operator = " " + StringValues.MULTIPLICATION_SIGN + " ";
+                break;
+            default:
+                operator = " " + StringValues.EQUAL_SIGN + " ";
+        }
+        return operator;
     }
 }

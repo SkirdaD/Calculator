@@ -1,11 +1,6 @@
-package slirdad.calculator.UI;
+package slirdad.calculator;
 
 class StringKeys {
-    /*
-    Переменные (ключи) для методов onRestoreInstanceState и onSaveInstanceState.
-    Используются только в них.
-    Для поворота экрана.
-     */
     static final String LAST_OPERATION = "lastOperation";
     static final String RESULT = "result";
     static final String VAR1 = "var1";

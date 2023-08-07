@@ -1,4 +1,4 @@
-package slirdad.calculator.Domain;
+package slirdad.calculator.MainActivityFragments.CalculatorFragment.Domain;
 
 
 public class Calculator {
@@ -56,6 +56,10 @@ public class Calculator {
 
     public void setOperationFinished(boolean operationFinished) {
         isOperationFinished = operationFinished;
+    }
+
+    public double getResult() {
+        return result;
     }
 
     public double getVar() {
