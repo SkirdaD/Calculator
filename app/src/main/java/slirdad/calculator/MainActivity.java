@@ -15,8 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logicHolder = new MainActivityLogicHolder(getSupportFragmentManager(), this);
-
+        logicHolder = new MainActivityLogicHolder(this);
         logicHolder.showCalculatorFragment();
     }
 
