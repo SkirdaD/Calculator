@@ -1,4 +1,4 @@
-package slirdad.calculator.Data.DataBase;
+package slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

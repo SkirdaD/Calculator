@@ -1,4 +1,4 @@
-package slirdad.calculator.Data.DataBase;
+package slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase;
 
 public class DataBaseStringValues {
     public static final String TABLE_NAME = "calculationsTable";

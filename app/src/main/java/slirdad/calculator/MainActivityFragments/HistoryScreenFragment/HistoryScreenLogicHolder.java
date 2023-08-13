@@ -4,8 +4,8 @@ import android.content.Context;
 
 import java.util.List;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
-import slirdad.calculator.Data.Expression;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.Expression;
 
 class HistoryScreenLogicHolder {
     private final ExpressionAdapter adapter;

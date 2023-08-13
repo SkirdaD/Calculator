@@ -9,9 +9,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.R;
 
 
@@ -36,6 +37,10 @@ public class CalculatorFragment extends Fragment {
 
         calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
 
+        calculatorViewModel.getTextLiveData().observe(getViewLifecycleOwner(),
+                newData -> viewHolder.getMainTextView().setText(newData));
+
+
         viewHolder = new CalculatorFragmentViewHolder(view);
 
         final CalculatorFragmentLogicHolder logicHolder =
@@ -58,16 +63,19 @@ public class CalculatorFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        String s = calculatorViewModel.getMainText();
-        viewHolder.getMainTextView().setText(s);
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        String s = calculatorViewModel.getTextLiveData().getValue();
+//        viewHolder.getMainTextView().setText(s);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        calculatorViewModel.setMainText(viewHolder.getMainTextView().getText().toString());
-    }
+//        String s = calculatorViewModel.getMainText();
+//        viewHolder.getMainTextView().setText(s);
+//    }
+//
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        calculatorViewModel.setMainText(viewHolder.getMainTextView().getText().toString());
+//    }
 }

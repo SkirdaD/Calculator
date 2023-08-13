@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import slirdad.calculator.Data.DataBase.HistoryDataBaseManager;
+import slirdad.calculator.MainActivityFragments.HistoryScreenFragment.DataBase.HistoryDataBaseManager;
 import slirdad.calculator.MainActivityFragments.AboutAppFragment.AboutAppFragment;
 import slirdad.calculator.MainActivityFragments.CalculationTrainingFragment.CalculationTrainingFragment;
 import slirdad.calculator.MainActivityFragments.CalculatorFragment.UI.CalculatorFragment;
@@ -44,21 +44,21 @@ public class MainActivityLogicHolder {
     public void showAboutAppFragment(MenuItem item) {
         fragmentManager.beginTransaction().
                 replace(R.id.fragment, new AboutAppFragment()).
-                addToBackStack("aboutApp").
+                //addToBackStack("aboutApp").
                 commit();
     }
 
     public void showCalculatorTrainingFragment(MenuItem item) {
         fragmentManager.beginTransaction().
                 replace(R.id.fragment, new CalculationTrainingFragment(item)).
-                addToBackStack("calculatorTraining").
+                //addToBackStack("calculatorTraining").
                 commit();
     }
 
     public void showHistoryScreenFragment(MenuItem item) {
         fragmentManager.beginTransaction().
                 replace(R.id.fragment, new HistoryScreenFragment((item), dataBaseManager)).
-                addToBackStack("historyScreen").
+                //addToBackStack("historyScreen").
                 commit();
     }
 }
